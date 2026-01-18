@@ -535,24 +535,45 @@ function App() {
         {/* Sidebar Navigation */}
         <aside style={{ display: isMobile ? 'flex' : 'block', overflowX: isMobile ? 'auto' : 'visible', paddingBottom: isMobile ? '1rem' : 0, gap: '0.5rem' }}>
           {Object.keys(menuData).filter(k => k !== 'promotions' && k !== 'categorySettings').map(cat => (
-            <button
-              key={cat}
-              className="btn"
-              style={{
-                width: isMobile ? 'auto' : '100%',
-                justifyContent: isMobile ? 'center' : 'flex-start',
-                background: activeCategory === cat ? 'var(--bg-input)' : 'transparent',
-                marginBottom: isMobile ? 0 : '0.25rem',
-                textTransform: 'capitalize',
-                whiteSpace: 'nowrap',
-                border: isMobile ? '1px solid var(--border)' : 'transparent',
-                color: activeCategory === cat ? 'var(--primary)' : 'var(--text-main)',
-                fontWeight: activeCategory === cat ? 700 : 400
-              }}
-              onClick={() => setActiveCategory(cat)}
-            >
-              {categoryLabels[cat] || cat}
-            </button>
+            <div key={cat} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', width: isMobile ? 'auto' : '100%' }}>
+              <button
+                className="btn"
+                style={{
+                  width: isMobile ? 'auto' : '100%',
+                  justifyContent: isMobile ? 'center' : 'flex-start',
+                  background: activeCategory === cat ? 'var(--bg-input)' : 'transparent',
+                  marginBottom: isMobile ? 0 : '0.25rem',
+                  textTransform: 'capitalize',
+                  whiteSpace: 'nowrap',
+                  border: isMobile ? '1px solid var(--border)' : 'transparent',
+                  color: activeCategory === cat ? 'var(--primary)' : 'var(--text-main)',
+                  fontWeight: activeCategory === cat ? 700 : 400,
+                  flexGrow: 1
+                }}
+                onClick={() => setActiveCategory(cat)}
+              >
+                {categoryLabels[cat] || cat}
+              </button>
+              <div
+                role="button"
+                className="btn-icon danger"
+                style={{ padding: '0.5rem', cursor: 'pointer', opacity: 0.7 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (confirm(`Delete entire "${cat}" category?`)) {
+                    pushHistory();
+                    const newData = { ...menuData };
+                    delete newData[cat];
+                    if (newData.categorySettings) delete newData.categorySettings[cat];
+                    setMenuData(newData);
+                    if (activeCategory === cat) setActiveCategory(null);
+                  }
+                }}
+                title="Delete Category"
+              >
+                <Trash2 size={14} />
+              </div>
+            </div>
           ))}
           <button
             className="btn"
@@ -675,68 +696,64 @@ function App() {
                 <h2>{activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)} Items</h2>
 
                 {/* Category Settings Panel */}
-                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', background: 'var(--bg-input)', padding: '0.5rem 1rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>Color:</span>
-                    <input
-                      type="color"
-                      value={menuData.categorySettings?.[activeCategory]?.color || '#000000'}
-                      onChange={(e) => {
-                        const newData = { ...menuData };
-                        if (!newData.categorySettings) newData.categorySettings = {};
-                        if (!newData.categorySettings[activeCategory]) newData.categorySettings[activeCategory] = {};
-                        newData.categorySettings[activeCategory].color = e.target.value;
-                        setMenuData(newData);
-                      }}
-                      style={{ border: 'none', width: '30px', height: '30px', cursor: 'pointer', background: 'none' }}
-                      title="Category Theme Color"
-                    />
-                  </div>
-                  <div style={{ width: '1px', height: '24px', background: 'var(--border)' }}></div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>Header:</span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 600 }}>Category Settings</span>
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', background: 'var(--bg-input)', padding: '0.5rem 1rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>Color:</span>
+                      <input
+                        type="color"
+                        value={menuData.categorySettings?.[activeCategory]?.color || '#000000'}
+                        onChange={(e) => {
+                          const newData = { ...menuData };
+                          if (!newData.categorySettings) newData.categorySettings = {};
+                          if (!newData.categorySettings[activeCategory]) newData.categorySettings[activeCategory] = {};
+                          newData.categorySettings[activeCategory].color = e.target.value;
+                          setMenuData(newData);
+                        }}
+                        style={{ border: 'none', width: '30px', height: '30px', cursor: 'pointer', background: 'none' }}
+                        title="Category Theme Color"
+                      />
+                    </div>
+                    <div style={{ width: '1px', height: '24px', background: 'var(--border)' }}></div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>Header:</span>
+                      <div
+                        role="button"
+                        className="btn-sm btn-outline"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          triggerUpload('header', activeCategory);
+                        }}
+                        title="Upload Header Image"
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '0.25rem 0.5rem', cursor: 'pointer' }}
+                      >
+                        <Upload size={14} />
+                        {menuData.categorySettings?.[activeCategory]?.image ? 'Change' : 'Upload'}
+                      </div>
+                    </div>
+                    <div style={{ width: '1px', height: '24px', background: 'var(--border)' }}></div>
                     <div
                       role="button"
-                      className="btn-sm btn-outline"
+                      className="btn-icon danger"
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        triggerUpload('header', activeCategory);
-                      }}
-                      title="Upload Header Image"
-                      style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '0.25rem 0.5rem', cursor: 'pointer' }}
-                    >
-                      <Upload size={14} />
-                      {menuData.categorySettings?.[activeCategory]?.image ? 'Change' : 'Upload'}
-                    </div>
-                  </div>
-                  <div style={{ width: '1px', height: '24px', background: 'var(--border)' }}></div>
-                  <div
-                    role="button"
-                    className="btn-icon danger"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      if (confirm(`Are you sure you want to delete the "${activeCategory}" category? This cannot be undone.`)) {
-                        pushHistory();
-                        const newData = { ...menuData };
-                        delete newData[activeCategory];
-                        if (newData.categorySettings) delete newData.categorySettings[activeCategory];
-
-                        setMenuData(newData);
-                        // Switch to first available category
-                        const distinctCategories = Object.keys(newData).filter(k => k !== 'promotions' && k !== 'categorySettings');
-                        if (distinctCategories.length > 0) {
-                          setActiveCategory(distinctCategories[0]);
-                        } else {
-                          setActiveCategory(null);
+                        if (confirm(`Remove custom header image for "${activeCategory}"?`)) {
+                          pushHistory();
+                          const newData = { ...menuData };
+                          if (newData.categorySettings && newData.categorySettings[activeCategory]) {
+                            newData.categorySettings[activeCategory].image = ''; // Clear image only
+                          }
+                          setMenuData(newData);
                         }
-                      }
-                    }}
-                    title="Delete Category"
-                    style={{ padding: '0.25rem', cursor: 'pointer' }}
-                  >
-                    <Trash2 size={16} color="#ef4444" />
+                      }}
+                      title="Remove Header Image"
+                      style={{ padding: '0.25rem', cursor: 'pointer' }}
+                    >
+                      <Trash2 size={16} color="#ef4444" />
+                    </div>
                   </div>
                 </div>
               </div>
