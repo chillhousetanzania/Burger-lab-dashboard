@@ -605,7 +605,8 @@ function App() {
                       <tr style={{ color: 'var(--text-muted)', textAlign: 'left', borderBottom: '1px solid var(--border)', background: 'rgba(128,128,128,0.05)' }}>
                         <th style={{ padding: '1rem' }}>Image</th>
                         <th style={{ padding: '1rem' }}>Name (English)</th>
-                        <th style={{ padding: '1rem' }}>Price</th>
+                        <th style={{ padding: '1rem' }}>Price (Single)</th>
+                        <th style={{ padding: '1rem' }}>Price (Double)</th>
                         <th style={{ padding: '1rem' }}>Kcal</th>
                         <th style={{ padding: '1rem' }}>Description</th>
                         <th style={{ padding: '1rem', width: '50px' }}></th>
@@ -653,6 +654,15 @@ function App() {
                               onChange={(e) => updateProduct(activeCategory, index, 'price', e.target.value)}
                               style={{ fontFamily: 'monospace', color: 'var(--primary)' }}
                               placeholder="0.00"
+                            />
+                          </td>
+                          <td style={{ padding: '0.75rem', width: '100px', verticalAlign: 'top' }}>
+                            <input
+                              className="input-transparent"
+                              value={product.priceDouble || ''}
+                              onChange={(e) => updateProduct(activeCategory, index, 'priceDouble', e.target.value)}
+                              style={{ fontFamily: 'monospace', color: 'var(--primary)' }}
+                              placeholder="Opt."
                             />
                           </td>
                           <td style={{ padding: '0.75rem', width: '80px', verticalAlign: 'top' }}>
@@ -726,7 +736,14 @@ function App() {
                               className="input-transparent"
                               value={product.price}
                               onChange={(e) => updateProduct(activeCategory, index, 'price', e.target.value)}
-                              placeholder="Price"
+                              placeholder="Single"
+                              style={{ color: 'var(--primary)', flex: 1 }}
+                            />
+                            <input
+                              className="input-transparent"
+                              value={product.priceDouble || ''}
+                              onChange={(e) => updateProduct(activeCategory, index, 'priceDouble', e.target.value)}
+                              placeholder="Double"
                               style={{ color: 'var(--primary)', flex: 1 }}
                             />
                             <input
