@@ -534,7 +534,7 @@ function App() {
       <div className="grid" style={{ gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: '2rem' }}>
         {/* Sidebar Navigation */}
         <aside style={{ display: isMobile ? 'flex' : 'block', overflowX: isMobile ? 'auto' : 'visible', paddingBottom: isMobile ? '1rem' : 0, gap: '0.5rem' }}>
-          {Object.keys(menuData).filter(k => k !== 'promotions').map(cat => (
+          {Object.keys(menuData).filter(k => k !== 'promotions' && k !== 'categorySettings').map(cat => (
             <button
               key={cat}
               className="btn"
