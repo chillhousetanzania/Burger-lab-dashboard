@@ -226,13 +226,19 @@ function updateBannerTheme(category) {
     const banner = document.querySelector('.hero-banner');
     if (!banner) return;
 
-    // Check for Billboard Mode (Active Promotion + Image)
-    if (menuData.promotions && menuData.promotions.isActive && menuData.promotions.image) {
+    // Check for Billboard Mode (Active Promotion + Billboards)
+    const billboards = menuData.promotions ? (menuData.promotions.billboards || []) : [];
+    // Fallback for legacy data (if 'image' property exists)
+    if (menuData.promotions && menuData.promotions.image && billboards.length === 0) {
+        billboards.push(menuData.promotions.image);
+    }
+
+    if (menuData.promotions && menuData.promotions.isActive && billboards.length > 0) {
         banner.classList.remove('theme-burgers', 'theme-chicken', 'theme-extras', 'theme-drinks', 'theme-all');
         banner.classList.add('billboard-active');
 
-        // Apply Billboard Image
-        banner.style.backgroundImage = `url('${menuData.promotions.image}?v=5')`;
+        // Apply Billboard Image (First one as background)
+        banner.style.backgroundImage = `url('${billboards[0]}?v=5')`;
         banner.style.backgroundSize = 'cover';
         banner.style.backgroundPosition = 'center';
         banner.style.height = 'auto';
