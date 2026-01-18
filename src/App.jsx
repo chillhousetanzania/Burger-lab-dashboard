@@ -782,7 +782,7 @@ function App() {
                               onClick={() => triggerUpload(activeCategory, index)}
                               title="Click to Upload Image"
                             >
-                              <img src={getImageUrl(product.image)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => e.target.style.display = 'none'} />
+                              <img key={product.image} src={getImageUrl(product.image)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => e.target.style.display = 'none'} />
                               <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0, transition: 'opacity 0.2s' }} className="hover-upload">
                                 <Upload size={16} color="white" />
                               </div>
@@ -874,7 +874,7 @@ function App() {
                           style={{ width: 80, height: 80, flexShrink: 0, borderRadius: 8, overflow: 'hidden', background: '#333', position: 'relative' }}
                           onClick={() => triggerUpload(activeCategory, index)}
                         >
-                          <img src={getImageUrl(product.image)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => e.target.style.display = 'none'} />
+                          <img key={product.image} src={getImageUrl(product.image)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => e.target.style.display = 'none'} />
                           <div style={{ position: 'absolute', bottom: 0, right: 0, padding: 4, background: 'rgba(0,0,0,0.6)', borderRadius: '4px 0 0 0' }}>
                             <Upload size={12} color="white" />
                           </div>
