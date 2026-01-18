@@ -696,8 +696,12 @@ function App() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>Header:</span>
                     <button
+                      type="button"
                       className="btn-sm btn-outline"
-                      onClick={() => triggerUpload('header', activeCategory)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        triggerUpload('header', activeCategory);
+                      }}
                       title="Upload Header Image"
                       style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '0.25rem 0.5rem' }}
                     >
@@ -707,8 +711,10 @@ function App() {
                   </div>
                   <div style={{ width: '1px', height: '24px', background: 'var(--border)' }}></div>
                   <button
+                    type="button"
                     className="btn-icon danger"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
                       if (confirm(`Are you sure you want to delete the "${activeCategory}" category? This cannot be undone.`)) {
                         pushHistory();
                         const newData = { ...menuData };
