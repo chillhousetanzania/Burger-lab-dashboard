@@ -498,7 +498,10 @@ async function init() {
 
         // Render Promotion Banner
         const heroBanner = document.querySelector('.hero-banner');
-        if (menuData.promotions && menuData.promotions.isActive && heroBanner) {
+        // Check if there is actual text to show
+        const promoText = (menuData.promotions.text[currentLang] || menuData.promotions.text.en || '').trim();
+
+        if (menuData.promotions && menuData.promotions.isActive && heroBanner && promoText) {
             // Inject Keyframes Style
             if (!document.getElementById('marquee-style')) {
                 const style = document.createElement('style');
