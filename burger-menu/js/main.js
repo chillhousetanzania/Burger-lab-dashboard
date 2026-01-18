@@ -187,8 +187,8 @@ function initializeAllGrids() {
 
     productGrid.innerHTML = ''; // Clear once
 
-    // Dynamic Categories: Get all keys except 'promotions', and ensure 'all' is first
-    const dataKeys = Object.keys(menuData).filter(k => k !== 'promotions');
+    // Dynamic Categories: Get all keys except 'promotions' and 'categorySettings', and ensure 'all' is first
+    const dataKeys = Object.keys(menuData).filter(k => k !== 'promotions' && k !== 'categorySettings');
     const categories = ['all', ...dataKeys];
 
     // Update Navigation Buttons Dynamically if new categories exist
