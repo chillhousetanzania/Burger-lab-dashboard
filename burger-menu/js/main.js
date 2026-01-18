@@ -379,7 +379,8 @@ function updateBannerTheme(category) {
             const optimizedHeader = getOptimizedImageUrl(settings.image, 1200);
             banner.style.backgroundImage = `url('${optimizedHeader}')`;
             banner.style.backgroundSize = 'cover';
-            banner.style.backgroundPosition = 'center';
+            banner.style.backgroundPosition = 'center center';
+            banner.style.backgroundRepeat = 'no-repeat';
         }
         if (settings.color) {
             banner.style.backgroundColor = settings.color;
