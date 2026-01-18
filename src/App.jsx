@@ -705,6 +705,31 @@ function App() {
                       {menuData.categorySettings?.[activeCategory]?.image ? 'Change' : 'Upload'}
                     </button>
                   </div>
+                  <div style={{ width: '1px', height: '24px', background: 'var(--border)' }}></div>
+                  <button
+                    className="btn-icon danger"
+                    onClick={() => {
+                      if (confirm(`Are you sure you want to delete the "${activeCategory}" category? This cannot be undone.`)) {
+                        pushHistory();
+                        const newData = { ...menuData };
+                        delete newData[activeCategory];
+                        if (newData.categorySettings) delete newData.categorySettings[activeCategory];
+
+                        setMenuData(newData);
+                        // Switch to first available category
+                        const distinctCategories = Object.keys(newData).filter(k => k !== 'promotions' && k !== 'categorySettings');
+                        if (distinctCategories.length > 0) {
+                          setActiveCategory(distinctCategories[0]);
+                        } else {
+                          setActiveCategory(null);
+                        }
+                      }
+                    }}
+                    title="Delete Category"
+                    style={{ padding: '0.25rem' }}
+                  >
+                    <Trash2 size={16} color="#ef4444" />
+                  </button>
                 </div>
               </div>
 
