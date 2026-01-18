@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Burgers & Chicken</title>
+    <meta name="description" content="Delicious burgers and chicken sandwiches. Order now!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload banner images with HIGH priority for instant display -->
+    <link rel="preload" as="image" href="images/banner_burgers.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="images/banner_all.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="images/banner_chicken.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="images/banner_extras.webp" fetchpriority="high">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <!-- Three.js scripts removed -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <img src="images/final_logo.webp" alt="Burger Lab" class="logo-img">
+        </div>
+        <div class="language-selector" id="languageSelector">
+            <span class="current-flag" id="currentFlag">🇬🇧</span>
+            <span class="current-lang" id="currentLang">English</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+            <div class="language-dropdown" id="languageDropdown">
+                <div class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</div>
+                <div class="lang-option" data-lang="ar" data-flag="🇸🇦">🇸🇦 العربية</div>
+                <div class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Category Navigation -->
+    <nav class="category-nav">
+        <button class="category-btn" data-category="all">All</button>
+        <button class="category-btn active" data-category="burgers">Beef Burgers</button>
+        <button class="category-btn" data-category="chicken">Chicken Burgers</button>
+        <button class="category-btn" data-category="extras">Extras</button>
+        <button class="category-btn" data-category="drinks">Drinks</button>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+
+        <div class="time-to-prepare">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+            </svg>
+            <div class="time-info">
+                <span class="time-label">Time to Prepare</span>
+                <span class="time-value">15 Minutes</span>
+            </div>
+        </div>
+        <h1 class="category-title" id="categoryTitle">Burgers</h1>
+        <!-- Checkered pattern decoration -->
+        <div class="checkered-pattern"></div>
+    </section>
+
+    <!-- Product Grid -->
+    <main class="product-grid" id="productGrid">
+        <!-- Products will be inserted by JavaScript -->
+    </main>
+
+    <!-- Product Detail Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close">&times;</button>
+            <div class="modal-body">
+                <img src="" alt="" class="modal-image" id="modalImage">
+                <div class="modal-details">
+                    <h2 class="modal-name" id="modalName"></h2>
+                    <div class="modal-options" id="modalOptions"></div>
+                    <div class="modal-price" id="modalPrice"></div>
+                    <p class="modal-description" id="modalDescription"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Promotional Footer Banner removed -->
+
+    <!-- Floating Language Menu -->
+    <div class="fab-language-menu" id="fabLanguageMenu">
+        <div class="fab-lang-item" data-lang="en">🇬🇧 English</div>
+        <div class="fab-lang-item" data-lang="ar">🇸🇦 العربية</div>
+        <div class="fab-lang-item" data-lang="tr">🇹🇷 Türkçe</div>
+    </div>
+
+    <!-- Floating Scroll Top Button -->
+    <button class="fab-scroll-top" id="fabScrollTop" aria-label="Scroll to Top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </button>
+
+    <!-- Floating Translation Button -->
+    <button class="fab-translate" id="fabTranslateBtn" aria-label="Translate">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path
+                d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0014.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z" />
+        </svg>
+    </button>
+
+    <script src="js/main.js?v=2"></script>
+</body>
+
+</html>

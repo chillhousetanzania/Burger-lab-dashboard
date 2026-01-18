@@ -1,0 +1,223 @@
+{
+    "burgers": [
+        {
+            "name": {
+                "en": "Classic Burger",
+                "ar": "برجر كلاسيك",
+                "tr": "Klasik Burger"
+            },
+            "price": "14,000",
+            "priceDouble": "17,000",
+            "calories": 540,
+            "image": "images/classic_burger_v2.webp",
+            "description": {
+                "en": "5 inch brioche, ketchup, mayonnaise, mustard, American cheese, lettuce, tomato, onion",
+                "ar": "بريوش 5 بوصات، كاتشب، مايونيز، خردل، جبنة أمريكية، خس، طماطم، بصل",
+                "tr": "5 inç brioche, ketçap, mayonez, hardal, Amerikan peyniri, marul, domates, soğan"
+            }
+        },
+        {
+            "name": {
+                "en": "Cheese Burger",
+                "ar": "تشيز برجر",
+                "tr": "Peynirli Burger"
+            },
+            "price": "14,000",
+            "priceDouble": "19,000",
+            "calories": 620,
+            "image": "images/cheese_burger_v2.webp",
+            "description": {
+                "en": "5 inch brioche, ketchup, mayonnaise, mustard, Pickles, American cheese",
+                "ar": "بريوش 5 بوصات، كاتشب، مايونيز، خردل، مخللات، جبنة أمريكية",
+                "tr": "5 inç brioche, ketçap, mayonez, hardal, turşu, Amerikan peyniri"
+            }
+        },
+        {
+            "name": {
+                "en": "Tropical Burger",
+                "ar": "برجر استوائي",
+                "tr": "Tropikal Burger"
+            },
+            "price": "15,000",
+            "priceDouble": "20,000",
+            "calories": 590,
+            "image": "images/tropical_burger_v2.webp",
+            "description": {
+                "en": "5 inch brioche, barbecue sauce, mayonnaise, grilled pineapple slice, american cheese",
+                "ar": "بريوش 5 بوصات، صلصة باربكيو، مايونيز، شريحة أناناس مشوية، جبنة أمريكية",
+                "tr": "5 inç brioche, barbekü sosu, mayonez, ızgara ananas dilimi, Amerikan peyniri"
+            }
+        },
+        {
+            "name": {
+                "en": "Mushroom Burger",
+                "ar": "برجر الفطر",
+                "tr": "Mantarlı Burger"
+            },
+            "price": "16,000",
+            "priceDouble": "21,000",
+            "calories": 650,
+            "image": "images/mushroom_burger_v2.webp",
+            "description": {
+                "en": "5 inch brioche, mushroom sauce, american cheese",
+                "ar": "بريوش 5 بوصات، صلصة الفطر، جبنة أمريكية",
+                "tr": "5 inç brioche, mantar sosu, Amerikan peyniri"
+            }
+        },
+        {
+            "name": {
+                "en": "Jalapeno Burger",
+                "ar": "برجر الهالبينو",
+                "tr": "Jalapeno Burger"
+            },
+            "price": "16,000",
+            "priceDouble": "21,000",
+            "calories": 580,
+            "image": "images/jalapeno_burger_v2.webp",
+            "description": {
+                "en": "5 inch brioche, sriracha mayonnaise sauce, american cheese, lettuce, jalapeno",
+                "ar": "بريوش 5 بوصات، صلصة مايونيز سريراتشا، جبنة أمريكية، خس، هالبينو",
+                "tr": "5 inç brioche, sriracha mayonez sosu, Amerikan peyniri, marul, jalapeno"
+            }
+        },
+        {
+            "name": {
+                "en": "Beef Bacon Burger",
+                "ar": "برجر بيكون بقري",
+                "tr": "Dana Bacon Burger"
+            },
+            "price": "17,000",
+            "priceDouble": "22,000",
+            "calories": 720,
+            "image": "images/bacon_burger_v2.webp",
+            "description": {
+                "en": "5 inch brioche, texas sauce, pickles, american cheese, slices of bacon, lettuce, tomato",
+                "ar": "بريوش 5 بوصات، صلصة تكساس، مخللات، جبنة أمريكية، شرائح بيكون، خس، طماطم",
+                "tr": "5 inç brioche, Texas sosu, turşu, Amerikan peyniri, pastırma dilimleri, marul, domates"
+            }
+        }
+    ],
+    "chicken": [
+        {
+            "name": {
+                "en": "Chicken Fillet",
+                "ar": "فيليه دجاج",
+                "tr": "Tavuk Fileto"
+            },
+            "price": "13,000",
+            "priceDouble": "18,000",
+            "calories": 485,
+            "image": "images/chicken_fillet_v2.webp",
+            "description": {
+                "en": "5 inch brioche, ketchup, mayonnaise, american cheese, crispy chicken, lettuce",
+                "ar": "بريوش 5 بوصات، كاتشب، مايونيز، جبنة أمريكية، دجاج مقرمش، خس",
+                "tr": "5 inç brioche, ketçap, mayonez, Amerikan peyniri, çıtır tavuk, marul"
+            }
+        },
+        {
+            "name": {
+                "en": "Spicy Chicken Fillet",
+                "ar": "فيليه دجاج حار",
+                "tr": "Acılı Tavuk Fileto"
+            },
+            "price": "13,000",
+            "priceDouble": "18,000",
+            "calories": 510,
+            "image": "images/spicy_chicken_v2.webp",
+            "description": {
+                "en": "5 inch brioche, sriracha mayonnaise sauce, american cheese, spicy crispy chicken, lettuce",
+                "ar": "بريوش 5 بوصات، صلصة مايونيز سريراتشا، جبنة أمريكية، دجاج مقرمش حار، خس",
+                "tr": "5 inç brioche, sriracha mayonez sosu, Amerikan peyniri, acılı çıtır tavuk, marul"
+            }
+        },
+        {
+            "name": {
+                "en": "Grilled Chicken (Lemon & Herbs)",
+                "ar": "دجاج مشوي (ليمون وأعشاب)",
+                "tr": "Izgara Tavuk (Limon ve Otlar)"
+            },
+            "price": "13,000",
+            "priceDouble": "18,000",
+            "calories": 420,
+            "image": "images/grilled_chicken.webp",
+            "description": {
+                "en": "5 inch brioche, thousand island sauce, american cheese, grilled chicken, lettuce, pickles",
+                "ar": "بريوش 5 بوصات، صلصة ثاوزند آيلاند، جبنة أمريكية، دجاج مشوي، خس، مخللات",
+                "tr": "5 inç brioche, thousand island sosu, Amerikan peyniri, ızgara tavuk, marul, turşu"
+            }
+        }
+    ],
+    "extras": [
+        {
+            "name": {
+                "en": "Extra Fries",
+                "ar": "بطاطس إضافية",
+                "tr": "Ekstra Patates"
+            },
+            "price": "4,000",
+            "calories": 320,
+            "image": "images/extra_fries_v2.webp",
+            "description": {
+                "en": "Crispy golden french fries",
+                "ar": "بطاطس مقلية مقرمشة ذهبية",
+                "tr": "Çıtır altın renkli patates kızartması"
+            }
+        },
+        {
+            "name": {
+                "en": "Extra Patty",
+                "ar": "قطعة لحم إضافية",
+                "tr": "Ekstra Köfte"
+            },
+            "price": "5,000",
+            "calories": 250,
+            "image": "images/extra_patty_v2.webp",
+            "description": {
+                "en": "For double burger - additional beef patty",
+                "ar": "للبرجر المزدوج - قطعة لحم بقري إضافية",
+                "tr": "Çift burger için - ekstra dana köfte"
+            }
+        }
+    ],
+    "drinks": [
+        {
+            "name": {
+                "en": "Water",
+                "ar": "ماء",
+                "tr": "Su"
+            },
+            "price": "1,000",
+            "calories": 0,
+            "image": "images/water_v3.webp",
+            "description": {
+                "en": "500ml Mineral Water",
+                "ar": "مياه معدنية 500 مل",
+                "tr": "500ml Maden Suyu"
+            }
+        },
+        {
+            "name": {
+                "en": "Soda",
+                "ar": "مشروب غازي",
+                "tr": "Soda"
+            },
+            "price": "2,000",
+            "calories": 140,
+            "image": "images/soda_v3.webp",
+            "description": {
+                "en": "330ml Can (Coke, Fanta, Sprite)",
+                "ar": "علبة 330 مل (كوكاكولا، فانتا، سبرايت)",
+                "tr": "330ml Kutu (Kola, Fanta, Sprite)"
+            }
+        }
+    ],
+    "promotions": {
+        "isActive": false,
+        "text": {
+            "en": "",
+            "ar": "جدا",
+            "tr": "Çoooook"
+        },
+        "billboards": []
+    }
+}

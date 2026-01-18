@@ -113,15 +113,15 @@ app.post('/api/update-password', authenticateToken, async (req, res) => {
 });
 
 // 3. Static Files (Isolated Routes)
-app.use('/menu', express.static(path.join(__dirname, '../burger-menu')));
-app.use('/images', express.static(path.join(__dirname, '../burger-menu/images')));
+app.use('/menu', express.static(path.join(__dirname, 'burger-menu')));
+app.use('/images', express.static(path.join(__dirname, 'burger-menu/images')));
 
 // 4. Admin Dashboard Static Files
 app.use(express.static(path.join(__dirname, 'dist'))); // Serve root files (favicon, etc)
 app.use('/assets', express.static(path.join(__dirname, 'dist/assets'))); // Explicit assets
 
 // Path to menu.json
-const MENU_PATH = path.resolve(__dirname, '../burger-menu/menu.json');
+const MENU_PATH = path.resolve(__dirname, 'burger-menu/menu.json');
 
 app.get('/api/menu', async (req, res) => {
     try {
