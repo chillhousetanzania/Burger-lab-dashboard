@@ -237,18 +237,28 @@ function updateBannerTheme(category) {
         banner.classList.remove('theme-burgers', 'theme-chicken', 'theme-extras', 'theme-drinks', 'theme-all');
         banner.classList.add('billboard-active');
 
-        // Apply Billboard Image (First one as background)
-        banner.style.backgroundImage = `url('${billboards[0]}?v=5')`;
-        banner.style.backgroundSize = 'contain'; // Show FULL image (no cropping)
-        banner.style.backgroundRepeat = 'no-repeat';
-        banner.style.backgroundPosition = 'center';
-        banner.style.backgroundColor = '#111'; // Dark background for letterboxing
-
-        // Force Standard 16:9 Aspect Ratio (Better for general photos)
+        // Use standard IMG tag to let natural aspect ratio dictate height
+        banner.style.backgroundImage = 'none';
+        banner.style.backgroundColor = 'transparent';
         banner.style.height = 'auto';
         banner.style.minHeight = 'unset';
-        banner.style.aspectRatio = '16 / 9';
-        banner.style.width = '100%';
+        banner.style.aspectRatio = 'unset'; // Remove forced ratio
+        banner.style.padding = '0'; // Remove padding to fit image perfectly
+
+        // Check if img already exists
+        let billboardImg = banner.querySelector('.billboard-img');
+        if (!billboardImg) {
+            billboardImg = document.createElement('img');
+            billboardImg.className = 'billboard-img';
+            billboardImg.style.width = '100%';
+            billboardImg.style.height = 'auto'; // Natural height
+            billboardImg.style.display = 'block';
+            billboardImg.style.borderRadius = 'var(--radius-lg)';
+
+            // Insert at beginning
+            banner.insertBefore(billboardImg, banner.firstChild);
+        }
+        billboardImg.src = billboards[0] + '?v=5';
 
         // Hide 3D Model Canvas if present
         const canvas = document.querySelector('canvas');
