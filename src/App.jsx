@@ -376,11 +376,23 @@ function App() {
     return (
       <div className="container" style={{ height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '2rem' }}>
         <div style={{ textAlign: 'center' }}>
-          <img
-            src={`${API_BASE}/images/final_logo.webp`}
-            alt="Logo"
-            style={{ height: 80, width: 'auto', marginBottom: '1rem' }}
-          />
+          <div style={{
+            width: '120px',
+            height: '120px',
+            background: '#fff',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 1.5rem',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
+          }}>
+            <img
+              src={`${API_BASE}/images/final_logo.webp`}
+              alt="Logo"
+              style={{ width: '80px', height: 'auto' }}
+            />
+          </div>
           <h1>Burger Menu Dashboard</h1>
           {status === 'loading' && <p style={{ color: 'var(--text-muted)' }}>Loading menu data...</p>}
           {status === 'error' && (
