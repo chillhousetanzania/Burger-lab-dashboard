@@ -239,8 +239,10 @@ function updateBannerTheme(category) {
 
         // Apply Billboard Image (First one as background)
         banner.style.backgroundImage = `url('${billboards[0]}?v=5')`;
-        banner.style.backgroundSize = 'cover';
+        banner.style.backgroundSize = 'contain'; // Show FULL image (no cropping)
+        banner.style.backgroundRepeat = 'no-repeat';
         banner.style.backgroundPosition = 'center';
+        banner.style.backgroundColor = '#111'; // Dark background for letterboxing
 
         // Force Standard 16:9 Aspect Ratio (Better for general photos)
         banner.style.height = 'auto';
