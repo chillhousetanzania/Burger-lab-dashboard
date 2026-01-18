@@ -274,10 +274,9 @@ function renderProducts(category) {
 }
 
 // Update category title
+// Update category title - Uses dynamic label helper
 function updateCategoryTitle(category) {
-    if (translations[currentLang]) {
-        categoryTitle.textContent = translations[currentLang][category];
-    }
+    categoryTitle.textContent = getCategoryLabel(category);
 }
 
 // Update UI language
@@ -427,8 +426,25 @@ function handleCategoryClick(e) {
     if (category === currentCategory) return;
 
     // Update active button
-    categoryButtons.forEach(b => b.classList.remove('active'));
+    // Update active button
+    categoryButtons.forEach(b => {
+        b.classList.remove('active');
+        // Reset dynamic styles
+        b.style.backgroundColor = '';
+        b.style.color = '';
+        b.style.boxShadow = '';
+    });
     btn.classList.add('active');
+
+    // Apply dynamic active color if available
+    if (menuData.categorySettings && menuData.categorySettings[category]) {
+        const settings = menuData.categorySettings[category];
+        if (settings.color) {
+            btn.style.backgroundColor = settings.color;
+            btn.style.color = 'white';
+            btn.style.boxShadow = `0 4px 15px ${settings.color}66`; // 40% opacity hex
+        }
+    }
 
     // Update current category
     currentCategory = category;
