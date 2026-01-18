@@ -41,6 +41,21 @@ let menuData = {
     drinks: []
 };
 
+// Cloudinary Optimizer Helper
+function getOptimizedImageUrl(url, width = 'auto') {
+    if (!url) return '';
+    if (url.includes('cloudinary.com') && !url.includes('/f_auto')) {
+        // Insert params after /upload/
+        const parts = url.split('/upload/');
+        if (parts.length === 2) {
+            let params = 'f_auto,q_auto';
+            if (width !== 'auto') params += `,w_${width}`;
+            return `${parts[0]}/upload/${params}/${parts[1]}`;
+        }
+    }
+    return url;
+}
+
 // Current language
 let currentLang = 'en';
 
@@ -63,7 +78,7 @@ let currentCategory = 'burgers';
 
 // Show product modal
 function showModal(product) {
-    modalImage.src = product.image;
+    modalImage.src = getOptimizedImageUrl(product.image, 800);
     modalImage.alt = product.name[currentLang];
     modalName.textContent = product.name[currentLang];
 
@@ -213,11 +228,11 @@ function initializeAllGrids() {
         if (products) {
             products.forEach((product, index) => {
                 const card = document.createElement('div');
-                card.className = 'product-card';
                 card.setAttribute('data-description', product.description[currentLang]);
 
+                const optimizedThumb = getOptimizedImageUrl(product.image, 500);
                 card.innerHTML = `
-                    <img src="${product.image}" alt="${product.name[currentLang]}" class="product-image" loading="lazy">
+                    <img src="${optimizedThumb}" alt="${product.name[currentLang]}" class="product-image" loading="lazy">
                     <h3 class="product-name">${product.name[currentLang]}</h3>
                     <div class="product-price">
                         ${product.priceDouble
@@ -311,7 +326,8 @@ function updateBannerTheme(category) {
         banner.style.borderRadius = '0'; // Optional: squared look for full width
 
         // Apply strict "Fixed Frame" dimensions (Matches the wide banner look)
-        banner.style.backgroundImage = `url('${billboards[0]}?v=5')`;
+        const optimizedBanner = getOptimizedImageUrl(billboards[0], 1200);
+        banner.style.backgroundImage = `url('${optimizedBanner}')`;
         banner.style.backgroundRepeat = 'no-repeat';
         banner.style.backgroundPosition = 'center';
         banner.style.backgroundSize = 'contain';
@@ -361,7 +377,8 @@ function updateBannerTheme(category) {
 
     if (settings) {
         if (settings.image) {
-            banner.style.backgroundImage = `url('${settings.image}')`;
+            const optimizedHeader = getOptimizedImageUrl(settings.image, 1200);
+            banner.style.backgroundImage = `url('${optimizedHeader}')`;
             banner.style.backgroundSize = 'cover';
             banner.style.backgroundPosition = 'center';
         }
@@ -548,7 +565,8 @@ function preloadImages() {
             const img = new Image();
             img.onload = resolve;
             img.onerror = resolve; // Continue even if error
-            img.src = product.image;
+            // Preload the OPTIMIZED version
+            img.src = getOptimizedImageUrl(product.image, 500);
         });
     });
 
