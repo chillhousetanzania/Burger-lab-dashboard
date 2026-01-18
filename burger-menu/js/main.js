@@ -467,7 +467,8 @@ async function init() {
     try {
         console.log('Fetching live menu from API...');
         // Correctly point to the dashboard server API
-        const API_URL = window.location.port === '5174' ? '/api/menu' : 'http://localhost:5174/api/menu';
+        // Correctly point to the dashboard server API (Relative path works for both)
+        const API_URL = '/api/menu';
 
         const response = await fetch(API_URL);
         if (!response.ok) {
