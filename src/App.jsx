@@ -695,26 +695,28 @@ function App() {
                   <div style={{ width: '1px', height: '24px', background: 'var(--border)' }}></div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>Header:</span>
-                    <button
-                      type="button"
+                    <div
+                      role="button"
                       className="btn-sm btn-outline"
                       onClick={(e) => {
                         e.preventDefault();
+                        e.stopPropagation();
                         triggerUpload('header', activeCategory);
                       }}
                       title="Upload Header Image"
-                      style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '0.25rem 0.5rem' }}
+                      style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '0.25rem 0.5rem', cursor: 'pointer' }}
                     >
                       <Upload size={14} />
                       {menuData.categorySettings?.[activeCategory]?.image ? 'Change' : 'Upload'}
-                    </button>
+                    </div>
                   </div>
                   <div style={{ width: '1px', height: '24px', background: 'var(--border)' }}></div>
-                  <button
-                    type="button"
+                  <div
+                    role="button"
                     className="btn-icon danger"
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       if (confirm(`Are you sure you want to delete the "${activeCategory}" category? This cannot be undone.`)) {
                         pushHistory();
                         const newData = { ...menuData };
@@ -732,10 +734,10 @@ function App() {
                       }
                     }}
                     title="Delete Category"
-                    style={{ padding: '0.25rem' }}
+                    style={{ padding: '0.25rem', cursor: 'pointer' }}
                   >
                     <Trash2 size={16} color="#ef4444" />
-                  </button>
+                  </div>
                 </div>
               </div>
 
