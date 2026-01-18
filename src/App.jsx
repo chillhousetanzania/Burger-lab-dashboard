@@ -510,6 +510,34 @@ function App() {
               {categoryLabels[cat] || cat}
             </button>
           ))}
+          <button
+            className="btn"
+            style={{
+              width: isMobile ? 'auto' : '100%',
+              justifyContent: isMobile ? 'center' : 'flex-start',
+              background: 'transparent',
+              border: '1px dashed var(--border)',
+              marginTop: '1rem',
+              color: 'var(--text-muted)'
+            }}
+            onClick={() => {
+              const name = prompt("Enter new category name (e.g. 'Sushi'):");
+              if (name && name.trim()) {
+                const key = name.toLowerCase().replace(/\s+/g, '');
+                if (menuData[key]) {
+                  alert('Category already exists!');
+                  return;
+                }
+                const newData = { ...menuData };
+                newData[key] = [];
+                setMenuData(newData);
+                setActiveCategory(key);
+                pushHistory();
+              }
+            }}
+          >
+            <Plus size={16} style={{ marginRight: '0.5rem' }} /> Add Category
+          </button>
         </aside>
 
         {/* Main Editor */}

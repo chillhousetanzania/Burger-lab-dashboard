@@ -47,7 +47,7 @@ let currentLang = 'en';
 // DOM Elements
 const productGrid = document.getElementById('productGrid');
 const categoryTitle = document.getElementById('categoryTitle');
-const categoryButtons = document.querySelectorAll('.category-btn');
+let categoryButtons = document.querySelectorAll('.category-btn');
 
 // Modal Elements
 const modal = document.getElementById('productModal');
@@ -122,13 +122,76 @@ function closeModal() {
 // Persistent Grids Cache
 const categoryGrids = {};
 
+// Update category title fallback
+function getCategoryLabel(cat) {
+    if (translations[currentLang] && translations[currentLang][cat]) {
+        return translations[currentLang][cat];
+    }
+    // Capitalize fallback
+    return cat.charAt(0).toUpperCase() + cat.slice(1);
+}
+
+// Update UI language
+function updateUILanguage() {
+    // Update category buttons (Dynamic)
+    categoryButtons.forEach(btn => {
+        const cat = btn.dataset.category;
+        btn.textContent = getCategoryLabel(cat);
+    });
+
+    // Update time to prepare text
+    const timeLabel = document.querySelector('.time-label');
+    const timeValue = document.querySelector('.time-value');
+    if (timeLabel) timeLabel.textContent = translations[currentLang].timeToPrepare;
+    if (timeValue) timeValue.textContent = '15 ' + translations[currentLang].minutes;
+
+    // Update RTL direction for Arabic
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+    // Re-render all grids with new language
+    updateCategoryTitle(currentCategory);
+    // initializeAllGrids no longer needed for language switch as grids persist, just update Text?
+    // Actually, product names/desc need re-render. 
+    initializeAllGrids();
+}
+
+// Update category title
+function updateCategoryTitle(category) {
+    categoryTitle.textContent = getCategoryLabel(category);
+}
+
+// Render products with click handlers
+// Persistent Grids Cache
+// Persistent Grids Cache
+// const categoryGrids = {}; // Removed duplicate
+
 // Initialize all category grids once (Persistent DOM)
 function initializeAllGrids() {
     // If data is empty, do nothing
-    if (!menuData.burgers.length) return;
+    // if (!menuData.burgers.length) return; // REMOVED: Now generic
 
     productGrid.innerHTML = ''; // Clear once
-    const categories = ['all', 'burgers', 'chicken', 'extras', 'drinks'];
+
+    // Dynamic Categories: Get all keys except 'promotions', and ensure 'all' is first
+    const dataKeys = Object.keys(menuData).filter(k => k !== 'promotions');
+    const categories = ['all', ...dataKeys];
+
+    // Update Navigation Buttons Dynamically if new categories exist
+    const nav = document.querySelector('.category-nav');
+    if (nav) {
+        // Clear existing buttons except logic (rebuild is safer for order)
+        nav.innerHTML = '';
+        categories.forEach(cat => {
+            const btn = document.createElement('button');
+            btn.className = `category-btn ${cat === currentCategory ? 'active' : ''}`;
+            btn.dataset.category = cat;
+            btn.textContent = getCategoryLabel(cat);
+            btn.addEventListener('click', handleCategoryClick);
+            nav.appendChild(btn);
+        });
+        // Update global reference
+        categoryButtons = document.querySelectorAll('.category-btn');
+    }
 
     categories.forEach(cat => {
         // Create container for this category
@@ -139,9 +202,12 @@ function initializeAllGrids() {
 
         let products;
         if (cat === 'all') {
-            products = [...menuData.burgers, ...menuData.chicken, ...menuData.extras, ...menuData.drinks];
+            // Combine all arrays
+            products = dataKeys.reduce((acc, key) => {
+                return Array.isArray(menuData[key]) ? acc.concat(menuData[key]) : acc;
+            }, []);
         } else {
-            products = menuData[cat];
+            products = menuData[cat] || [];
         }
 
         if (products) {
@@ -241,6 +307,8 @@ function updateBannerTheme(category) {
         const existingImg = banner.querySelector('.billboard-img');
         if (existingImg) existingImg.remove();
         banner.style.padding = '';
+        banner.style.margin = '0'; // Remove margin to eliminate side gaps (Full Width)
+        banner.style.borderRadius = '0'; // Optional: squared look for full width
 
         // Apply strict "Fixed Frame" dimensions (Matches the wide banner look)
         banner.style.backgroundImage = `url('${billboards[0]}?v=5')`;
