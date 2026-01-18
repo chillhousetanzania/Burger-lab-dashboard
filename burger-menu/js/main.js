@@ -241,8 +241,12 @@ function updateBannerTheme(category) {
         banner.style.backgroundImage = `url('${billboards[0]}?v=5')`;
         banner.style.backgroundSize = 'cover';
         banner.style.backgroundPosition = 'center';
-        banner.style.height = 'auto';
-        banner.style.aspectRatio = '16 / 9'; // Fixed aspect ratio
+
+        // Force Fixed Aspect Ratio (2:1 is standard for web banners)
+        banner.style.height = 'auto'; // Override CSS height
+        banner.style.minHeight = 'unset'; // Override potential min-height
+        banner.style.aspectRatio = '2 / 1';
+        banner.style.width = '100%';
 
         // Hide 3D Model Canvas if present
         const canvas = document.querySelector('canvas');
