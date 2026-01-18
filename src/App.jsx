@@ -155,21 +155,21 @@ function App() {
         }}>
           <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
             <div style={{
-              width: '180px',
-              height: '180px',
+              width: '200px',
+              height: '200px',
               background: '#fff',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 2rem',
-              boxShadow: '0 10px 25px rgba(0,0,0,0.2)'
+              boxShadow: '0 0 0 8px rgba(255,255,255,0.1), 0 10px 25px rgba(0,0,0,0.2)'
             }}>
               <img
                 src={`${API_BASE}/images/final_logo.webp`}
                 alt="Burger Lab Logo"
                 style={{
-                  width: '150px',
+                  width: '130px',
                   height: 'auto',
                   filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.5))'
                 }}
