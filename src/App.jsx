@@ -114,6 +114,27 @@ function App() {
       if (!json.promotions) json.promotions = { isActive: false, text: { en: '', ar: '', tr: '' }, billboards: [] };
       if (!json.promotions.billboards) json.promotions.billboards = [];
 
+      // Initialize Category Settings (For Dynamic Colors/Images)
+      if (!json.categorySettings) json.categorySettings = {};
+
+      // Migrate existing categories to have default settings if missing
+      const defaultColors = {
+        burgers: '#A01E28',
+        chicken: '#D97706',
+        extras: '#DC2626',
+        drinks: '#0891b2'
+      };
+
+      Object.keys(json).forEach(key => {
+        if (key === 'promotions' || key === 'categorySettings') return;
+        if (!json.categorySettings[key]) {
+          json.categorySettings[key] = {
+            color: defaultColors[key] || '#' + Math.floor(Math.random() * 16777215).toString(16), // Random fallback
+            image: `images/banner_${key}.webp` // Legacy fallback
+          };
+        }
+      });
+
       setMenuData(json);
       setHistory([]); // Reset history on load
       setFileHandle({ name: 'Remote Server' });
@@ -315,6 +336,7 @@ function App() {
       const data = await res.json();
 
       // Check if it's a promotion upload
+      // Check if it's a promotion upload
       if (uploadTarget.category === 'promotions') {
         const newData = { ...menuData };
         if (!newData.promotions.billboards) newData.promotions.billboards = [];
@@ -325,6 +347,16 @@ function App() {
         } else {
           newData.promotions.billboards.push(data.path);
         }
+        setMenuData(newData);
+      } else if (uploadTarget.category === 'header') {
+        // Handle Category Header Image Upload
+        // In this case, 'index' is actually the category key string
+        const categoryKey = uploadTarget.index;
+        const newData = { ...menuData };
+        if (!newData.categorySettings) newData.categorySettings = {};
+        if (!newData.categorySettings[categoryKey]) newData.categorySettings[categoryKey] = {};
+
+        newData.categorySettings[categoryKey].image = data.path;
         setMenuData(newData);
       } else {
         // Standard product upload
@@ -542,6 +574,12 @@ function App() {
                 }
                 const newData = { ...menuData };
                 newData[key] = [];
+                // Assign new random color
+                if (!newData.categorySettings) newData.categorySettings = {};
+                newData.categorySettings[key] = {
+                  color: '#' + Math.floor(Math.random() * 16777215).toString(16),
+                  image: 'images/banner_all.webp' // Default placeholder
+                };
                 setMenuData(newData);
                 setActiveCategory(key);
                 pushHistory();
@@ -633,8 +671,41 @@ function App() {
 
           {activeCategory && (
             <div className="grid gap-4">
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center" style={{ flexWrap: 'wrap', gap: '1rem' }}>
                 <h2>{activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)} Items</h2>
+
+                {/* Category Settings Panel */}
+                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', background: 'var(--bg-input)', padding: '0.5rem 1rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>Color:</span>
+                    <input
+                      type="color"
+                      value={menuData.categorySettings?.[activeCategory]?.color || '#000000'}
+                      onChange={(e) => {
+                        const newData = { ...menuData };
+                        if (!newData.categorySettings) newData.categorySettings = {};
+                        if (!newData.categorySettings[activeCategory]) newData.categorySettings[activeCategory] = {};
+                        newData.categorySettings[activeCategory].color = e.target.value;
+                        setMenuData(newData);
+                      }}
+                      style={{ border: 'none', width: '30px', height: '30px', cursor: 'pointer', background: 'none' }}
+                      title="Category Theme Color"
+                    />
+                  </div>
+                  <div style={{ width: '1px', height: '24px', background: 'var(--border)' }}></div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>Header:</span>
+                    <button
+                      className="btn-sm btn-outline"
+                      onClick={() => triggerUpload('header', activeCategory)}
+                      title="Upload Header Image"
+                      style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '0.25rem 0.5rem' }}
+                    >
+                      <Upload size={14} />
+                      {menuData.categorySettings?.[activeCategory]?.image ? 'Change' : 'Upload'}
+                    </button>
+                  </div>
+                </div>
               </div>
 
               {/* DESKTOP TABLE VIEW */}

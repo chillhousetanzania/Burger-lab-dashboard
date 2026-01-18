@@ -355,29 +355,50 @@ function updateBannerTheme(category) {
     if (canvas) canvas.style.display = 'block';
 
     banner.classList.remove('theme-burgers', 'theme-chicken', 'theme-extras', 'theme-drinks', 'theme-all');
-    banner.classList.add(`theme-${category}`);
+
+    // Check for Dynamic Settings first
+    const settings = menuData.categorySettings ? menuData.categorySettings[category] : null;
+
+    if (settings) {
+        if (settings.image) {
+            banner.style.backgroundImage = `url('${settings.image}')`;
+            banner.style.backgroundSize = 'cover';
+            banner.style.backgroundPosition = 'center';
+        }
+        if (settings.color) {
+            banner.style.backgroundColor = settings.color;
+            const root = document.documentElement;
+            root.style.setProperty('--category-primary', settings.color);
+            root.style.setProperty('--category-glow', settings.color + '80');
+        }
+    } else {
+        // Fallback
+        banner.classList.add(`theme-${category}`);
+    }
 
     // Also update body class for FABs and indicators
     document.body.classList.remove('theme-burgers', 'theme-chicken', 'theme-extras', 'theme-drinks', 'theme-all');
     document.body.classList.add(`theme-${category}`);
 
-    // Update CSS variable for dynamic components
+    // Update CSS variable for dynamic components (Legacy Support)
     const root = document.documentElement;
-    if (category === 'chicken') {
-        root.style.setProperty('--category-primary', 'var(--chicken-primary)');
-        root.style.setProperty('--category-glow', 'rgba(217, 119, 6, 0.5)');
-    }
-    else if (category === 'extras') {
-        root.style.setProperty('--category-primary', 'var(--extras-primary)');
-        root.style.setProperty('--category-glow', 'rgba(220, 38, 38, 0.5)');
-    }
-    else if (category === 'drinks') {
-        root.style.setProperty('--category-primary', 'var(--drinks-primary)');
-        root.style.setProperty('--category-glow', 'rgba(8, 145, 178, 0.5)');
-    }
-    else {
-        root.style.setProperty('--category-primary', 'var(--burgers-primary)');
-        root.style.setProperty('--category-glow', 'rgba(220, 38, 38, 0.5)');
+    if (!settings) {
+        if (category === 'chicken') {
+            root.style.setProperty('--category-primary', 'var(--chicken-primary)');
+            root.style.setProperty('--category-glow', 'rgba(217, 119, 6, 0.5)');
+        }
+        else if (category === 'extras') {
+            root.style.setProperty('--category-primary', 'var(--extras-primary)');
+            root.style.setProperty('--category-glow', 'rgba(220, 38, 38, 0.5)');
+        }
+        else if (category === 'drinks') {
+            root.style.setProperty('--category-primary', 'var(--drinks-primary)');
+            root.style.setProperty('--category-glow', 'rgba(8, 145, 178, 0.5)');
+        }
+        else {
+            root.style.setProperty('--category-primary', 'var(--burgers-primary)');
+            root.style.setProperty('--category-glow', 'rgba(220, 38, 38, 0.5)');
+        }
     }
 }
 
