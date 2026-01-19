@@ -470,6 +470,12 @@ html[dir="rtl"] .language-dropdown {
     /* Subtle Red-ish Border */
     overflow: hidden;
     /* Ensure content stays inside */
+    display: flex;
+    /* Enable Flexbox layout */
+    flex-direction: column;
+    /* Stack children vertically */
+    height: 100%;
+    /* Stretch to fill grid cell */
 }
 
 .product-card:hover {
@@ -513,7 +519,8 @@ html[dir="rtl"] .language-dropdown {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 12px;
+    margin-top: auto;
+    /* Push to bottom */
     padding-top: 12px;
     border-top: 1px solid var(--gray-border);
 }
