@@ -677,27 +677,37 @@ body.theme-drinks .option-btn.active {
 /* Professional Glowing Ring Indicator */
 /* Professional Glowing Ring Indicator */
 /* Hand Click Indicator */
+/* Hand Click Indicator */
 .product-info {
     position: absolute;
     /* Beside the image (Bottom Right) */
     bottom: 10px;
     right: 10px;
     top: auto;
-    width: auto;
-    height: auto;
+    width: 24px;
+    height: 24px;
     background: transparent;
     border: none;
     box-shadow: none;
     animation: tapUser 1.5s infinite ease-in-out;
     z-index: 10;
     pointer-events: none;
+    color: var(--brown-medium);
+    /* SVG inherits this */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Remove pseudo-element so we use the real SVG */
 .product-info::after {
-    content: '👆';
-    font-size: 1.8rem;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    display: block;
+    content: none;
+}
+
+.product-info svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 @keyframes tapUser {
@@ -717,6 +727,8 @@ body.theme-drinks .option-btn.active {
     transform: none;
     border: none;
     box-shadow: none;
+    color: var(--category-primary);
+    /* Change color on hover */
 }
 
 /* ===== Product Modal ===== */

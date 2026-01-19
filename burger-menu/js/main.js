@@ -253,7 +253,14 @@ function initializeAllGrids() {
                         : `${product.price}<sup>TZS</sup>`
                     }
                     </div>
-                    <span class="product-info"></span>
+                    <span class="product-info">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 24C12 24 9.136 24 7.647 22.56L2 16.912L3.896 15.016C4.088 14.824 4.376 14.728 4.664 14.776L7.2 15.2V2.4C7.2 1.08 8.28 0 9.6 0C10.92 0 12 1.08 12 2.4V10.8H12.96C12.96 10.8 12.96 10.8 12.984 10.8C13.296 10.8 13.56 10.992 13.632 11.232L14.76 15.48C15.336 17.592 17.232 19.2 19.44 19.2H20.4V24H12ZM9.6 2.4V12.8L4.656 12.008L9.6 16.944V21.6H17.808C16.896 21.6 15.984 21.168 15.432 20.376L13.752 18.024L11.784 13.2H12V2.4H9.6Z" fill="#3D2314" stroke="#3D2314" stroke-width="1"/>
+                             <path d="M10 13L6 12L10 16V13Z" fill="#3D2314"/> 
+                            <!-- Simple Hand cursor simplified -->
+                            <path d="M7 15l-4.5-4.5 1.5-1.5 3 3V2a2 2 0 1 1 4 0v9h1a2 2 0 0 1 2 2l-1 5h-6z" fill="currentColor"/>
+                        </svg>
+                    </span>
                 `;
 
                 // Add click handler for modal
