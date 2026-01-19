@@ -678,51 +678,67 @@ body.theme-drinks .option-btn.active {
 /* Professional Glowing Ring Indicator */
 /* Hand Click Indicator */
 /* Hand Click Indicator */
+/* Professional Glowing Ring Indicator */
 .product-info {
     position: absolute;
-    /* Beside the image (Bottom Right) */
-    bottom: 10px;
-    right: 10px;
-    top: auto;
-    width: 32px;
-    height: 32px;
+    bottom: 14px;
+    right: 14px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
     background: transparent;
-    border: none;
-    box-shadow: none;
-    animation: tapUser 1.5s infinite ease-in-out;
-    z-index: 10;
-    pointer-events: none;
-    color: #A01E28;
-    /* Force Brand Red */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: 2px solid var(--category-primary);
+    display: block;
+    box-shadow: 0 0 8px var(--category-glow),
+        0 0 16px var(--category-glow),
+        inset 0 0 4px var(--category-glow);
+    animation: ringPulse 2s ease-in-out infinite;
+    z-index: 2;
+    /* Reset z-index */
+    pointer-events: auto;
+    /* Allow hover */
+    /* Remove Hand Icon Props */
+    padding: 0;
+    color: inherit;
     opacity: 1;
-    /* Full visibility */
-    padding: 4px;
-    /* Safety padding */
 }
 
-/* Remove pseudo-element so we use the real SVG */
 .product-info::after {
-    content: none;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--category-primary);
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 6px var(--category-glow);
 }
 
-.product-info svg {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+.product-card:hover .product-info {
+    transform: scale(1.3);
+    border-color: var(--category-primary);
+    box-shadow: 0 0 12px var(--category-glow),
+        0 0 24px var(--category-glow),
+        inset 0 0 6px var(--category-glow);
 }
 
-@keyframes tapUser {
+@keyframes ringPulse {
 
     0%,
     100% {
-        transform: translateY(0) scale(1);
+        box-shadow: 0 0 8px var(--category-glow),
+            0 0 16px var(--category-glow),
+            inset 0 0 4px var(--category-glow);
+        transform: scale(1);
     }
 
     50% {
-        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 0 12px var(--category-glow),
+            0 0 24px var(--category-glow),
+            inset 0 0 6px var(--category-glow);
+        transform: scale(1.15);
     }
 }
 

@@ -253,12 +253,7 @@ function initializeAllGrids() {
                         : `${product.price}<sup>TZS</sup>`
                     }
                     </div>
-                    <span class="product-info">
-                        <!-- Material Design Touch App Icon -->
-                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-2.54-.78-1.54 4.19c-.19.52-.78.78-1.29.6l-5.18-1.92c-.52-.19-.78-.79-.6-1.3l.08-.24c.05-.14.12-.27.21-.38L8 15.86V7.5c0-1.93 1.57-3.5 3.5-3.5S15 5.57 15 7.5v3.65l3.29.83c1.55.39 2.45 2.01 2.05 3.56-.25.99-.95 1.76-1.85 2.09z"/>
-                        </svg>
-                    </span>
+                    <span class="product-info"></span>
                 `;
 
                 // Add click handler for modal
