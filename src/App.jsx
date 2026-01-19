@@ -790,14 +790,7 @@ function App() {
                             {/* Hover effect helper */}
                             <style>{`.hover-upload:hover { opacity: 1 !important; }`}</style>
 
-                            <input
-                              className="input-transparent"
-                              value={product.image}
-                              onChange={(e) => updateProduct(activeCategory, index, 'image', e.target.value)}
-                              placeholder="/img/..."
-                              title="Image Path"
-                              style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}
-                            />
+
                           </td>
                           <td style={{ padding: '0.75rem', width: '25%', verticalAlign: 'top' }}>
                             <input
@@ -917,15 +910,7 @@ function App() {
                           </div>
                         </div>
                       </div>
-                      <div style={{ marginTop: '0.5rem' }}>
-                        <input
-                          className="input-transparent"
-                          value={product.image}
-                          onChange={(e) => updateProduct(activeCategory, index, 'image', e.target.value)}
-                          placeholder="Image path"
-                          style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}
-                        />
-                      </div>
+
                     </div>
                   ))}
                 </div>
