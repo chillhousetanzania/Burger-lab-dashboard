@@ -677,30 +677,10 @@ body.theme-drinks .option-btn.active {
 /* Professional Glowing Ring Indicator */
 /* Professional Glowing Ring Indicator */
 /* Hand Click Indicator */
-/* Hand Click Indicator */
-/* Professional Glowing Ring Indicator */
+/* Hand Click Indicator Removed */
+/* Professional Glowing Ring Indicator Removed */
 .product-info {
-    position: absolute;
-    bottom: 14px;
-    right: 14px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: transparent;
-    border: 2px solid var(--category-primary);
-    display: block;
-    box-shadow: 0 0 8px var(--category-glow),
-        0 0 16px var(--category-glow),
-        inset 0 0 4px var(--category-glow);
-    animation: ringPulse 2s ease-in-out infinite;
-    z-index: 2;
-    /* Reset z-index */
-    pointer-events: auto;
-    /* Allow hover */
-    /* Remove Hand Icon Props */
-    padding: 0;
-    color: inherit;
-    opacity: 1;
+    display: none;
 }
 
 .product-info::after {
