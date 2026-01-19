@@ -515,20 +515,25 @@ html[dir="rtl"] .language-dropdown {
 /* ===== Product Footer Removed - Back to Original ===== */
 /* .product-footer removed */
 
+/* ===== Card Bottom Container ===== */
+.card-bottom {
+    position: relative;
+    margin-top: auto;
+    /* Push to bottom */
+    width: 100%;
+    padding-top: 8px;
+}
+
 .product-price {
     text-align: center;
-    /* Back to Center */
     font-size: 1.1rem;
-    margin-bottom: 8px;
-    /* Space from bottom */
     width: 100%;
 }
 
 .more-info-btn {
     position: absolute;
-    /* Place in corner */
-    bottom: 12px;
-    right: 12px;
+    bottom: 0;
+    right: 0;
     background: var(--category-primary);
     color: var(--white);
     border: none;
@@ -541,7 +546,7 @@ html[dir="rtl"] .language-dropdown {
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
-    z-index: 5;
+    z-index: 10;
 }
 
 .more-info-btn:hover {
