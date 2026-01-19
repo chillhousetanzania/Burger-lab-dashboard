@@ -466,8 +466,8 @@ html[dir="rtl"] .language-dropdown {
     transition: var(--transition);
     cursor: pointer;
     position: relative;
-    border: 1px solid rgba(160, 30, 40, 0.15);
-    /* Subtle Red-ish Border */
+    border: 1px solid #D1D5DB;
+    /* Visible Gray Border (Gray-300) */
     overflow: hidden;
     /* Ensure content stays inside */
     display: flex;
@@ -509,29 +509,26 @@ html[dir="rtl"] .language-dropdown {
 }
 
 .product-price sup {
-    font-size: 0.7rem;
-    font-weight: 500;
     margin-left: 2px;
 }
 
-/* ===== Product Footer ===== */
-.product-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-    /* Push to bottom */
-    padding-top: 12px;
-    border-top: 1px solid var(--gray-border);
-}
+/* ===== Product Footer Removed - Back to Original ===== */
+/* .product-footer removed */
 
 .product-price {
-    text-align: left;
-    /* Align left in footer */
+    text-align: center;
+    /* Back to Center */
     font-size: 1.1rem;
+    margin-bottom: 8px;
+    /* Space from bottom */
+    width: 100%;
 }
 
 .more-info-btn {
+    position: absolute;
+    /* Place in corner */
+    bottom: 12px;
+    right: 12px;
     background: var(--category-primary);
     color: var(--white);
     border: none;
@@ -544,6 +541,7 @@ html[dir="rtl"] .language-dropdown {
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
+    z-index: 5;
 }
 
 .more-info-btn:hover {

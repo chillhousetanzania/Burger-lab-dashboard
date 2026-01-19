@@ -247,19 +247,17 @@ function initializeAllGrids() {
                 card.innerHTML = `
                     <img src="${optimizedThumb}" alt="${product.name[currentLang]}" class="product-image" loading="lazy">
                     <h3 class="product-name">${product.name[currentLang]}</h3>
-                    <div class="product-footer">
-                        <div class="product-price">
-                            ${product.priceDouble
+                    <div class="product-price">
+                        ${product.priceDouble
                         ? `<span style="font-size:0.9em">Single: ${product.price}</span><br><span style="font-size:0.9em">Double: ${product.priceDouble}</span>`
                         : `${product.price}<sup>TZS</sup>`
                     }
-                        </div>
-                        <button class="more-info-btn" aria-label="View Details">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                                <path d="M12 4.5C7.86 4.5 4.5 7.86 4.5 12S7.86 19.5 12 19.5 19.5 16.14 19.5 12 16.14 4.5 12 4.5zm0 16.5c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9zm1-4h-2v-6h2v6zm0-8h-2V7h2v1.5z"/>
-                            </svg>
-                        </button>
                     </div>
+                    <button class="more-info-btn" aria-label="View Details">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <path d="M12 4.5C7.86 4.5 4.5 7.86 4.5 12S7.86 19.5 12 19.5 19.5 16.14 19.5 12 16.14 4.5 12 4.5zm0 16.5c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9zm1-4h-2v-6h2v6zm0-8h-2V7h2v1.5z"/>
+                        </svg>
+                    </button>
                 `;
 
                 // Add click handler for modal
