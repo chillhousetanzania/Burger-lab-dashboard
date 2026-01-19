@@ -172,7 +172,20 @@ function updateUILanguage() {
 
 // Update category title
 function updateCategoryTitle(category) {
-    categoryTitle.textContent = getCategoryLabel(category);
+    const hardcodedTitles = {
+        'burgers': 'Beef Burger'
+    };
+
+    if (hardcodedTitles[category]) {
+        categoryTitle.textContent = hardcodedTitles[category];
+        return;
+    }
+
+    if (menuData.categorySettings && menuData.categorySettings[category] && menuData.categorySettings[category].title) {
+        categoryTitle.textContent = menuData.categorySettings[category].title;
+    } else {
+        categoryTitle.textContent = getCategoryLabel(category);
+    }
 }
 
 // Render products with click handlers
