@@ -680,7 +680,7 @@ body.theme-drinks .option-btn.active {
 /* Hand Click Indicator Removed */
 /* Professional Glowing Ring Indicator Removed */
 .product-info {
-    display: none;
+    display: none !important;
 }
 
 .product-info::after {

@@ -253,7 +253,6 @@ function initializeAllGrids() {
                         : `${product.price}<sup>TZS</sup>`
                     }
                     </div>
-                    <span class="product-info"></span>
                 `;
 
                 // Add click handler for modal
