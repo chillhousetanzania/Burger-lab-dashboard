@@ -466,6 +466,10 @@ html[dir="rtl"] .language-dropdown {
     transition: var(--transition);
     cursor: pointer;
     position: relative;
+    border: 1px solid rgba(160, 30, 40, 0.15);
+    /* Subtle Red-ish Border */
+    overflow: hidden;
+    /* Ensure content stays inside */
 }
 
 .product-card:hover {
@@ -504,7 +508,42 @@ html[dir="rtl"] .language-dropdown {
     margin-left: 2px;
 }
 
-/* Old product-info removed to avoid conflict */
+/* ===== Product Footer ===== */
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--gray-border);
+}
+
+.product-price {
+    text-align: left;
+    /* Align left in footer */
+    font-size: 1.1rem;
+}
+
+.more-info-btn {
+    background: var(--category-primary);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+.more-info-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 
 /* ===== Floating Action Button ===== */
 .fab-translate {
