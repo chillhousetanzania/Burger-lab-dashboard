@@ -311,13 +311,13 @@ function App() {
         newData[cat].forEach((item, idx) => {
           // Translate Name
           if (item.name?.en) {
-            if (!item.name.ar || !item.name.ar.trim()) queueTranslation(item.name.en, 'ar', cat, idx, 'name');
-            if (!item.name.tr || !item.name.tr.trim()) queueTranslation(item.name.en, 'tr', cat, idx, 'name');
+            if (!item.name.ar) queueTranslation(item.name.en, 'ar', cat, idx, 'name');
+            if (!item.name.tr) queueTranslation(item.name.en, 'tr', cat, idx, 'name');
           }
           // Translate Description
           if (item.description?.en) {
-            if (!item.description.ar || !item.description.ar.trim()) queueTranslation(item.description.en, 'ar', cat, idx, 'description');
-            if (!item.description.tr || !item.description.tr.trim()) queueTranslation(item.description.en, 'tr', cat, idx, 'description');
+            if (!item.description.ar) queueTranslation(item.description.en, 'ar', cat, idx, 'description');
+            if (!item.description.tr) queueTranslation(item.description.en, 'tr', cat, idx, 'description');
           }
         });
       });
