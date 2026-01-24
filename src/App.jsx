@@ -360,6 +360,7 @@ function App() {
 
   const updateName = (category, index, value) => {
     const newData = { ...menuData };
+    if (!newData[category][index].name) newData[category][index].name = {};
     newData[category][index].name.en = value;
     setMenuData(newData);
   };
@@ -883,7 +884,7 @@ function App() {
                               <div style={{ display: 'flex', gap: '4px' }}>
                                 <input
                                   className="input-transparent"
-                                  value={product.name.en}
+                                  value={product.name?.en || ''}
                                   onChange={(e) => updateName(activeCategory, index, e.target.value)}
                                   style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--text-main)', width: '100%' }}
                                   placeholder="Name (English)"
@@ -895,9 +896,10 @@ function App() {
                               <div style={{ display: 'flex', gap: '4px' }}>
                                 <input
                                   className="input-transparent"
-                                  value={product.name.ar || ''}
+                                  value={product.name?.ar || ''}
                                   onChange={(e) => {
                                     const newData = { ...menuData };
+                                    if (!newData[activeCategory][index].name) newData[activeCategory][index].name = {};
                                     newData[activeCategory][index].name.ar = e.target.value;
                                     setMenuData(newData);
                                   }}
@@ -907,9 +909,10 @@ function App() {
                                 />
                                 <input
                                   className="input-transparent"
-                                  value={product.name.tr || ''}
+                                  value={product.name?.tr || ''}
                                   onChange={(e) => {
                                     const newData = { ...menuData };
+                                    if (!newData[activeCategory][index].name) newData[activeCategory][index].name = {};
                                     newData[activeCategory][index].name.tr = e.target.value;
                                     setMenuData(newData);
                                   }}
@@ -996,7 +999,7 @@ function App() {
                               <div style={{ display: 'flex', gap: '4px' }}>
                                 <input
                                   className="input-transparent"
-                                  value={product.name.en}
+                                  value={product.name?.en || ''}
                                   onChange={(e) => updateName(activeCategory, index, e.target.value)}
                                   style={{ fontWeight: 'bold', marginBottom: '0.25rem', fontSize: '1rem', width: '100%' }}
                                   placeholder="Name (EN)"
@@ -1008,9 +1011,10 @@ function App() {
                               <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
                                 <input
                                   className="input-transparent"
-                                  value={product.name.ar || ''}
+                                  value={product.name?.ar || ''}
                                   onChange={(e) => {
                                     const newData = { ...menuData };
+                                    if (!newData[activeCategory][index].name) newData[activeCategory][index].name = {};
                                     newData[activeCategory][index].name.ar = e.target.value;
                                     setMenuData(newData);
                                   }}
