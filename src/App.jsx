@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Save, Smartphone, Monitor, Plus, Trash2, Moon, Sun, Upload, Megaphone, RotateCcw, Lock, LogOut, ExternalLink } from 'lucide-react';
+import { Save, Smartphone, Monitor, Plus, Trash2, Moon, Sun, Upload, Megaphone, RotateCcw, Lock, LogOut, ExternalLink, Globe } from 'lucide-react';
 
 const API_BASE = ''; // Use relative paths, let Vite proxy handle dev and Express handle production.
 
