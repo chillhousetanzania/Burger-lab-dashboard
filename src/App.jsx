@@ -293,10 +293,20 @@ function App() {
             .then(res => res.json())
             .then(res => {
               if (res.translation) {
-                if (field === 'name') newData[category][index].name[targetLang] = res.translation;
-                if (field === 'description') {
-                  if (!newData[category][index].description) newData[category][index].description = {};
-                  newData[category][index].description[targetLang] = res.translation;
+                if (category === 'promotions' && field === 'text') {
+                  if (!newData.promotions.text) newData.promotions.text = {};
+                  newData.promotions.text[targetLang] = res.translation;
+                } else if (category === 'categorySettings' && field === 'title') {
+                  if (!newData.categorySettings[index]) newData.categorySettings[index] = { titles: {} }; // index here is category key
+                  if (!newData.categorySettings[index].titles) newData.categorySettings[index].titles = {};
+                  newData.categorySettings[index].titles[targetLang] = res.translation;
+                } else {
+                  // Standard Item
+                  if (field === 'name') newData[category][index].name[targetLang] = res.translation;
+                  if (field === 'description') {
+                    if (!newData[category][index].description) newData[category][index].description = {};
+                    newData[category][index].description[targetLang] = res.translation;
+                  }
                 }
                 hasChanges = true;
               }
@@ -307,7 +317,29 @@ function App() {
 
       // Iterate all items
       Object.keys(newData).forEach(cat => {
-        if (cat === 'promotions' || cat === 'categorySettings') return;
+        // Promotions Translation
+        if (cat === 'promotions') {
+          if (newData.promotions.text?.en) {
+            if (!newData.promotions.text.ar || !newData.promotions.text.ar.trim()) queueTranslation(newData.promotions.text.en, 'ar', 'promotions', -1, 'text');
+            if (!newData.promotions.text.tr || !newData.promotions.text.tr.trim()) queueTranslation(newData.promotions.text.en, 'tr', 'promotions', -1, 'text');
+          }
+          return;
+        }
+
+        // Category Settings Translation
+        if (!newData.categorySettings) newData.categorySettings = {};
+        if (!newData.categorySettings[cat]) newData.categorySettings[cat] = { color: '#000000', image: '', titles: { en: cat, ar: '', tr: '' } };
+        if (!newData.categorySettings[cat].titles) newData.categorySettings[cat].titles = { en: cat, ar: '', tr: '' };
+
+        // Ensure English title exists (capitalized key fallback)
+        if (!newData.categorySettings[cat].titles.en) newData.categorySettings[cat].titles.en = cat.charAt(0).toUpperCase() + cat.slice(1);
+
+        const catTitleEn = newData.categorySettings[cat].titles.en;
+        if (!newData.categorySettings[cat].titles.ar || !newData.categorySettings[cat].titles.ar.trim()) queueTranslation(catTitleEn, 'ar', 'categorySettings', cat, 'title');
+        if (!newData.categorySettings[cat].titles.tr || !newData.categorySettings[cat].titles.tr.trim()) queueTranslation(catTitleEn, 'tr', 'categorySettings', cat, 'title');
+
+        if (cat === 'categorySettings') return; // Skip the settings key itself
+
         newData[cat].forEach((item, idx) => {
           // Translate Name
           if (item.name?.en) {
@@ -818,6 +850,55 @@ function App() {
                       >
                         <Upload size={14} />
                         {menuData.categorySettings?.[activeCategory]?.image ? 'Change' : 'Upload'}
+                      </div>
+                    </div>
+                    {/* Title Translations */}
+                    <div style={{ width: '1px', height: '24px', background: 'var(--border)' }}></div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                      <input
+                        className="input-transparent"
+                        value={menuData.categorySettings?.[activeCategory]?.titles?.en || activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}
+                        onChange={(e) => {
+                          const newData = { ...menuData };
+                          if (!newData.categorySettings) newData.categorySettings = {};
+                          if (!newData.categorySettings[activeCategory]) newData.categorySettings[activeCategory] = { titles: {} };
+                          if (!newData.categorySettings[activeCategory].titles) newData.categorySettings[activeCategory].titles = { en: activeCategory };
+                          newData.categorySettings[activeCategory].titles.en = e.target.value;
+                          setMenuData(newData);
+                        }}
+                        style={{ fontSize: '0.85rem', fontWeight: 600, width: '100px' }}
+                        placeholder="Title (EN)"
+                      />
+                      <div style={{ display: 'flex', gap: '2px' }}>
+                        <input
+                          className="input-transparent"
+                          value={menuData.categorySettings?.[activeCategory]?.titles?.ar || ''}
+                          onChange={(e) => {
+                            const newData = { ...menuData };
+                            if (!newData.categorySettings) newData.categorySettings = {};
+                            if (!newData.categorySettings[activeCategory]) newData.categorySettings[activeCategory] = { titles: {} };
+                            if (!newData.categorySettings[activeCategory].titles) newData.categorySettings[activeCategory].titles = { en: activeCategory };
+                            newData.categorySettings[activeCategory].titles.ar = e.target.value;
+                            setMenuData(newData);
+                          }}
+                          style={{ fontSize: '0.75rem', width: '60px', color: 'var(--text-muted)' }}
+                          placeholder="🇸🇦 Ar"
+                          dir="rtl"
+                        />
+                        <input
+                          className="input-transparent"
+                          value={menuData.categorySettings?.[activeCategory]?.titles?.tr || ''}
+                          onChange={(e) => {
+                            const newData = { ...menuData };
+                            if (!newData.categorySettings) newData.categorySettings = {};
+                            if (!newData.categorySettings[activeCategory]) newData.categorySettings[activeCategory] = { titles: {} };
+                            if (!newData.categorySettings[activeCategory].titles) newData.categorySettings[activeCategory].titles = { en: activeCategory };
+                            newData.categorySettings[activeCategory].titles.tr = e.target.value;
+                            setMenuData(newData);
+                          }}
+                          style={{ fontSize: '0.75rem', width: '60px', color: 'var(--text-muted)' }}
+                          placeholder="🇹🇷 Tr"
+                        />
                       </div>
                     </div>
                     <div style={{ width: '1px', height: '24px', background: 'var(--border)' }}></div>

@@ -138,7 +138,11 @@ function closeModal() {
 const categoryGrids = {};
 
 // Update category title fallback
+// Update category title fallback
 function getCategoryLabel(cat) {
+    if (menuData.categorySettings && menuData.categorySettings[cat] && menuData.categorySettings[cat].titles && menuData.categorySettings[cat].titles[currentLang]) {
+        return menuData.categorySettings[cat].titles[currentLang];
+    }
     if (translations[currentLang] && translations[currentLang][cat]) {
         return translations[currentLang][cat];
     }
@@ -244,7 +248,7 @@ function initializeAllGrids() {
                 // Fallback to English if translation is missing/empty
                 const desc = product.description[currentLang] || product.description['en'] || '';
                 const name = product.name[currentLang] || product.name['en'] || 'Unnamed Product';
-                
+
                 card.setAttribute('data-description', desc);
 
                 const optimizedThumb = getOptimizedImageUrl(product.image, 500);
