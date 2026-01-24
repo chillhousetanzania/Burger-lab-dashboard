@@ -267,7 +267,7 @@ function initializeAllGrids() {
                     <div class="card-bottom">
                         <div class="product-price">
                             ${product.priceDouble
-                        ? `<span style="font-size:0.9em">Single: ${product.price}</span><br><span style="font-size:0.9em">Double: ${product.priceDouble}</span>`
+                        ? `<span style="font-size:0.9em">${translations[currentLang].singlePatty}: ${product.price}</span><br><span style="font-size:0.9em">${translations[currentLang].doublePatty}: ${product.priceDouble}</span>`
                         : `${product.price}<sup>TZS</sup>`
                     }
                         </div>
