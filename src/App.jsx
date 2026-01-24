@@ -27,6 +27,40 @@ function App() {
     return `${API_BASE}/${path}${path.includes('?') ? '' : '?v=5'}`;
   };
 
+  const autoTranslate = async (category, index) => {
+    const item = menuData[category][index];
+    const text = item.name.en;
+    if (!text) return;
+
+    pushHistory();
+    const newData = { ...menuData };
+
+    // Visual feedback (optional hooks)
+
+    try {
+      if (!item.name.ar) {
+        const resAr = await fetch(`${API_BASE}/api/translate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text, targetLang: 'ar' })
+        }).then(r => r.json());
+        if (resAr.translation) newData[category][index].name.ar = resAr.translation;
+      }
+
+      if (!item.name.tr) {
+        const resTr = await fetch(`${API_BASE}/api/translate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text, targetLang: 'tr' })
+        }).then(r => r.json());
+        if (resTr.translation) newData[category][index].name.tr = resTr.translation;
+      }
+      setMenuData(newData);
+    } catch (e) {
+      alert("Translation failed: " + e.message);
+    }
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -241,13 +275,65 @@ function App() {
 
     try {
       setStatus('saving');
+
+      // AUTO-TRANSLATE BATCHING
+      const newData = JSON.parse(JSON.stringify(menuData));
+      let hasChanges = false;
+      const translationPromises = [];
+
+      // Helper to queue translation
+      const queueTranslation = (text, targetLang, category, index, field) => {
+        if (!text) return;
+        translationPromises.push(
+          fetch(`${API_BASE}/api/translate`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text, targetLang })
+          })
+            .then(res => res.json())
+            .then(res => {
+              if (res.translation) {
+                if (field === 'name') newData[category][index].name[targetLang] = res.translation;
+                if (field === 'description') {
+                  if (!newData[category][index].description) newData[category][index].description = {};
+                  newData[category][index].description[targetLang] = res.translation;
+                }
+                hasChanges = true;
+              }
+            })
+            .catch(err => console.error("Batch translate error:", err))
+        );
+      };
+
+      // Iterate all items
+      Object.keys(newData).forEach(cat => {
+        if (cat === 'promotions' || cat === 'categorySettings') return;
+        newData[cat].forEach((item, idx) => {
+          // Translate Name
+          if (item.name?.en) {
+            if (!item.name.ar || !item.name.ar.trim()) queueTranslation(item.name.en, 'ar', cat, idx, 'name');
+            if (!item.name.tr || !item.name.tr.trim()) queueTranslation(item.name.en, 'tr', cat, idx, 'name');
+          }
+          // Translate Description
+          if (item.description?.en) {
+            if (!item.description.ar || !item.description.ar.trim()) queueTranslation(item.description.en, 'ar', cat, idx, 'description');
+            if (!item.description.tr || !item.description.tr.trim()) queueTranslation(item.description.en, 'tr', cat, idx, 'description');
+          }
+        });
+      });
+
+      if (translationPromises.length > 0) {
+        await Promise.all(translationPromises);
+        if (hasChanges) setMenuData(newData);
+      }
+
       const response = await fetch(`${API_BASE}/api/menu`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(menuData)
+        body: JSON.stringify(hasChanges ? newData : menuData)
       });
 
       if (response.status === 401 || response.status === 403) {
@@ -793,13 +879,45 @@ function App() {
 
                           </td>
                           <td style={{ padding: '0.75rem', width: '25%', verticalAlign: 'top' }}>
-                            <input
-                              className="input-transparent"
-                              value={product.name.en}
-                              onChange={(e) => updateName(activeCategory, index, e.target.value)}
-                              style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--text-main)' }}
-                              placeholder="Item Name"
-                            />
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                              <div style={{ display: 'flex', gap: '4px' }}>
+                                <input
+                                  className="input-transparent"
+                                  value={product.name.en}
+                                  onChange={(e) => updateName(activeCategory, index, e.target.value)}
+                                  style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--text-main)', width: '100%' }}
+                                  placeholder="Name (English)"
+                                />
+                                <button className="btn-icon" onClick={() => autoTranslate(activeCategory, index)} title="Auto-Translate Empty Fields">
+                                  <Globe size={16} color="var(--primary)" />
+                                </button>
+                              </div>
+                              <div style={{ display: 'flex', gap: '4px' }}>
+                                <input
+                                  className="input-transparent"
+                                  value={product.name.ar || ''}
+                                  onChange={(e) => {
+                                    const newData = { ...menuData };
+                                    newData[activeCategory][index].name.ar = e.target.value;
+                                    setMenuData(newData);
+                                  }}
+                                  style={{ fontSize: '0.8rem', color: 'var(--text-muted)', width: '50%' }}
+                                  placeholder="🇸🇦 Arabic"
+                                  dir="rtl"
+                                />
+                                <input
+                                  className="input-transparent"
+                                  value={product.name.tr || ''}
+                                  onChange={(e) => {
+                                    const newData = { ...menuData };
+                                    newData[activeCategory][index].name.tr = e.target.value;
+                                    setMenuData(newData);
+                                  }}
+                                  style={{ fontSize: '0.8rem', color: 'var(--text-muted)', width: '50%' }}
+                                  placeholder="🇹🇷 Turkish"
+                                />
+                              </div>
+                            </div>
                           </td>
                           <td style={{ padding: '0.75rem', width: '100px', verticalAlign: 'top' }}>
                             <input
@@ -874,13 +992,45 @@ function App() {
                         </div>
                         <div style={{ flexGrow: 1 }}>
                           <div className="flex justify-between">
-                            <input
-                              className="input-transparent"
-                              value={product.name.en}
-                              onChange={(e) => updateName(activeCategory, index, e.target.value)}
-                              style={{ fontWeight: 'bold', marginBottom: '0.25rem', fontSize: '1rem' }}
-                              placeholder="Item Name"
-                            />
+                            <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                              <div style={{ display: 'flex', gap: '4px' }}>
+                                <input
+                                  className="input-transparent"
+                                  value={product.name.en}
+                                  onChange={(e) => updateName(activeCategory, index, e.target.value)}
+                                  style={{ fontWeight: 'bold', marginBottom: '0.25rem', fontSize: '1rem', width: '100%' }}
+                                  placeholder="Name (EN)"
+                                />
+                                <button className="btn-icon" onClick={() => autoTranslate(activeCategory, index)} title="Auto-Translate">
+                                  <Globe size={16} color="var(--primary)" />
+                                </button>
+                              </div>
+                              <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                                <input
+                                  className="input-transparent"
+                                  value={product.name.ar || ''}
+                                  onChange={(e) => {
+                                    const newData = { ...menuData };
+                                    newData[activeCategory][index].name.ar = e.target.value;
+                                    setMenuData(newData);
+                                  }}
+                                  style={{ fontSize: '0.85rem', color: 'var(--text-muted)', width: '50%', background: 'rgba(255,255,255,0.05)', padding: '2px 4px', borderRadius: 4 }}
+                                  placeholder="🇸🇦 Arabic"
+                                  dir="rtl"
+                                />
+                                <input
+                                  className="input-transparent"
+                                  value={product.name.tr || ''}
+                                  onChange={(e) => {
+                                    const newData = { ...menuData };
+                                    newData[activeCategory][index].name.tr = e.target.value;
+                                    setMenuData(newData);
+                                  }}
+                                  style={{ fontSize: '0.85rem', color: 'var(--text-muted)', width: '50%', background: 'rgba(255,255,255,0.05)', padding: '2px 4px', borderRadius: 4 }}
+                                  placeholder="🇹🇷 Turkish"
+                                />
+                              </div>
+                            </div>
                             <button className="btn-icon danger" onClick={() => deleteItem(index)}>
                               <Trash2 size={16} />
                             </button>

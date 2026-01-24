@@ -241,12 +241,16 @@ function initializeAllGrids() {
         if (products) {
             products.forEach((product, index) => {
                 const card = document.createElement('div');
-                card.setAttribute('data-description', product.description[currentLang]);
+                // Fallback to English if translation is missing/empty
+                const desc = product.description[currentLang] || product.description['en'] || '';
+                const name = product.name[currentLang] || product.name['en'] || 'Unnamed Product';
+                
+                card.setAttribute('data-description', desc);
 
                 const optimizedThumb = getOptimizedImageUrl(product.image, 500);
                 card.innerHTML = `
-                    <img src="${optimizedThumb}" alt="${product.name[currentLang]}" class="product-image" loading="lazy">
-                    <h3 class="product-name">${product.name[currentLang]}</h3>
+                    <img src="${optimizedThumb}" alt="${name}" class="product-image" loading="lazy">
+                    <h3 class="product-name">${name}</h3>
                     <div class="card-bottom">
                         <div class="product-price">
                             ${product.priceDouble
