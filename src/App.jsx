@@ -316,11 +316,15 @@ function App() {
       };
 
       // Iterate all items
+      const isArabic = (text) => /[\u0600-\u06FF]/.test(text);
+
+      // Iterate all items
       Object.keys(newData).forEach(cat => {
         // Promotions Translation
         if (cat === 'promotions') {
           if (newData.promotions.text?.en) {
-            if (!newData.promotions.text.ar || !newData.promotions.text.ar.trim()) queueTranslation(newData.promotions.text.en, 'ar', 'promotions', -1, 'text');
+            const arText = newData.promotions.text.ar;
+            if (!arText || !arText.trim() || !isArabic(arText)) queueTranslation(newData.promotions.text.en, 'ar', 'promotions', -1, 'text');
             if (!newData.promotions.text.tr || !newData.promotions.text.tr.trim()) queueTranslation(newData.promotions.text.en, 'tr', 'promotions', -1, 'text');
           }
           return;
@@ -331,25 +335,28 @@ function App() {
         if (!newData.categorySettings[cat]) newData.categorySettings[cat] = { color: '#000000', image: '', titles: { en: cat, ar: '', tr: '' } };
         if (!newData.categorySettings[cat].titles) newData.categorySettings[cat].titles = { en: cat, ar: '', tr: '' };
 
-        // Ensure English title exists (capitalized key fallback)
+        // Ensure English title exists
         if (!newData.categorySettings[cat].titles.en) newData.categorySettings[cat].titles.en = cat.charAt(0).toUpperCase() + cat.slice(1);
 
         const catTitleEn = newData.categorySettings[cat].titles.en;
-        if (!newData.categorySettings[cat].titles.ar || !newData.categorySettings[cat].titles.ar.trim()) queueTranslation(catTitleEn, 'ar', 'categorySettings', cat, 'title');
+        const catTitleAr = newData.categorySettings[cat].titles.ar;
+        if (!catTitleAr || !catTitleAr.trim() || !isArabic(catTitleAr)) queueTranslation(catTitleEn, 'ar', 'categorySettings', cat, 'title');
         if (!newData.categorySettings[cat].titles.tr || !newData.categorySettings[cat].titles.tr.trim()) queueTranslation(catTitleEn, 'tr', 'categorySettings', cat, 'title');
 
-        if (cat === 'categorySettings') return; // Skip the settings key itself
+        if (cat === 'categorySettings') return;
 
         newData[cat].forEach((item, idx) => {
           // Translate Name
           if (item.name?.en) {
-            if (!item.name.ar) queueTranslation(item.name.en, 'ar', cat, idx, 'name');
-            if (!item.name.tr) queueTranslation(item.name.en, 'tr', cat, idx, 'name');
+            const nameAr = item.name.ar;
+            if (!nameAr || !nameAr.trim() || !isArabic(nameAr)) queueTranslation(item.name.en, 'ar', cat, idx, 'name');
+            if (!item.name.tr || !item.name.tr.trim()) queueTranslation(item.name.en, 'tr', cat, idx, 'name');
           }
           // Translate Description
           if (item.description?.en) {
-            if (!item.description.ar) queueTranslation(item.description.en, 'ar', cat, idx, 'description');
-            if (!item.description.tr) queueTranslation(item.description.en, 'tr', cat, idx, 'description');
+            const descAr = item.description.ar;
+            if (!descAr || !descAr.trim() || !isArabic(descAr)) queueTranslation(item.description.en, 'ar', cat, idx, 'description');
+            if (!item.description.tr || !item.description.tr.trim()) queueTranslation(item.description.en, 'tr', cat, idx, 'description');
           }
         });
       });

@@ -8,7 +8,10 @@ const translations = {
         drinks: 'Drinks',
         timeToPrepare: 'Time to Prepare',
         minutes: 'Minutes',
-        tapForDetails: 'Tap for details'
+        tapForDetails: 'Tap for details',
+        singlePatty: 'Single Patty',
+        doublePatty: 'Double Patty',
+        kcal: 'kcal'
     },
     ar: {
         all: 'الكل',
@@ -18,7 +21,10 @@ const translations = {
         drinks: 'مشروبات',
         timeToPrepare: 'وقت التحضير',
         minutes: 'دقائق',
-        tapForDetails: 'اضغط للتفاصيل'
+        tapForDetails: 'اضغط للتفاصيل',
+        singlePatty: 'شريحة واحدة',
+        doublePatty: 'شريحتين',
+        kcal: 'سعرة'
     },
     tr: {
         all: 'Tümü',
@@ -28,7 +34,10 @@ const translations = {
         drinks: 'İçecekler',
         timeToPrepare: 'Hazırlık Süresi',
         minutes: 'Dakika',
-        tapForDetails: 'Detaylar için tıklayın'
+        tapForDetails: 'Detaylar için tıklayın',
+        singlePatty: 'Tek Köfte',
+        doublePatty: 'Çift Köfte',
+        kcal: 'kcal'
     }
 };
 
@@ -93,11 +102,11 @@ function showModal(product) {
         // Create Toggle
         const singleBtn = document.createElement('button');
         singleBtn.className = 'option-btn active';
-        singleBtn.textContent = 'Single Patty';
+        singleBtn.textContent = translations[currentLang].singlePatty;
 
         const doubleBtn = document.createElement('button');
         doubleBtn.className = 'option-btn';
-        doubleBtn.textContent = 'Double Patty';
+        doubleBtn.textContent = translations[currentLang].doublePatty;
 
         // Event Handlers
         singleBtn.onclick = () => {
@@ -121,7 +130,7 @@ function showModal(product) {
     }
 
     modalPrice.innerHTML = currentPrice + '<sup>TZS</sup>';
-    modalDescription.innerHTML = `<strong>${product.calories} kcal</strong> • ${product.description[currentLang]}`;
+    modalDescription.innerHTML = `<strong>${product.calories} ${translations[currentLang].kcal}</strong> • ${product.description[currentLang]}`;
 
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
