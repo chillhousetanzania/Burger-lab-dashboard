@@ -1,8 +1,8 @@
-// Translations
 const translations = {
     en: {
         all: 'All',
         burgers: 'Beef Burgers',
+        burger: 'Beef Burgers', // Alias
         chicken: 'Chicken Burgers',
         extras: 'Extras',
         drinks: 'Drinks',
@@ -16,6 +16,7 @@ const translations = {
     ar: {
         all: 'الكل',
         burgers: 'برجر بقري',
+        burger: 'برجر بقري', // Alias
         chicken: 'برجر دجاج',
         extras: 'إضافات',
         drinks: 'مشروبات',
@@ -29,6 +30,7 @@ const translations = {
     tr: {
         all: 'Tümü',
         burgers: 'Dana Burgerler',
+        burger: 'Dana Burgerler', // Alias
         chicken: 'Tavuk Burgerler',
         extras: 'Ekstralar',
         drinks: 'İçecekler',
@@ -148,14 +150,22 @@ const categoryGrids = {};
 
 // Update category title fallback
 // Update category title fallback
+// Update category title fallback
 function getCategoryLabel(cat) {
+    // 1. Dynamic Setting
     if (menuData.categorySettings && menuData.categorySettings[cat] && menuData.categorySettings[cat].titles && menuData.categorySettings[cat].titles[currentLang]) {
-        return menuData.categorySettings[cat].titles[currentLang];
+        const dbTitle = menuData.categorySettings[cat].titles[currentLang];
+        // SMART CHECK: If DB title is basically the same as the raw key (e.g. "chicken" == "chicken"), assume it's a weak default and prefer our translation
+        // Also check if it's just Capitalized version of key (e.g. "Chicken" == "chicken")
+        if (dbTitle.toLowerCase() !== cat.toLowerCase()) {
+            return dbTitle;
+        }
     }
+    // 2. Translation Map (Robust Check)
     if (translations[currentLang] && translations[currentLang][cat]) {
         return translations[currentLang][cat];
     }
-    // Capitalize fallback
+    // 3. Fallback to Capitalized Key
     return cat.charAt(0).toUpperCase() + cat.slice(1);
 }
 
@@ -184,21 +194,11 @@ function updateUILanguage() {
 }
 
 // Update category title
+// Update category title
 function updateCategoryTitle(category) {
-    const hardcodedTitles = {
-        'burgers': 'Beef Burger'
-    };
-
-    if (hardcodedTitles[category]) {
-        categoryTitle.textContent = hardcodedTitles[category];
-        return;
-    }
-
-    if (menuData.categorySettings && menuData.categorySettings[category] && menuData.categorySettings[category].title) {
-        categoryTitle.textContent = menuData.categorySettings[category].title;
-    } else {
-        categoryTitle.textContent = getCategoryLabel(category);
-    }
+    // Removed legacy hardcoded override and .title check
+    // Use the robust getCategoryLabel function which handles all cases
+    categoryTitle.textContent = getCategoryLabel(category);
 }
 
 // Render products with click handlers
