@@ -4,8 +4,6 @@ const translations = {
         all: 'All',
         burgers: 'Beef Burgers',
         chicken: 'Chicken Burgers',
-        sauces: 'Sauces',
-        sides: 'Sides',
         extras: 'Extras',
         drinks: 'Drinks',
         timeToPrepare: 'Time to Prepare',
@@ -19,8 +17,6 @@ const translations = {
         all: 'الكل',
         burgers: 'برجر بقري',
         chicken: 'برجر دجاج',
-        sauces: 'صوصات',
-        sides: 'أطباق جانبية',
         extras: 'إضافات',
         drinks: 'مشروبات',
         timeToPrepare: 'وقت التحضير',
@@ -34,8 +30,6 @@ const translations = {
         all: 'Tümü',
         burgers: 'Dana Burgerler',
         chicken: 'Tavuk Burgerler',
-        sauces: 'Soslar',
-        sides: 'Yan Ürünler',
         extras: 'Ekstralar',
         drinks: 'İçecekler',
         timeToPrepare: 'Hazırlık Süresi',
@@ -52,13 +46,9 @@ let menuData = {
     promotions: { isActive: false, text: { en: '', ar: '', tr: '' } },
     burgers: [],
     chicken: [],
-    sauces: [],
-    sides: [],
     extras: [],
     drinks: []
 };
-
-// ... (getOptimizedImageUrl omitted for brevity, unchanged) ...
 
 // Cloudinary Optimizer Helper
 function getOptimizedImageUrl(url, width = 'auto') {
@@ -83,34 +73,89 @@ const productGrid = document.getElementById('productGrid');
 const categoryTitle = document.getElementById('categoryTitle');
 let categoryButtons = document.querySelectorAll('.category-btn');
 
-// ... (Modal Elements omitted, unchanged) ...
+// Modal Elements
+const modal = document.getElementById('productModal');
+const modalImage = document.getElementById('modalImage');
+const modalName = document.getElementById('modalName');
+const modalPrice = document.getElementById('modalPrice');
+const modalDescription = document.getElementById('modalDescription');
+const modalClose = document.querySelector('.modal-close');
+const modalBackdrop = document.querySelector('.modal-backdrop');
+
+// Current category
+let currentCategory = 'burgers';
 
 // Show product modal
-// ... (showModal omitted) ...
+function showModal(product) {
+    modalImage.src = getOptimizedImageUrl(product.image, 800);
+    modalImage.alt = product.name[currentLang];
+    modalName.textContent = product.name[currentLang];
+
+    const modalOptions = document.getElementById('modalOptions');
+    modalOptions.innerHTML = ''; // Clear previous options
+
+    // Default price
+    let currentPrice = product.price;
+
+    if (product.priceDouble) {
+        modalOptions.style.display = 'flex';
+        // Create Toggle
+        const singleBtn = document.createElement('button');
+        singleBtn.className = 'option-btn active';
+        singleBtn.textContent = translations[currentLang].singlePatty;
+
+        const doubleBtn = document.createElement('button');
+        doubleBtn.className = 'option-btn';
+        doubleBtn.textContent = translations[currentLang].doublePatty;
+
+        // Event Handlers
+        singleBtn.onclick = () => {
+            singleBtn.classList.add('active');
+            doubleBtn.classList.remove('active');
+            currentPrice = product.price;
+            modalPrice.innerHTML = currentPrice + '<sup>TZS</sup>';
+        };
+
+        doubleBtn.onclick = () => {
+            doubleBtn.classList.add('active');
+            singleBtn.classList.remove('active');
+            currentPrice = product.priceDouble;
+            modalPrice.innerHTML = currentPrice + '<sup>TZS</sup>';
+        };
+
+        modalOptions.appendChild(singleBtn);
+        modalOptions.appendChild(doubleBtn);
+    } else {
+        modalOptions.style.display = 'none';
+    }
+
+    modalPrice.innerHTML = currentPrice + '<sup>TZS</sup>';
+    modalDescription.innerHTML = `<strong>${product.calories} ${translations[currentLang].kcal}</strong> • ${product.description[currentLang]}`;
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
 
 // Close product modal
-// ... (closeModal omitted) ...
+function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
 
 // Render products with click handlers
 // Persistent Grids Cache
 const categoryGrids = {};
 
 // Update category title fallback
+// Update category title fallback
 function getCategoryLabel(cat) {
-    // 1. Prioritize Dynamic Dashboard Titles (if set)
-    if (menuData.categorySettings &&
-        menuData.categorySettings[cat] &&
-        menuData.categorySettings[cat].titles &&
-        menuData.categorySettings[cat].titles[currentLang]) {
+    if (menuData.categorySettings && menuData.categorySettings[cat] && menuData.categorySettings[cat].titles && menuData.categorySettings[cat].titles[currentLang]) {
         return menuData.categorySettings[cat].titles[currentLang];
     }
-
-    // 2. Fallback to Hardcoded Translations
     if (translations[currentLang] && translations[currentLang][cat]) {
         return translations[currentLang][cat];
     }
-
-    // 3. Fallback to Capitalized Key
+    // Capitalize fallback
     return cat.charAt(0).toUpperCase() + cat.slice(1);
 }
 
@@ -133,20 +178,25 @@ function updateUILanguage() {
 
     // Re-render all grids with new language
     updateCategoryTitle(currentCategory);
+    // initializeAllGrids no longer needed for language switch as grids persist, just update Text?
+    // Actually, product names/desc need re-render. 
     initializeAllGrids();
 }
 
 // Update category title
 function updateCategoryTitle(category) {
-    // Remove conflicting hardcoded override
-    // Prioritize Dynamic Dashboard Title if available
-    if (menuData.categorySettings &&
-        menuData.categorySettings[category] &&
-        menuData.categorySettings[category].titles &&
-        menuData.categorySettings[category].titles[currentLang]) {
-        categoryTitle.textContent = menuData.categorySettings[category].titles[currentLang];
+    const hardcodedTitles = {
+        'burgers': 'Beef Burger'
+    };
+
+    if (hardcodedTitles[category]) {
+        categoryTitle.textContent = hardcodedTitles[category];
+        return;
+    }
+
+    if (menuData.categorySettings && menuData.categorySettings[category] && menuData.categorySettings[category].title) {
+        categoryTitle.textContent = menuData.categorySettings[category].title;
     } else {
-        // Use unified label function
         categoryTitle.textContent = getCategoryLabel(category);
     }
 }
@@ -605,9 +655,6 @@ async function init() {
         }
         menuData = await response.json();
         console.log('Menu data loaded from cloud:', menuData);
-
-        // IMMEDIATE UPDATE: Force UI to sync with fetched data (titles, labels)
-        updateUILanguage();
 
         // Render Promotion Banner
         const heroBanner = document.querySelector('.hero-banner');
