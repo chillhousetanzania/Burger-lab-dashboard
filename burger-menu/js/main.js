@@ -606,6 +606,9 @@ async function init() {
         menuData = await response.json();
         console.log('Menu data loaded from cloud:', menuData);
 
+        // IMMEDIATE UPDATE: Force UI to sync with fetched data (titles, labels)
+        updateUILanguage();
+
         // Render Promotion Banner
         const heroBanner = document.querySelector('.hero-banner');
         // Check if there is actual text to show
