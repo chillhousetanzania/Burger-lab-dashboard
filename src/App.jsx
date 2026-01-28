@@ -864,7 +864,14 @@ function App() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                       <input
                         className="input-transparent"
-                        value={menuData.categorySettings?.[activeCategory]?.titles?.en || activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}
+                        value={menuData.categorySettings?.[activeCategory]?.titles?.en || {
+                          burgers: "Beef Burgers",
+                          chicken: "Chicken Burgers",
+                          sauces: "Sauces",
+                          sides: "Sides",
+                          extras: "Extras",
+                          drinks: "Drinks"
+                        }[activeCategory] || activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}
                         onChange={(e) => {
                           const newData = { ...menuData };
                           if (!newData.categorySettings) newData.categorySettings = {};
