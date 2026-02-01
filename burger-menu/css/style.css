@@ -477,18 +477,20 @@ html[dir="rtl"] .language-dropdown {
     /* Fix Logo Overlap */
     .logo {
         width: 50px;
-        /* Smaller on mobile */
-        height: 50px;
+        width: 70px;
+        /* Increased mobile size */
+        height: 70px;
         top: 5px;
         left: 16px;
         padding: 6px;
     }
 
-    /* Push nav down to avoid logo collision */
     /* Push nav down to avoid logo collision & add breathing room below */
     .category-nav {
-        margin-top: 16px;
-        margin-bottom: 16px;
+        margin-top: 24px;
+        /* Increased to clear larger logo */
+        margin-bottom: 24px;
+        /* Symmetric spacing */
         /* Added spacing below as requested */
     }
 
