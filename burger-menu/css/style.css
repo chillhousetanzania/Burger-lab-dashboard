@@ -493,27 +493,39 @@ html[dir="rtl"] .language-dropdown {
         margin-top: 16px;
     }
 
-    .hero-banner {
-        margin: 12px 16px;
-        padding: 20px 12px;
-        /* Less side padding */
-        height: 220px;
-        /* Taller banner for wrapped text */
-        justify-content: center;
-    }
-
-    /* Reposition Time to Prepare to bottom */
+    /* Reposition Time to Prepare - Restore to Top-Left but simpler */
     .time-to-prepare {
-        top: auto;
-        bottom: 12px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        justify-content: center;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        top: 10px;
+        left: 10px;
+        bottom: auto;
+        transform: none;
+        width: auto;
+        font-size: 0.75rem;
+        /* Scale down text */
     }
 
-    /* Fixed stray brace */
+    .time-value {
+        font-size: 0.9rem;
+    }
+
+    /* Adapt banner to be tall enough for stacked content */
+    .hero-banner {
+        margin: 10px;
+        padding: 40px 10px 20px;
+        /* Top padding clears the Time text */
+        height: auto;
+        min-height: 200px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Ensure title wraps and scales */
+    .category-title {
+        font-size: clamp(1.5rem, 7vw, 2.5rem);
+        /* Tune max size for mobile */
+        width: 100%;
+        padding: 8px 16px;
+    }
 
     .category-title {
         /* Font size handled by main clamp() */
