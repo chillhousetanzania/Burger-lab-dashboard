@@ -130,7 +130,7 @@ const newMenuData = {
             price: "15,000",
             priceDouble: "20,000",
             calories: "600",
-            image: "images/butter_chicken_burger_1768773238007.png",
+            image: "images/butter_chicken_v2.png",
             description: { en: "Grilled chicken, Buffalo sauce, Lettuce, Tomato, Onion, Cheddar cheese, Coriander leaves", ar: "", tr: "" }
         },
         {
@@ -138,7 +138,7 @@ const newMenuData = {
             price: "18,000",
             priceDouble: "23,000",
             calories: "620",
-            image: "images/flaky_chicken_burger_1768773255235.png",
+            image: "images/flaky_chicken_v2.png",
             description: { en: "Fried chicken, Cheeder cheese, Fresh, mushrooms, Beef bacon", ar: "", tr: "" }
         },
         {
@@ -146,7 +146,7 @@ const newMenuData = {
             price: "18,000",
             priceDouble: "23,000",
             calories: "680",
-            image: "images/gunners_chicken.png",
+            image: "images/gunners_chicken_v2.png",
             description: { en: "5 inch brioche chicken, onion rings, mozarella sticks", ar: "", tr: "" }
         },
         {
