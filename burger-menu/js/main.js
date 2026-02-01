@@ -361,23 +361,11 @@ function updateBannerTheme(category) {
         banner.style.borderRadius = '0'; // Optional: squared look for full width
 
         // Apply strict "Fixed Frame" dimensions (Matches the wide banner look)
-        // Apply strict "Fixed Frame" dimensions
         const optimizedBanner = getOptimizedImageUrl(billboards[0], 1200);
-
-        // Skeleton Logic: Add loading class first
-        banner.classList.add('skeleton-loading');
-
-        // Preload image
-        const img = new Image();
-        img.src = optimizedBanner;
-        img.onload = () => {
-            banner.style.backgroundImage = `url('${optimizedBanner}')`;
-            banner.classList.remove('skeleton-loading');
-        };
-
+        banner.style.backgroundImage = `url('${optimizedBanner}')`;
         banner.style.backgroundRepeat = 'no-repeat';
         banner.style.backgroundPosition = 'center';
-        banner.style.backgroundSize = 'cover'; // Ensure it covers the flex container
+        banner.style.backgroundSize = 'contain';
         banner.style.backgroundColor = '#101010';
 
         // Force Fixed Aspect Ratio (2.5:1)
@@ -425,7 +413,21 @@ function updateBannerTheme(category) {
     if (settings) {
         if (settings.image) {
             const optimizedHeader = getOptimizedImageUrl(settings.image, 1200);
-            banner.style.backgroundImage = `url('${optimizedHeader}')`;
+
+            // SKELETON: Start loading state
+            banner.classList.add('skeleton-loading');
+
+            // Preload image
+            const img = new Image();
+            img.src = optimizedHeader;
+            img.onload = () => {
+                banner.style.backgroundImage = `url('${optimizedHeader}')`;
+                banner.classList.remove('skeleton-loading');
+            };
+            img.onerror = () => {
+                banner.classList.remove('skeleton-loading'); // Remove on error to show fallback color
+            };
+
             banner.style.backgroundSize = 'cover';
             banner.style.backgroundPosition = 'center center';
             banner.style.backgroundRepeat = 'no-repeat';
@@ -438,6 +440,7 @@ function updateBannerTheme(category) {
         }
     } else {
         // Fallback
+        banner.classList.remove('skeleton-loading'); // Ensure no stuck skeleton
         banner.classList.add(`theme-${category}`);
     }
 
@@ -656,6 +659,11 @@ function preloadImages() {
 // Initial Skeleton Loader
 function renderSkeletonGrid() {
     const grid = document.getElementById('productGrid');
+    const hero = document.querySelector('.hero-banner');
+
+    // Apply skeleton to hero if exists
+    if (hero) hero.classList.add('skeleton-loading');
+
     if (!grid) return;
 
     // Create a temporary container for skeletons
@@ -683,10 +691,6 @@ renderSkeletonGrid();
 async function init() {
     try {
         console.log('Fetching live menu from API...');
-
-        // ARTIFICIAL DELAY to show Skeleton (User Request)
-        await new Promise(r => setTimeout(r, 1500));
-
         // SMART API DETECTION
         // If on localhost (dev), assume port 5174. If on Render (prod), use relative path.
         const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';

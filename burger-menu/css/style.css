@@ -283,6 +283,21 @@ html[dir="rtl"] .language-dropdown {
     }
 }
 
+/* Skeleton State for Banner */
+.hero-banner.skeleton-loading {
+    background-image: none !important;
+    background-color: #f0f0f0;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    position: relative;
+}
+
+.hero-banner.skeleton-loading>* {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
 /* Banner theme classes - Images visible, gradient as fallback */
 .hero-banner.theme-all {
     background-color: var(--burgers-primary);
