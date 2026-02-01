@@ -11,12 +11,12 @@ const newMenuData = {
         billboards: []
     },
     categorySettings: {
-        burgers: { color: "#8B0000", image: "images/banner_burgers.webp" },
-        chicken: { color: "#E1ad01", image: "images/banner_chicken.webp" },
-        veg_burger: { color: "#2E7D32", image: "images/banner_all.webp" },
-        kids: { color: "#FF69B4", image: "images/banner_all.webp" },
-        sauces: { color: "#C0392B", image: "images/banner_extras.webp" },
-        sides: { color: "#27AE60", image: "images/banner_extras.webp" }
+        burgers: { color: "#8B0000", image: "images/banner_burgers_nano.webp" },
+        chicken: { color: "#E1ad01", image: "images/banner_chicken_nano.webp" },
+        veg_burger: { color: "#2E7D32", image: "images/banner_all_nano.webp" },
+        kids: { color: "#FF69B4", image: "images/banner_all_nano.webp" },
+        sauces: { color: "#C0392B", image: "images/banner_extras_nano.webp" },
+        sides: { color: "#27AE60", image: "images/banner_extras_nano.webp" }
     },
     burgers: [
         {
@@ -72,7 +72,7 @@ const newMenuData = {
             price: "19,000",
             priceDouble: "23,000",
             calories: "650",
-            image: "images/mediterranean_burger_1768772925172.png",
+            image: "images/mediterranean_burger_1768772925172.webp",
             description: { en: "Ketchup, Mayonnaise, Pickles, Cheddar cheese, Pastrami, Lettuce, Tomato", ar: "", tr: "" }
         },
         {
@@ -80,7 +80,7 @@ const newMenuData = {
             price: "18,000",
             priceDouble: "22,000",
             calories: "780",
-            image: "images/smoky_mushrooms_burger_1768773223098.png",
+            image: "images/smoky_mushrooms_burger_1768773223098.webp",
             description: { en: "Smoky bbq sauce, Lettuce, Cheeder cheese, Caramelize onion, Slice of Tomato, Crispy Bacon", ar: "", tr: "" }
         },
         {
@@ -88,7 +88,7 @@ const newMenuData = {
             price: "18,000",
             priceDouble: "22,000",
             calories: "850",
-            image: "images/lord_of_the_rings_burger_1768773206918.png",
+            image: "images/lord_of_the_rings_burger_1768773206918.webp",
             description: { en: "Ranch sauce, BBQ sauce, Slice of Tomato, Lettuce, Cheeder cheese, 3 pieces of onion rings, 50 G beef bacon", ar: "", tr: "" }
         }
     ],
@@ -122,7 +122,7 @@ const newMenuData = {
             price: "15,000",
             priceDouble: "20,000",
             calories: "550",
-            image: "images/tandoori_chicken_burger_1768772940647.png",
+            image: "images/tandoori_chicken_burger_1768772940647.webp",
             description: { en: "Buffalo sauce, Grilled onion, Tomato, Lettuce, Cucumber", ar: "", tr: "" }
         },
         {
@@ -130,7 +130,7 @@ const newMenuData = {
             price: "15,000",
             priceDouble: "20,000",
             calories: "600",
-            image: "images/butter_chicken_v2.png",
+            image: "images/butter_chicken_v2.webp",
             description: { en: "Grilled chicken, Buffalo sauce, Lettuce, Tomato, Onion, Cheddar cheese, Coriander leaves", ar: "", tr: "" }
         },
         {
@@ -138,7 +138,7 @@ const newMenuData = {
             price: "18,000",
             priceDouble: "23,000",
             calories: "620",
-            image: "images/flaky_chicken_v2.png",
+            image: "images/flaky_chicken_v2.webp",
             description: { en: "Fried chicken, Cheeder cheese, Fresh, mushrooms, Beef bacon", ar: "", tr: "" }
         },
         {
@@ -146,7 +146,7 @@ const newMenuData = {
             price: "18,000",
             priceDouble: "23,000",
             calories: "680",
-            image: "images/gunners_chicken_v2.png",
+            image: "images/gunners_chicken_v2.webp",
             description: { en: "5 inch brioche chicken, onion rings, mozarella sticks", ar: "", tr: "" }
         },
         {
@@ -154,7 +154,7 @@ const newMenuData = {
             price: "15,000",
             priceDouble: "20,000",
             calories: "580",
-            image: "images/jalapeno_chicken.png",
+            image: "images/jalapeno_chicken.webp",
             description: { en: "5 inch brioche, ketchup, mayonnaise, american cheese, crispy chicken, lettuce, jalapeno", ar: "", tr: "" }
         }
     ],
@@ -164,7 +164,7 @@ const newMenuData = {
             price: "15,000",
             priceDouble: "18,000",
             calories: "500",
-            image: "images/veg_burger.png",
+            image: "images/veg_burger.webp",
             description: { en: "single patty 15,000 double patty 18,000", ar: "", tr: "" }
         }
     ],
@@ -173,41 +173,41 @@ const newMenuData = {
             name: { en: "Kids chicken burger", ar: "", tr: "" },
             price: "15,000",
             calories: "450",
-            image: "images/kids_chicken_meal.jpg",
+            image: "images/kids_chicken_meal.webp",
             description: { en: "Burger 4 inch, Juice, French fries, Toys.", ar: "", tr: "" }
         },
         {
             name: { en: "Kids cheese burger", ar: "", tr: "" },
             price: "15,000",
             calories: "500",
-            image: "images/kids_cheese_meal.jpg",
+            image: "images/kids_cheese_meal.webp",
             description: { en: "Burger 4 inch, Juice, French fries, Toys.", ar: "", tr: "" }
         },
         {
             name: { en: "Nuggets meal", ar: "", tr: "" },
             price: "15,000",
             calories: "400",
-            image: "images/kids_nuggets_meal.jpg",
+            image: "images/kids_nuggets_meal.webp",
             description: { en: "4 piece nuggets, Juice, French fries, Toys.", ar: "", tr: "" }
         }
     ],
     sauces: [
-        { name: { en: "Buffalo", ar: "", tr: "" }, price: "2,000", calories: "50", image: "images/buffalo_sauce_1768772959299.png", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Smoky BBQ", ar: "", tr: "" }, price: "2,000", calories: "60", image: "images/smoky_bbq_sauce_1768773304200.png", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Ranch", ar: "", tr: "" }, price: "2,000", calories: "120", image: "images/ranch_sauce_1768773319742.png", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Cheddar Cheese", ar: "", tr: "" }, price: "2,000", calories: "150", image: "images/cheddar_cheese_sauce_1768773359543.png", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Thousand Island", ar: "", tr: "" }, price: "2,000", calories: "100", image: "images/thousands_island_sauce_1768773375613.png", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Texas", ar: "", tr: "" }, price: "2,000", calories: "90", image: "images/texas_sauce_1768773391820.png", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Siracha", ar: "", tr: "" }, price: "2,000", calories: "30", image: "images/sriracha_sauce_1768773407273.png", description: { en: "", ar: "", tr: "" } }
+        { name: { en: "Buffalo", ar: "", tr: "" }, price: "2,000", calories: "50", image: "images/buffalo_sauce_1768772959299.webp", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Smoky BBQ", ar: "", tr: "" }, price: "2,000", calories: "60", image: "images/smoky_bbq_sauce_1768773304200.webp", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Ranch", ar: "", tr: "" }, price: "2,000", calories: "120", image: "images/ranch_sauce_1768773319742.webp", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Cheddar Cheese", ar: "", tr: "" }, price: "2,000", calories: "150", image: "images/cheddar_cheese_sauce_1768773359543.webp", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Thousand Island", ar: "", tr: "" }, price: "2,000", calories: "100", image: "images/thousands_island_sauce_1768773375613.webp", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Texas", ar: "", tr: "" }, price: "2,000", calories: "90", image: "images/texas_sauce_1768773391820.webp", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Siracha", ar: "", tr: "" }, price: "2,000", calories: "30", image: "images/sriracha_sauce_1768773407273.webp", description: { en: "", ar: "", tr: "" } }
     ],
     sides: [
-        { name: { en: "Fries", ar: "", tr: "" }, price: "4,000", calories: "350", image: "images/french_fries_1768772980331.png", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Coleslaw", ar: "", tr: "" }, price: "2,000", calories: "150", image: "images/coleslaw_1768773464116.png", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Onion Rings (4 pcs)", ar: "", tr: "" }, price: "3,000", calories: "300", image: "images/onion_rings_1768773484685.png", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Caramelized Onion", ar: "", tr: "" }, price: "2,000", calories: "80", image: "images/caramelised_onions_1768773444802.png", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Mozzarella (2 pcs)", ar: "", tr: "" }, price: "4,000", calories: "400", image: "images/mozzarella_sticks.jpg", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Buffalo Wings Fried", ar: "", tr: "" }, price: "12,000", calories: "400", image: "images/buffalo_wings_fried_1768773502140.png", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Cheese Fries", ar: "", tr: "" }, price: "8,000", calories: "500", image: "images/cheese_fries_1768773515682.png", description: { en: "", ar: "", tr: "" } }
+        { name: { en: "Fries", ar: "", tr: "" }, price: "4,000", calories: "350", image: "images/french_fries_1768772980331.webp", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Coleslaw", ar: "", tr: "" }, price: "2,000", calories: "150", image: "images/coleslaw_1768773464116.webp", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Onion Rings (4 pcs)", ar: "", tr: "" }, price: "3,000", calories: "300", image: "images/onion_rings_1768773484685.webp", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Caramelized Onion", ar: "", tr: "" }, price: "2,000", calories: "80", image: "images/caramelised_onions_1768773444802.webp", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Mozzarella (2 pcs)", ar: "", tr: "" }, price: "4,000", calories: "400", image: "images/mozzarella_sticks.webp", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Buffalo Wings Fried", ar: "", tr: "" }, price: "12,000", calories: "400", image: "images/buffalo_wings_fried_1768773502140.webp", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Cheese Fries", ar: "", tr: "" }, price: "8,000", calories: "500", image: "images/cheese_fries_1768773515682.webp", description: { en: "", ar: "", tr: "" } }
     ]
 };
 
