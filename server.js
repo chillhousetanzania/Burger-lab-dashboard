@@ -134,26 +134,6 @@ app.get('/api/menu', async (req, res) => {
     }
 });
 
-// DEBUG ROUTE - Check files
-app.get('/api/debug-files', async (req, res) => {
-    try {
-        const menuPath = path.join(__dirname, 'burger-menu');
-        const cssPath = path.join(__dirname, 'burger-menu/css');
-
-        let files = [], cssFiles = [];
-        try { files = await fs.readdir(menuPath); } catch (e) { files = [e.message] }
-        try { cssFiles = await fs.readdir(cssPath); } catch (e) { cssFiles = [e.message] }
-
-        res.json({
-            root: __dirname,
-            files,
-            cssFiles
-        });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
 app.post('/api/menu', authenticateToken, async (req, res) => {
     try {
         let data = req.body;
@@ -176,57 +156,56 @@ app.post('/api/menu', authenticateToken, async (req, res) => {
                     } catch (e) { }
                 }
             }
-        } catch (e) { }
 
-        // Start Product Translation Loop
-        const categories = Object.keys(data);
-        for (const cat of categories) {
-            if (!Array.isArray(data[cat])) continue;
+            const categories = Object.keys(data);
+            for (const cat of categories) {
+                if (!Array.isArray(data[cat])) continue;
 
-            for (let i = 0; i < data[cat].length; i++) {
-                const item = data[cat][i];
-                // Translate Name if missing
-                if (item.name && item.name.en) {
-                    if (!item.name.ar || item.name.ar.trim() === '') {
-                        try {
-                            const res = await translate(item.name.en, { to: 'ar' });
-                            item.name.ar = res.text;
-                        } catch (e) { }
-                    }
-                    if (!item.name.tr || item.name.tr.trim() === '') {
-                        try {
-                            const res = await translate(item.name.en, { to: 'tr' });
-                            item.name.tr = res.text;
-                        } catch (e) { }
-                    }
-                }
+                for (let i = 0; i < data[cat].length; i++) {
+                    const item = data[cat][i];
 
-                // Translate Description if present
-                if (item.description && item.description.en) {
-                    if (!item.description.ar || item.description.ar.trim() === '') {
-                        try {
-                            const res = await translate(item.description.en, { to: 'ar' });
-                            item.description.ar = res.text;
-                        } catch (e) { }
+                    // Translate Name if missing
+                    if (item.name && item.name.en) {
+                        if (!item.name.ar || item.name.ar.trim() === '') {
+                            try {
+                                const res = await translate(item.name.en, { to: 'ar' });
+                                item.name.ar = res.text;
+                            } catch (e) { }
+                        }
+                        if (!item.name.tr || item.name.tr.trim() === '') {
+                            try {
+                                const res = await translate(item.name.en, { to: 'tr' });
+                                item.name.tr = res.text;
+                            } catch (e) { }
+                        }
                     }
-                    if (!item.description.tr || item.description.tr.trim() === '') {
-                        try {
-                            const res = await translate(item.description.en, { to: 'tr' });
-                            item.description.tr = res.text;
-                        } catch (e) { }
+
+                    // Translate Description if present
+                    if (item.description && item.description.en) {
+                        if (!item.description.ar || item.description.ar.trim() === '') {
+                            try {
+                                const res = await translate(item.description.en, { to: 'ar' });
+                                item.description.ar = res.text;
+                            } catch (e) { }
+                        }
+                        if (!item.description.tr || item.description.tr.trim() === '') {
+                            try {
+                                const res = await translate(item.description.en, { to: 'tr' });
+                                item.description.tr = res.text;
+                            } catch (e) { }
+                        }
                     }
                 }
             }
+        } catch (transError) {
+            console.error('Auto-translation failed:', transError);
         }
-    } catch (transError) {
-        console.error('Auto-translation failed:', transError);
-    }
 
-    await Menu.findOneAndUpdate({}, { data, lastUpdated: new Date() }, { upsert: true });
-    res.json({ success: true, message: 'Saved (and Translated)' });
-} catch (error) {
-    res.status(500).json({ error: 'Failed to save menu data' });
-}
+        await Menu.findOneAndUpdate({}, { data, lastUpdated: new Date() }, { upsert: true });
+        res.json({ success: true, message: 'Saved (and Translated)' });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to save menu data' });
+    }
 });
 
 app.post('/api/translate', async (req, res) => {

@@ -323,7 +323,6 @@ function App() {
         // Promotions Translation
         if (cat === 'promotions') {
           if (newData.promotions.text?.en) {
-
             const arText = newData.promotions.text.ar;
             if (!arText || !arText.trim() || !isArabic(arText)) queueTranslation(newData.promotions.text.en, 'ar', 'promotions', -1, 'text');
             if (!newData.promotions.text.tr || !newData.promotions.text.tr.trim()) queueTranslation(newData.promotions.text.en, 'tr', 'promotions', -1, 'text');
@@ -506,87 +505,8 @@ function App() {
 
     const newData = { ...menuData };
     if (field === 'isActive') newData.promotions.isActive = value;
-    if (field === 'text') {
-      newData.promotions.text.en = value;
-      // Auto translate promotion
-      if (!newData.promotions.text.ar) newData.promotions.text.ar = autoTranslateDictionary(value, 'ar');
-      if (!newData.promotions.text.tr) newData.promotions.text.tr = autoTranslateDictionary(value, 'tr');
-    }
+    if (field === 'text') newData.promotions.text.en = value;
     setMenuData(newData);
-  };
-
-  // Auto-Translation Helper (Dictionary)
-  const autoTranslateDictionary = (text, targetLang) => {
-    if (!text) return "";
-
-    // Simple Dictionary for Burger Menu context
-    const dictionary = {
-      ar: {
-        "Burger": "برغر", "Chicken": "دجاج", "Beef": "لحم بقر", "Fries": "بطاطس",
-        "Cheese": "جبن", "Double": "دبل", "Spicy": "حار", "Classic": "كلاسيك",
-        "Mushroom": "فطر", "Sauce": "صوص", "Drink": "مشروب", "Large": "كبير",
-        "Water": "ماء", "Soda": "صودا", "Veg": "نباتي", "Kids": "أطفال",
-        "Meal": "وجبة", "BBQ": "باربيكيو", "Wings": "أجنحة"
-      },
-      tr: {
-        "Burger": "Burger", "Chicken": "Tavuk", "Beef": "Sığır", "Fries": "Patates",
-        "Cheese": "Peynir", "Double": "Çift", "Spicy": "Acı", "Classic": "Klasik",
-        "Mushroom": "Mantar", "Sauce": "Sos", "Drink": "İçecek", "Large": "Büyük",
-        "Water": "Su", "Soda": "Gazoz", "Veg": "Sebzeli", "Kids": "Çocuk",
-        "Meal": "Yemek", "BBQ": "Barbekü", "Wings": "Kanat"
-      }
-    };
-
-    // Word-by-word replacement
-    let translated = text;
-    if (dictionary[targetLang]) {
-      Object.keys(dictionary[targetLang]).forEach(key => {
-        const regex = new RegExp(`\\b${key}\\b`, 'gi');
-        translated = translated.replace(regex, dictionary[targetLang][key]);
-      });
-    }
-    return translated;
-  };
-
-  const handleUpdateProduct = (e, catIndex, prodIndex, field, value, lang = null) => {
-    const newData = { ...menuData };
-    const category = Object.keys(newData).filter(k => k !== 'promotions' && k !== 'categorySettings')[catIndex];
-
-    if (lang) {
-      newData[category][prodIndex][field][lang] = value;
-    } else {
-      newData[category][prodIndex][field] = value;
-    }
-
-    // Auto-Translate Name trigger
-    if (field === 'name' && lang === 'en') {
-      // If Arabic/Turkish are empty (or were same as old English), update them
-      const arField = newData[category][prodIndex].name.ar;
-      const trField = newData[category][prodIndex].name.tr;
-
-      if (!arField || arField === '') {
-        newData[category][prodIndex].name.ar = autoTranslateDictionary(value, 'ar');
-      }
-      if (!trField || trField === '') {
-        newData[category][prodIndex].name.tr = autoTranslateDictionary(value, 'tr');
-      }
-    }
-
-    // Auto-Translate Description trigger
-    if (field === 'description' && lang === 'en') {
-      const arDesc = newData[category][prodIndex].description.ar;
-      const trDesc = newData[category][prodIndex].description.tr;
-
-      if (!arDesc || arDesc === '') {
-        newData[category][prodIndex].description.ar = autoTranslateDictionary(value, 'ar');
-      }
-      if (!trDesc || trDesc === '') {
-        newData[category][prodIndex].description.tr = autoTranslateDictionary(value, 'tr');
-      }
-    }
-
-    setMenuData(newData);
-    pushHistory();
   };
 
   const handleUpdatePassword = async () => {
