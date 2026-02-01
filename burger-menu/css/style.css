@@ -336,7 +336,8 @@ html[dir="rtl"] .language-dropdown {
 
 .category-title {
     font-family: var(--font-display);
-    font-size: 3.5rem;
+    /* Fluid scale: Min 1.5rem, Pref 8% of viewport, Max 5rem */
+    font-size: clamp(1.5rem, 8vw, 5rem);
     font-weight: 700;
     text-align: center;
     margin-top: 0;
@@ -347,7 +348,10 @@ html[dir="rtl"] .language-dropdown {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    padding: 10px 40px;
+
+    /* Fluid Padding */
+    padding: clamp(0.5rem, 2vw, 1rem) clamp(1.5rem, 5vw, 3rem);
+
     border-radius: 100px;
     /* Pill shape */
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -355,8 +359,15 @@ html[dir="rtl"] .language-dropdown {
 
     /* Centering */
     width: fit-content;
+    max-width: 90%;
+    /* Ensure it never hits edges on mobile */
     margin-left: auto;
     margin-right: auto;
+
+    /* Text Overflow Handling */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Checkered Pattern Decoration - Hidden */
@@ -459,16 +470,9 @@ html[dir="rtl"] .language-dropdown {
     }
 
     .category-title {
-        font-size: 2rem;
-        /* Smaller font */
-        padding: 8px 20px;
-        /* Reduced glass padding */
+        /* Font size handled by main clamp() */
+        /* Keeping basic adjustments just in case */
         width: 90%;
-        /* Prevent overflow */
-        white-space: nowrap;
-        /* Keep on one line if possible, or wrap gracefully */
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 
     .header {
