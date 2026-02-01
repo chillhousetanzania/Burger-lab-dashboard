@@ -165,8 +165,8 @@ function getCategoryLabel(cat) {
     if (translations[currentLang] && translations[currentLang][cat]) {
         return translations[currentLang][cat];
     }
-    // 3. Fallback to Capitalized Key
-    return cat.charAt(0).toUpperCase() + cat.slice(1);
+    // 3. Fallback to Capitalized Key (handle underscores)
+    return cat.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
 
 // Update UI language
@@ -647,14 +647,22 @@ async function init() {
         console.log('Fetching live menu from API...');
         // Correctly point to the dashboard server API
         // Correctly point to the dashboard server API (Relative path works for both)
-        const API_URL = '/api/menu';
+        const API_URL = window.location.port === '5174' ? '/api/menu' : 'http://localhost:5174/api/menu';
 
-        const response = await fetch(API_URL);
+        let response;
+        try {
+            response = await fetch(API_URL);
+            if (!response.ok) throw new Error('API unreachable');
+        } catch (err) {
+            console.warn('API failed, falling back to local menu.json', err);
+            response = await fetch('menu.json');
+        }
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         menuData = await response.json();
-        console.log('Menu data loaded from cloud:', menuData);
+        console.log('Menu data loaded:', menuData);
 
         // Render Promotion Banner
         const heroBanner = document.querySelector('.hero-banner');

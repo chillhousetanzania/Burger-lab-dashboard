@@ -342,16 +342,17 @@ html[dir="rtl"] .language-dropdown {
     margin-top: 0;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    
+
     /* Glass Effect */
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     padding: 10px 40px;
-    border-radius: 100px; /* Pill shape */
+    border-radius: 100px;
+    /* Pill shape */
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-    
+
     /* Centering */
     width: fit-content;
     margin-left: auto;
@@ -458,7 +459,16 @@ html[dir="rtl"] .language-dropdown {
     }
 
     .category-title {
-        font-size: 2.8rem;
+        font-size: 2rem;
+        /* Smaller font */
+        padding: 8px 20px;
+        /* Reduced glass padding */
+        width: 90%;
+        /* Prevent overflow */
+        white-space: nowrap;
+        /* Keep on one line if possible, or wrap gracefully */
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .header {
