@@ -81,25 +81,18 @@ body {
 .logo {
     position: absolute;
     top: 5px;
-    /* Slight adjust for spacing */
     left: 24px;
-    width: 80px;
-    /* Fixed width for circle */
-    height: 80px;
+    width: 110px;
+    /* Increased size */
+    height: 110px;
     z-index: 102;
     display: flex;
     align-items: center;
-    /* Center Vertically */
     justify-content: center;
-    /* Center Horizontally */
     background: var(--white);
-    /* White Background */
     border-radius: 50%;
-    /* Circle Frame */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow */
     padding: 10px;
-    /* Internal spacing */
     pointer-events: none;
 }
 
