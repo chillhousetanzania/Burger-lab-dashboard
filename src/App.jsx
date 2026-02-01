@@ -105,7 +105,7 @@ function App() {
     chicken: 'Chicken Burger',
     extras: 'Extras',
     drinks: 'Drinks',
-    veg_burger: 'Veg & All'
+    veg_burger: 'Veggie Burger' // Clean Label
   };
 
   // Responsive check
@@ -661,7 +661,34 @@ function App() {
       <div className="grid" style={{ gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: '2rem' }}>
         {/* Sidebar Navigation */}
         <aside style={{ display: isMobile ? 'flex' : 'block', overflowX: isMobile ? 'auto' : 'visible', paddingBottom: isMobile ? '1rem' : 0, gap: '0.5rem' }}>
-          {Object.keys(menuData).filter(k => k !== 'promotions' && k !== 'categorySettings').map(cat => (
+          {/* Main Page (All) Special Category */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', width: isMobile ? 'auto' : '100%' }}>
+            <button
+              className="btn"
+              style={{
+                width: isMobile ? 'auto' : '100%',
+                justifyContent: isMobile ? 'center' : 'flex-start',
+                background: activeCategory === 'all' ? 'var(--bg-input)' : 'transparent',
+                marginBottom: isMobile ? 0 : '0.25rem',
+                textTransform: 'capitalize',
+                whiteSpace: 'nowrap',
+                border: isMobile ? '1px solid var(--border)' : 'transparent',
+                color: activeCategory === 'all' ? 'var(--primary)' : 'var(--text-main)',
+                fontWeight: activeCategory === 'all' ? 700 : 400,
+                flexGrow: 1
+              }}
+              onClick={() => {
+                // Ensure 'all' exists in settings
+                if (!menuData.categorySettings) menuData.categorySettings = {};
+                if (!menuData.categorySettings.all) menuData.categorySettings.all = { color: '#000', image: 'images/banner_all_nano_real.webp', titles: { en: 'Main Page' } };
+                setActiveCategory('all');
+              }}
+            >
+              Main Menu (All)
+            </button>
+          </div>
+
+          {Object.keys(menuData).filter(k => k !== 'promotions' && k !== 'categorySettings' && k !== 'all').map(cat => (
             <div key={cat} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', width: isMobile ? 'auto' : '100%' }}>
               <button
                 className="btn"

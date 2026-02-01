@@ -11,6 +11,7 @@ const newMenuData = {
         billboards: []
     },
     categorySettings: {
+        all: { color: "#C0392B", image: "images/banner_all_nano_real.webp" },
         burgers: { color: "#8B0000", image: "images/banner_burgers_nano.webp" },
         chicken: { color: "#E1ad01", image: "images/banner_chicken_nano.webp" },
         veg_burger: { color: "#2E7D32", image: "images/banner_veg_nano.webp" },
