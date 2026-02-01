@@ -104,7 +104,8 @@ function App() {
     burgers: 'Beef Burger',
     chicken: 'Chicken Burger',
     extras: 'Extras',
-    drinks: 'Drinks'
+    drinks: 'Drinks',
+    veg_burger: 'Veg & All'
   };
 
   // Responsive check
