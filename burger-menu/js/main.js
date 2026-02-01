@@ -641,6 +641,32 @@ function preloadImages() {
     return Promise.all([...bannerPromises, ...productPromises]);
 }
 
+// Initial Skeleton Loader
+function renderSkeletonGrid() {
+    const grid = document.getElementById('productGrid');
+    if (!grid) return;
+
+    // Create a temporary container for skeletons
+    // Using 4 columns x 2 rows = 8 cards
+    let html = '<div class="category-grid-container" style="display:grid; opacity:1;">';
+
+    for (let i = 0; i < 8; i++) {
+        html += `
+        <div class="product-card skeleton-card">
+            <div class="skeleton skeleton-image"></div>
+            <div class="skeleton skeleton-text title" style="width: 60%; margin: 0 auto 12px;"></div>
+            <div class="skeleton skeleton-text medium"></div>
+            <div class="skeleton skeleton-text short"></div>
+        </div>
+        `;
+    }
+    html += '</div>';
+    grid.innerHTML = html;
+}
+
+// Show skeletons immediately
+renderSkeletonGrid();
+
 // Initialization Logic
 async function init() {
     try {
