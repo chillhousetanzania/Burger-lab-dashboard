@@ -504,6 +504,22 @@ function App() {
     }
   };
 
+  // Promotion Handling
+  const updatePromotion = (field, value) => {
+    // Checkbox toggles should push history
+    if (field === 'isActive') pushHistory();
+
+    const newData = { ...menuData };
+    if (field === 'isActive') newData.promotions.isActive = value;
+    if (field === 'text') {
+      newData.promotions.text.en = value;
+      // Auto translate promotion
+      if (!newData.promotions.text.ar) newData.promotions.text.ar = autoTranslate(value, 'ar');
+      if (!newData.promotions.text.tr) newData.promotions.text.tr = autoTranslate(value, 'tr');
+    }
+    setMenuData(newData);
+  };
+
   // Auto-Translation Helper
   const autoTranslate = (text, targetLang) => {
     if (!text) return "";
