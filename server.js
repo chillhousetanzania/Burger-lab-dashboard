@@ -208,25 +208,6 @@ app.post('/api/menu', authenticateToken, async (req, res) => {
     }
 });
 
-// EMERGNCY ROUTE: Force seed DB from local file (fixes split-brain DB issues)
-app.get('/api/admin/force-seed', async (req, res) => {
-    try {
-        console.log("⚠️ Force Seeding DB from:", MENU_PATH);
-        const fileContent = await fs.readFile(MENU_PATH, 'utf-8');
-        const menuData = JSON.parse(fileContent);
-
-        // Clear and Replace
-        await Menu.deleteMany({});
-        await Menu.create({ data: menuData, lastUpdated: new Date() });
-
-        console.log("✅ Database successfully re-seeded from file.");
-        res.json({ success: true, message: "Database re-seeded from menu.json", items: Object.keys(menuData).length });
-    } catch (e) {
-        console.error("Force Seed Error:", e);
-        res.status(500).json({ error: e.message, stack: e.stack });
-    }
-});
-
 app.post('/api/translate', async (req, res) => {
     try {
         const { text, targetLang } = req.body;
