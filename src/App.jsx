@@ -819,7 +819,7 @@ function App() {
           {activeCategory && (
             <div className="grid gap-4">
               <div className="flex justify-between items-center" style={{ flexWrap: 'wrap', gap: '1rem' }}>
-                <h2>{activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)} Items</h2>
+                <h2>{activeCategory.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')} Items</h2>
 
                 {/* Category Settings Panel */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
