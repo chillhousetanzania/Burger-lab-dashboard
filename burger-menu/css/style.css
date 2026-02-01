@@ -513,22 +513,21 @@ html[dir="rtl"] .language-dropdown {
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
 
-    height: 160px;
-}
+    /* Fixed stray brace */
 
-.category-title {
-    /* Font size handled by main clamp() */
-    /* Keeping basic adjustments just in case */
-    width: 90%;
-}
+    .category-title {
+        /* Font size handled by main clamp() */
+        /* Keeping basic adjustments just in case */
+        width: 90%;
+    }
 
-.header {
-    padding: 16px;
-}
+    .header {
+        padding: 16px;
+    }
 
-.logo {
-    font-size: 2rem;
-}
+    .logo {
+        font-size: 2rem;
+    }
 }
 
 /* ===== Product Card ===== */
