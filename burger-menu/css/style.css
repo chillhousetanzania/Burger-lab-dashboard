@@ -505,54 +505,47 @@ html[dir="rtl"] .language-dropdown {
         /* Scale down text */
     }
 
-    .time-value {
-        font-size: 0.9rem;
-    }
-
-    /* REDO: Reposition Time to Prepare to Bottom Center (User request) */
-    .time-to-prepare {
-        top: auto;
-        bottom: 12px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        justify-content: center;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-        font-size: 0.9rem;
-        /* Restore readable size */
-    }
-
-    .time-value {
-        font-size: 1.1rem;
-    }
-
-    /* Adapt banner - Align Center again */
+    /* FLEX STACK LAYOUT: The ultimate fix for overlap */
     .hero-banner {
         margin: 10px;
-        padding: 20px 12px;
-        /* Standard padding */
+        padding: 20px 10px;
         height: auto;
-        min-height: 220px;
-        justify-content: center;
-        /* Center content */
-        align-items: center;
-        /* Center items */
+        min-height: 240px;
         display: flex;
         flex-direction: column;
+        /* Stack items vertically */
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        /* Space between Time and Title */
     }
 
-    /* Ensure title wraps and scales */
+    /* Make Time Text part of the flow (No Absolute) */
+    .time-to-prepare {
+        position: static;
+        /* Removes it from absolute top/bottom */
+        transform: none;
+        width: auto;
+        justify-content: center;
+        order: -1;
+        /* Place it ABOVE the title */
+        background: rgba(0, 0, 0, 0.4);
+        /* Optional: small pill bg for readability */
+        padding: 4px 12px;
+        border-radius: 20px;
+        backdrop-filter: blur(4px);
+    }
+
+    .time-value {
+        font-size: 1rem;
+        color: #fff;
+    }
+
     .category-title {
         font-size: clamp(1.8rem, 7vw, 2.5rem);
         width: 100%;
         padding: 8px 16px;
         margin-top: 0;
-    }
-
-    .category-title {
-        /* Font size handled by main clamp() */
-        /* Keeping basic adjustments just in case */
-        width: 90%;
     }
 
     .header {

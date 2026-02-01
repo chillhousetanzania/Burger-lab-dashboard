@@ -361,11 +361,23 @@ function updateBannerTheme(category) {
         banner.style.borderRadius = '0'; // Optional: squared look for full width
 
         // Apply strict "Fixed Frame" dimensions (Matches the wide banner look)
+        // Apply strict "Fixed Frame" dimensions
         const optimizedBanner = getOptimizedImageUrl(billboards[0], 1200);
-        banner.style.backgroundImage = `url('${optimizedBanner}')`;
+
+        // Skeleton Logic: Add loading class first
+        banner.classList.add('skeleton-loading');
+
+        // Preload image
+        const img = new Image();
+        img.src = optimizedBanner;
+        img.onload = () => {
+            banner.style.backgroundImage = `url('${optimizedBanner}')`;
+            banner.classList.remove('skeleton-loading');
+        };
+
         banner.style.backgroundRepeat = 'no-repeat';
         banner.style.backgroundPosition = 'center';
-        banner.style.backgroundSize = 'contain';
+        banner.style.backgroundSize = 'cover'; // Ensure it covers the flex container
         banner.style.backgroundColor = '#101010';
 
         // Force Fixed Aspect Ratio (2.5:1)
