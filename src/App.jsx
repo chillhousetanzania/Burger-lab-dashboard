@@ -172,8 +172,8 @@ function App() {
       setMenuData(json);
       setHistory([]); // Reset history on load
       setFileHandle({ name: 'Remote Server' });
-      // Default to first real category (skip promotions key)
-      const firstCat = Object.keys(json).find(k => k !== 'promotions') || 'burgers';
+      // Default to first real category (skip promotions and categorySettings)
+      const firstCat = Object.keys(json).find(k => k !== 'promotions' && k !== 'categorySettings') || 'burgers';
       setActiveCategory(firstCat);
       setStatus('idle');
     } catch (err) {
