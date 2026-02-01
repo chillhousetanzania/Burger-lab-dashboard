@@ -323,12 +323,7 @@ function App() {
         // Promotions Translation
         if (cat === 'promotions') {
           if (newData.promotions.text?.en) {
-            if (field === 'text') {
-              newData.promotions.text.en = value;
-              // Auto translate promotion
-              if (!newData.promotions.text.ar) newData.promotions.text.ar = autoTranslate(value, 'ar');
-              if (!newData.promotions.text.tr) newData.promotions.text.tr = autoTranslate(value, 'tr');
-            }
+
             const arText = newData.promotions.text.ar;
             if (!arText || !arText.trim() || !isArabic(arText)) queueTranslation(newData.promotions.text.en, 'ar', 'promotions', -1, 'text');
             if (!newData.promotions.text.tr || !newData.promotions.text.tr.trim()) queueTranslation(newData.promotions.text.en, 'tr', 'promotions', -1, 'text');
