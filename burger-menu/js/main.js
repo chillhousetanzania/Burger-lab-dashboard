@@ -671,6 +671,10 @@ renderSkeletonGrid();
 async function init() {
     try {
         console.log('Fetching live menu from API...');
+
+        // ARTIFICIAL DELAY to show Skeleton (User Request)
+        await new Promise(r => setTimeout(r, 1500));
+
         // SMART API DETECTION
         // If on localhost (dev), assume port 5174. If on Render (prod), use relative path.
         const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';

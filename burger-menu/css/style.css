@@ -480,17 +480,17 @@ html[dir="rtl"] .language-dropdown {
 
     /* Fix Logo Overlap */
     .logo {
-        width: 50px;
-        /* Smaller on mobile */
-        height: 50px;
+        width: 70px;
+        /* Increased from 50px */
+        height: 70px;
         top: 5px;
         left: 16px;
-        padding: 6px;
+        padding: 5px;
     }
 
-    /* Push nav down to avoid logo collision */
+    /* Push nav down significantly to avoid logo collision */
     .category-nav {
-        margin-top: 16px;
+        margin-top: 32px;
     }
 
     /* Reposition Time to Prepare - Restore to Top-Left but simpler */
