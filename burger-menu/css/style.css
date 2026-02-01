@@ -337,12 +337,25 @@ html[dir="rtl"] .language-dropdown {
 .category-title {
     font-family: var(--font-display);
     font-size: 3.5rem;
-    /* Scaled down for compact banner */
     font-weight: 700;
     text-align: center;
     margin-top: 0;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    
+    /* Glass Effect */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 10px 40px;
+    border-radius: 100px; /* Pill shape */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    
+    /* Centering */
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Checkered Pattern Decoration - Hidden */
