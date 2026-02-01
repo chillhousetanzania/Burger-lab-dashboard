@@ -1,5 +1,4 @@
 /* ===== CSS Variables ===== */
-/* Main Styles - Deployed 17:55 */
 :root {
     --primary-red: #A01E28;
     --primary-red-dark: #7A161E;
@@ -329,8 +328,7 @@ html[dir="rtl"] .language-dropdown {
     gap: 12px;
     margin-bottom: 0;
     opacity: 0.95;
-    z-index: 20;
-    /* Boosted visibility */
+    z-index: 5;
 }
 
 .time-info {
@@ -482,71 +480,48 @@ html[dir="rtl"] .language-dropdown {
 
     /* Fix Logo Overlap */
     .logo {
-        width: 70px;
-        /* Increased from 50px */
-        height: 70px;
+        width: 50px;
+        /* Smaller on mobile */
+        height: 50px;
         top: 5px;
         left: 16px;
-        padding: 5px;
+        padding: 6px;
     }
 
-    /* Push nav down significantly to avoid logo collision */
+    /* Push nav down to avoid logo collision */
+    /* Push nav down to avoid logo collision & add breathing room below */
     .category-nav {
-        margin-top: 32px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+        /* Added spacing below as requested */
     }
 
-    /* Reposition Time to Prepare - Restore to Top-Left but simpler */
-    .time-to-prepare {
-        top: 10px;
-        left: 10px;
-        bottom: auto;
-        transform: none;
-        width: auto;
-        font-size: 0.75rem;
-        /* Scale down text */
-    }
-
-    /* FLEX STACK LAYOUT: The ultimate fix for overlap */
     .hero-banner {
-        margin: 10px;
-        padding: 20px 10px;
-        height: auto;
-        min-height: 240px;
-        display: flex;
-        flex-direction: column;
-        /* Stack items vertically */
+        margin: 12px 16px;
+        padding: 20px 12px;
+        /* Less side padding */
+        height: 220px;
+        /* Taller banner for wrapped text */
         justify-content: center;
-        align-items: center;
-        gap: 16px;
-        /* Space between Time and Title */
     }
 
-    /* Make Time Text part of the flow (No Absolute) */
+    /* Reposition Time to Prepare to bottom */
     .time-to-prepare {
-        position: static;
-        /* Removes it from absolute top/bottom */
-        transform: none;
-        width: auto;
+        top: auto;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
         justify-content: center;
-        order: -1;
-        /* Place it ABOVE the title */
-        background: rgba(0, 0, 0, 0.4);
-        /* Optional: small pill bg for readability */
-        padding: 4px 12px;
-        border-radius: 20px;
-        backdrop-filter: blur(4px);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
 
-    .time-value {
-        font-size: 1rem;
-        color: #fff;
-    }
+    /* Fixed stray brace */
 
     .category-title {
-        font-size: clamp(1.8rem, 7vw, 2.5rem);
-        width: 100%;
-        padding: 8px 16px;
-        margin-top: 0;
+        /* Font size handled by main clamp() */
+        /* Keeping basic adjustments just in case */
+        width: 90%;
     }
 
     .header {
