@@ -509,14 +509,14 @@ function App() {
     if (field === 'text') {
       newData.promotions.text.en = value;
       // Auto translate promotion
-      if (!newData.promotions.text.ar) newData.promotions.text.ar = autoTranslate(value, 'ar');
-      if (!newData.promotions.text.tr) newData.promotions.text.tr = autoTranslate(value, 'tr');
+      if (!newData.promotions.text.ar) newData.promotions.text.ar = autoTranslateDictionary(value, 'ar');
+      if (!newData.promotions.text.tr) newData.promotions.text.tr = autoTranslateDictionary(value, 'tr');
     }
     setMenuData(newData);
   };
 
-  // Auto-Translation Helper
-  const autoTranslate = (text, targetLang) => {
+  // Auto-Translation Helper (Dictionary)
+  const autoTranslateDictionary = (text, targetLang) => {
     if (!text) return "";
 
     // Simple Dictionary for Burger Menu context
@@ -565,10 +565,10 @@ function App() {
       const trField = newData[category][prodIndex].name.tr;
 
       if (!arField || arField === '') {
-        newData[category][prodIndex].name.ar = autoTranslate(value, 'ar');
+        newData[category][prodIndex].name.ar = autoTranslateDictionary(value, 'ar');
       }
       if (!trField || trField === '') {
-        newData[category][prodIndex].name.tr = autoTranslate(value, 'tr');
+        newData[category][prodIndex].name.tr = autoTranslateDictionary(value, 'tr');
       }
     }
 
@@ -578,10 +578,10 @@ function App() {
       const trDesc = newData[category][prodIndex].description.tr;
 
       if (!arDesc || arDesc === '') {
-        newData[category][prodIndex].description.ar = autoTranslate(value, 'ar');
+        newData[category][prodIndex].description.ar = autoTranslateDictionary(value, 'ar');
       }
       if (!trDesc || trDesc === '') {
-        newData[category][prodIndex].description.tr = autoTranslate(value, 'tr');
+        newData[category][prodIndex].description.tr = autoTranslateDictionary(value, 'tr');
       }
     }
 
