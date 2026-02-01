@@ -679,8 +679,11 @@ function App() {
               }}
               onClick={() => {
                 // Ensure 'all' exists in settings
-                if (!menuData.categorySettings) menuData.categorySettings = {};
-                if (!menuData.categorySettings.all) menuData.categorySettings.all = { color: '#000', image: 'images/banner_all_nano_real.webp', titles: { en: 'Main Page' } };
+                const newData = { ...menuData };
+                if (!newData.categorySettings) newData.categorySettings = {};
+                if (!newData.categorySettings.all) newData.categorySettings.all = { color: '#000', image: 'images/banner_all_nano_real.webp', titles: { en: 'Main Page' } };
+                if (!newData.all) newData.all = []; // Init array to prevent crash
+                setMenuData(newData);
                 setActiveCategory('all');
               }}
             >
