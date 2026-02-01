@@ -1266,11 +1266,11 @@ body.theme-all .product-info::after {
     margin: 0 auto;
 }
 
-/* ===== Billboard Skeleton (High Priority) ===== */
+/* ===== Billboard Skeleton (High Priority) - Darker for Visibility ===== */
 .hero-banner.skeleton-loading {
     background-image: none !important;
-    background-color: #f0f0f0 !important;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%) !important;
+    background-color: #e0e0e0 !important;
+    background: linear-gradient(90deg, #e0e0e0 25%, #c0c0c0 50%, #e0e0e0 75%) !important;
     background-size: 200% 100% !important;
     animation: shimmer 1.5s infinite;
     position: relative;
