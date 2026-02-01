@@ -328,7 +328,8 @@ html[dir="rtl"] .language-dropdown {
     gap: 12px;
     margin-bottom: 0;
     opacity: 0.95;
-    z-index: 5;
+    z-index: 20;
+    /* Boosted visibility */
 }
 
 .time-info {
@@ -511,20 +512,25 @@ html[dir="rtl"] .language-dropdown {
     /* Adapt banner to be tall enough for stacked content */
     .hero-banner {
         margin: 10px;
-        padding: 40px 10px 20px;
-        /* Top padding clears the Time text */
+        /* INCREASED Top padding to 70px to force Title down away from Time text */
+        padding: 70px 10px 20px;
         height: auto;
-        min-height: 200px;
+        min-height: 220px;
         justify-content: center;
-        align-items: center;
+        /* Center horizontally */
+        align-items: flex-start;
+        /* Align Top (respect padding) instead of Center */
+        display: flex;
+        flex-direction: column;
     }
 
     /* Ensure title wraps and scales */
     .category-title {
         font-size: clamp(1.5rem, 7vw, 2.5rem);
-        /* Tune max size for mobile */
         width: 100%;
         padding: 8px 16px;
+        margin-top: 10px;
+        /* Extra push */
     }
 
     .category-title {
