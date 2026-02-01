@@ -13,10 +13,10 @@ const newMenuData = {
     categorySettings: {
         burgers: { color: "#8B0000", image: "images/banner_burgers_nano.webp" },
         chicken: { color: "#E1ad01", image: "images/banner_chicken_nano.webp" },
-        veg_burger: { color: "#2E7D32", image: "images/banner_all_nano_new.webp" },
-        kids: { color: "#FF69B4", image: "images/banner_kids_nano_v2.webp" },
+        veg_burger: { color: "#2E7D32", image: "images/banner_veg_nano.webp" },
+        kids: { color: "#FF69B4", image: "images/banner_kids_nano_real.webp" },
         sauces: { color: "#C0392B", image: "images/banner_extras_nano.webp" },
-        sides: { color: "#27AE60", image: "images/banner_sides_nano_v2.webp" }
+        sides: { color: "#27AE60", image: "images/banner_sides_nano_real.webp" }
     },
     burgers: [
         {
