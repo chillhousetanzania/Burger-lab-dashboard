@@ -645,9 +645,10 @@ function preloadImages() {
 async function init() {
     try {
         console.log('Fetching live menu from API...');
-        // Correctly point to the dashboard server API
-        // Correctly point to the dashboard server API (Relative path works for both)
-        const API_URL = window.location.port === '5174' ? '/api/menu' : 'http://localhost:5174/api/menu';
+        // SMART API DETECTION
+        // If on localhost (dev), assume port 5174. If on Render (prod), use relative path.
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const API_URL = isLocal && window.location.port === '5173' ? 'http://localhost:5174/api/menu' : '/api/menu';
 
         let response;
         try {
