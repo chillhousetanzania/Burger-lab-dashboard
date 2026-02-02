@@ -11,9 +11,7 @@ const sourceDir = "C:/Users/Andrew/.gemini/antigravity/brain/3e2055d7-ce69-4878-
 const targetDir = "d:/websites/burger-menu/images";
 
 const images = [
-    { src: "banner_kids_nano_real_1769968916084.png", dest: "banner_kids_nano_real.webp" },
-    { src: "banner_sides_nano_real_1769968933440.png", dest: "banner_sides_nano_real.webp" },
-    { src: "banner_all_nano_real_1769968948475.png", dest: "banner_all_nano_real.webp" }
+    { src: "banner_all_nano_real_clean_1769998237402.png", dest: "banner_all_nano_real.webp" }
 ];
 
 async function processImages() {
