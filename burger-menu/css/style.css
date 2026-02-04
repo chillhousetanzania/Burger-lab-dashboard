@@ -592,6 +592,22 @@ html[dir="rtl"] .language-dropdown {
 /* ===== Product Footer Removed - Back to Original ===== */
 /* .product-footer removed */
 
+/* Text Only Card Variant */
+.product-card.text-only {
+    justify-content: center;
+    border-left: 5px solid var(--category-primary);
+    background: linear-gradient(135deg, #ffffff 60%, rgba(var(--category-primary-rgb), 0.05));
+    min-height: 160px;
+    /* Shorter than photo cards */
+    padding: 20px 24px;
+}
+
+.product-card.text-only .product-name {
+    font-size: 1.25rem;
+    color: var(--category-primary);
+    margin-bottom: 8px;
+}
+
 /* ===== Card Bottom Container ===== */
 .card-bottom {
     position: relative;

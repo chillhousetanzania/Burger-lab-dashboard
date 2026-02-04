@@ -203,13 +203,13 @@ const newMenuData = {
         { name: { en: "Siracha", ar: "", tr: "" }, price: "2,000", calories: "30", image: "images/sriracha_sauce_1768773407273.webp", description: { en: "", ar: "", tr: "" } }
     ],
     sides: [
-        { name: { en: "Fries", ar: "", tr: "" }, price: "4,000", calories: "350", image: "images/french_fries_1768772980331.webp", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Coleslaw", ar: "", tr: "" }, price: "2,000", calories: "150", image: "images/coleslaw_1768773464116.webp", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Onion Rings (4 pcs)", ar: "", tr: "" }, price: "3,000", calories: "300", image: "images/onion_rings_1768773484685.webp", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Caramelized Onion", ar: "", tr: "" }, price: "2,000", calories: "80", image: "images/caramelised_onions_1768773444802.webp", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Mozzarella (2 pcs)", ar: "", tr: "" }, price: "4,000", calories: "400", image: "images/mozzarella_sticks.webp", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Buffalo Wings Fried", ar: "", tr: "" }, price: "12,000", calories: "400", image: "images/buffalo_wings_fried_1768773502140.webp", description: { en: "", ar: "", tr: "" } },
-        { name: { en: "Cheese Fries", ar: "", tr: "" }, price: "8,000", calories: "500", image: "images/cheese_fries_1768773515682.webp", description: { en: "", ar: "", tr: "" } }
+        { name: { en: "Fries", ar: "", tr: "" }, price: "4,000", calories: "350", image: "", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Coleslaw", ar: "", tr: "" }, price: "2,000", calories: "150", image: "", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Onion Rings (4 pcs)", ar: "", tr: "" }, price: "3,000", calories: "300", image: "", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Caramelized Onion", ar: "", tr: "" }, price: "2,000", calories: "80", image: "", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Mozzarella (2 pcs)", ar: "", tr: "" }, price: "4,000", calories: "400", image: "", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Buffalo Wings Fried", ar: "", tr: "" }, price: "12,000", calories: "400", image: "", description: { en: "", ar: "", tr: "" } },
+        { name: { en: "Cheese Fries", ar: "", tr: "" }, price: "8,000", calories: "500", image: "", description: { en: "", ar: "", tr: "" } }
     ],
     drinks: [
         { name: { en: "Water (500ml)", ar: "", tr: "" }, price: "2,000", calories: "0", image: "images/water_bottle_red.webp", description: { en: "Fresh mineral water", ar: "", tr: "" } },
