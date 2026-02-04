@@ -273,7 +273,7 @@ function initializeAllGrids() {
                 // Add data attributes for category styling
                 card.dataset.category = cat;
 
-                const nameHTML = `<h3 class="product-name" ${!hasImage ? 'style="font-size: 1.2rem; margin-bottom: 12px; margin-top:auto;"' : ''}>${name}</h3>`;
+                const nameHTML = `<h3 class="product-name" ${!hasImage ? 'style="font-size: 1.1rem; margin-bottom: 4px; margin-top:auto;"' : ''}>${name}</h3>`;
 
                 const priceHTML = `
                         <div class="product-price">
@@ -305,9 +305,9 @@ function initializeAllGrids() {
                     card.innerHTML = `
                     <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
                         ${nameHTML}
-                        <p style="font-size:0.9rem; color:#666; text-align:left; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px;">${desc}</p>
+                        <p style="font-size:0.85rem; color:#666; text-align:left; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 4px;">${desc}</p>
                     </div>
-                    <div class="card-bottom">
+                    <div class="card-bottom" style="padding-top: 4px;">
                         ${priceHTML}
                         ${btnHTML}
                     </div>
