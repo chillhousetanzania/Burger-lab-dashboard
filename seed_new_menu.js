@@ -43,11 +43,11 @@ const newMenuData = {
         },
         {
             name: { en: "Gunners Beef", ar: "", tr: "" },
-            price: "18000",
-            priceDouble: "23000",
-            calories: "850",
-            image: "images/gunners_beef_red_real.png",
-            description: { en: "Brioche bun, onion rings, ketchup, mayo, American cheese, lettuce, mozzarella sticks", ar: "", tr: "" }
+            price: "18,000",
+            priceDouble: "23,000",
+            calories: "900",
+            image: "images/gunners_beef_burger.webp",
+            description: { en: "Brioche bread, Onion rings, Ketchup, Mayonnaise, American cheese, Lettuce, Mozzarella sticks", ar: "", tr: "" }
         }
     ],
     chicken: [
