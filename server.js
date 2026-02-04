@@ -201,8 +201,19 @@ app.post('/api/menu', authenticateToken, async (req, res) => {
             console.error('Auto-translation failed:', transError);
         }
 
+        // Update Database
         await Menu.findOneAndUpdate({}, { data, lastUpdated: new Date() }, { upsert: true });
-        res.json({ success: true, message: 'Saved (and Translated)' });
+
+        // Update Local File (Source of Truth for Static Deployment)
+        try {
+            await fs.writeFile(MENU_PATH, JSON.stringify(data, null, 4));
+            console.log('✅ Updated local menu.json');
+        } catch (fileErr) {
+            console.error('❌ Failed to update menu.json:', fileErr);
+            // Don't fail the request, just log it
+        }
+
+        res.json({ success: true, message: 'Saved to Database & File' });
     } catch (error) {
         res.status(500).json({ error: 'Failed to save menu data' });
     }

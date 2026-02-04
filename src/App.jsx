@@ -15,6 +15,7 @@ function App() {
   const fileInputRef = useRef(null);
 
   const [uploadTarget, setUploadTarget] = useState(null); // { category, index }
+  const [uploadPreview, setUploadPreview] = useState(null); // Optimistic UI for uploads
   const [token, setToken] = useState(localStorage.getItem('adminToken') || '');
   const [loginPassword, setLoginPassword] = useState('');
   const [loginError, setLoginError] = useState('');
@@ -437,6 +438,10 @@ function App() {
     const file = e.target.files[0];
     if (!file || !uploadTarget) return;
 
+    // Optimistic Preview
+    const previewUrl = URL.createObjectURL(file);
+    setUploadPreview(previewUrl);
+
     pushHistory(); // Save state before upload changes
     const formData = new FormData();
     formData.append('image', file);
@@ -463,7 +468,6 @@ function App() {
       const data = await res.json();
 
       // Check if it's a promotion upload
-      // Check if it's a promotion upload
       if (uploadTarget.category === 'promotions') {
         const newData = { ...menuData };
         if (!newData.promotions.billboards) newData.promotions.billboards = [];
@@ -476,8 +480,6 @@ function App() {
         }
         setMenuData(newData);
       } else if (uploadTarget.category === 'header') {
-        // Handle Category Header Image Upload
-        // In this case, 'index' is actually the category key string
         const categoryKey = uploadTarget.index;
         const newData = { ...menuData };
         if (!newData.categorySettings) newData.categorySettings = {};
@@ -486,7 +488,6 @@ function App() {
         newData.categorySettings[categoryKey].image = data.path;
         setMenuData(newData);
       } else {
-        // Standard product upload
         updateProduct(uploadTarget.category, uploadTarget.index, 'image', data.path);
       }
 
@@ -494,7 +495,12 @@ function App() {
       console.error(err);
       alert('Failed to upload image: ' + err.message);
     } finally {
-      setUploadTarget(null);
+      // Small delay to smooth out the transition from Preview -> Real URL
+      setTimeout(() => {
+        setUploadTarget(null);
+        setUploadPreview(null);
+        URL.revokeObjectURL(previewUrl);
+      }, 500);
       e.target.value = null; // Reset input
     }
   };
@@ -989,10 +995,26 @@ function App() {
                               title="Click to Upload Image"
                             >
                               <img key={product.image} src={getImageUrl(product.image)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => e.target.style.display = 'none'} />
+
+                              {/* Upload Overlay */}
+                              {uploadTarget?.category === activeCategory && uploadTarget?.index === index && uploadPreview && (
+                                <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
+                                  <img src={uploadPreview} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} alt="Preview" />
+                                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                                    <div className="spinner" style={{ width: 24, height: 24, border: '3px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+                                    <span style={{ color: 'white', fontSize: '0.7rem', marginTop: '4px', fontWeight: 'bold' }}>Uploading</span>
+                                  </div>
+                                </div>
+                              )}
+
                               <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0, transition: 'opacity 0.2s' }} className="hover-upload">
                                 <Upload size={16} color="white" />
                               </div>
                             </div>
+                            <style>{`
+                              @keyframes spin { to { transform: rotate(360deg); } }
+                              .hover-upload:hover { opacity: 1 !important; }
+                            `}</style>
                             {/* Hover effect helper */}
                             <style>{`.hover-upload:hover { opacity: 1 !important; }`}</style>
 
@@ -1108,6 +1130,17 @@ function App() {
                           onClick={() => triggerUpload(activeCategory, index)}
                         >
                           <img key={product.image} src={getImageUrl(product.image)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => e.target.style.display = 'none'} />
+
+                          {/* Mobile Upload Overlay */}
+                          {uploadTarget?.category === activeCategory && uploadTarget?.index === index && uploadPreview && (
+                            <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
+                              <img src={uploadPreview} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} alt="Preview" />
+                              <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                                <div className="spinner" style={{ width: 20, height: 20, border: '3px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+                              </div>
+                            </div>
+                          )}
+
                           <div style={{ position: 'absolute', bottom: 0, right: 0, padding: 4, background: 'rgba(0,0,0,0.6)', borderRadius: '4px 0 0 0' }}>
                             <Upload size={12} color="white" />
                           </div>
