@@ -548,7 +548,7 @@ html[dir="rtl"] .language-dropdown {
     margin-bottom: 12px;
 }
 
-.product-name {
+.product-title {
     font-size: 1rem;
     font-weight: 600;
     color: var(--brown-dark);
@@ -585,7 +585,7 @@ html[dir="rtl"] .language-dropdown {
     padding: 10px 16px;
 }
 
-.product-card.text-only .product-name {
+.product-card.text-only .product-title {
     font-size: 1.15rem;
     color: var(--category-primary);
     margin-bottom: 4px;
