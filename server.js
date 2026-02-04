@@ -122,9 +122,11 @@ app.use('/assets', express.static(path.join(__dirname, 'dist/assets'))); // Expl
 
 // Path to menu.json (Source of Truth - Local Dev Folder)
 const MENU_PATH = path.resolve(__dirname, '../burger-menu/menu.json');
+console.log('📍 MENU_PATH RESOLVED TO:', MENU_PATH);
 
 app.get('/api/menu', async (req, res) => {
     try {
+        console.log('📖 Reading Menu from DB...');
         res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
         const menuDoc = await Menu.findOne();
         if (!menuDoc) return res.status(404).json({ error: 'Menu not found' });
@@ -136,6 +138,7 @@ app.get('/api/menu', async (req, res) => {
 
 app.post('/api/menu', authenticateToken, async (req, res) => {
     try {
+        console.log('💾 Received Save Request');
         let data = req.body;
         if (!data) throw new Error('No data provided');
 
@@ -206,14 +209,28 @@ app.post('/api/menu', authenticateToken, async (req, res) => {
 
         // Update Local File (Source of Truth for Static Deployment)
         try {
+            console.log(`📝 Writing to ${MENU_PATH}...`);
             await fs.writeFile(MENU_PATH, JSON.stringify(data, null, 4));
-            console.log('✅ Updated local menu.json');
+            console.log(`✅ SUCCESSFULLY Updated local menu.json at ${new Date().toISOString()}`);
+
+            // TRIGGER DEPLOYMENT
+            console.log('🚀 Triggering Deployment Script...');
+            const deployScript = path.resolve(__dirname, '../burger-menu/force_update.bat');
+            const { exec } = await import('child_process');
+            exec(`"${deployScript}"`, { cwd: path.dirname(deployScript) }, (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`❌ Deployment Failed: ${error.message}`);
+                    return;
+                }
+                console.log(`✅ Deployment Output: ${stdout}`);
+            });
+
         } catch (fileErr) {
-            console.error('❌ Failed to update menu.json:', fileErr);
+            console.error(`❌ FAILED to update/deploy menu.json at ${MENU_PATH}:`, fileErr);
             // Don't fail the request, just log it
         }
 
-        res.json({ success: true, message: 'Saved to Database & File' });
+        res.json({ success: true, message: 'Saved to Database, File, & Cloud 🚀' });
     } catch (error) {
         res.status(500).json({ error: 'Failed to save menu data' });
     }
