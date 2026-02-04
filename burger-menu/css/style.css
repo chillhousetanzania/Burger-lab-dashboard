@@ -439,6 +439,8 @@ html[dir="rtl"] .language-dropdown {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 24px;
+    padding-bottom: 120px;
+    /* Space for FABs */
     /* transition: opacity 0.3s ease; */
 }
 
