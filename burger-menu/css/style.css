@@ -183,8 +183,8 @@ html[dir="rtl"] .language-dropdown {
     gap: 12px;
     padding: 16px 24px;
     /* Always clear the logo: logo width (110px) + left pos (24px) + gap (10px) = 144px */
-    /* On mobile (< 600px), this will be overridden to a smaller value */
-    margin-left: 120px;
+    padding-left: 140px;
+    /* Use padding so background extends to edge */
     overflow-x: auto;
     background: var(--cream-light);
     scrollbar-width: none;
@@ -493,7 +493,8 @@ html[dir="rtl"] .language-dropdown {
         margin-top: 24px;
         margin-bottom: 24px;
         margin-left: 0;
-        /* Mobile logo is smaller, no extra margin needed */
+        padding-left: 24px;
+        /* Reset to standard padding on mobile */
     }
 
     .hero-banner {
