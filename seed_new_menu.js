@@ -40,14 +40,6 @@ const newMenuData = {
             calories: "780",
             image: "images/placeholder.webp",
             description: { en: "Smoky BBQ sauce, Lettuce, Cheddar cheese, Caramelized onion, Tomato slice, Crispy Bacon", ar: "", tr: "" }
-        },
-        {
-            name: { en: "Gunners Beef", ar: "", tr: "" },
-            price: "18,000",
-            priceDouble: "23,000",
-            calories: "900",
-            image: "images/gunners_beef_burger.webp",
-            description: { en: "Brioche bread, Onion rings, Ketchup, Mayonnaise, American cheese, Lettuce, Mozzarella sticks", ar: "", tr: "" }
         }
     ],
     chicken: [

@@ -80,14 +80,19 @@ body {
 /* Absolute Logo Container */
 .logo {
     position: absolute;
-    top: -10px;
+    top: 5px;
     left: 24px;
-    height: 80px;
-    /* Decreased from 110px */
+    width: 110px;
+    /* Increased size */
+    height: 110px;
     z-index: 102;
     display: flex;
-    align-items: flex-start;
-    padding-top: 5px;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px;
     pointer-events: none;
 }
 
@@ -177,6 +182,9 @@ html[dir="rtl"] .language-dropdown {
     display: flex;
     gap: 12px;
     padding: 16px 24px;
+    /* Always clear the logo: logo width (110px) + left pos (24px) + gap (10px) = 144px */
+    padding-left: 140px;
+    /* Use padding so background extends to edge */
     overflow-x: auto;
     background: var(--cream-light);
     scrollbar-width: none;
@@ -271,6 +279,9 @@ html[dir="rtl"] .language-dropdown {
     }
 }
 
+/* Skeleton State for Banner */
+/* Skeleton State removed */
+
 /* Banner theme classes - Images visible, gradient as fallback */
 .hero-banner.theme-all {
     background-color: var(--burgers-primary);
@@ -336,13 +347,41 @@ html[dir="rtl"] .language-dropdown {
 
 .category-title {
     font-family: var(--font-display);
-    font-size: 3.5rem;
-    /* Scaled down for compact banner */
+    /* Fluid scale: Min 1.5rem, Pref 8% of viewport, Max 5rem */
+    font-size: clamp(1.5rem, 8vw, 5rem);
     font-weight: 700;
     text-align: center;
     margin-top: 0;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+
+    /* Glass Effect */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    /* Fluid Padding */
+    padding: clamp(0.5rem, 2vw, 1rem) clamp(1.5rem, 5vw, 3rem);
+
+    border-radius: 100px;
+    /* Pill shape */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+
+    /* Centering */
+    width: fit-content;
+    max-width: 90%;
+    /* Ensure it never hits edges on mobile */
+    margin-left: auto;
+    margin-right: auto;
+
+    /* Text Overflow Handling */
+    /* Text Overflow Handling */
+    white-space: normal;
+    /* Allow wrapping */
+    overflow: visible;
+    line-height: 1.1;
+    /* Tight line height for multiline */
 }
 
 /* Checkered Pattern Decoration - Hidden */
@@ -438,14 +477,52 @@ html[dir="rtl"] .language-dropdown {
         padding: 16px;
     }
 
-    .hero-banner {
-        margin: 12px 16px;
-        padding: 20px 24px;
-        height: 160px;
+    /* Fix Logo Overlap */
+    .logo {
+        width: 50px;
+        width: 70px;
+        /* Increased mobile size */
+        height: 70px;
+        top: 5px;
+        left: 16px;
+        padding: 6px;
     }
 
+    /* Push nav down to avoid logo collision & add breathing room below */
+    .category-nav {
+        margin-top: 24px;
+        margin-bottom: 24px;
+        margin-left: 0;
+        padding-left: 24px;
+        /* Reset to standard padding on mobile */
+    }
+
+    .hero-banner {
+        margin: 12px 16px;
+        padding: 20px 12px;
+        /* Less side padding */
+        height: 220px;
+        /* Taller banner for wrapped text */
+        justify-content: center;
+    }
+
+    /* Reposition Time to Prepare to bottom */
+    .time-to-prepare {
+        top: auto;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        justify-content: center;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Fixed stray brace */
+
     .category-title {
-        font-size: 2.8rem;
+        /* Font size handled by main clamp() */
+        /* Keeping basic adjustments just in case */
+        width: 90%;
     }
 
     .header {
@@ -514,6 +591,29 @@ html[dir="rtl"] .language-dropdown {
 
 /* ===== Product Footer Removed - Back to Original ===== */
 /* .product-footer removed */
+
+/* Text Only Card Variant */
+.product-card.text-only {
+    justify-content: center;
+    border-left: 4px solid var(--category-primary);
+    background: linear-gradient(135deg, #ffffff 60%, rgba(var(--category-primary-rgb), 0.05));
+    min-height: 60px;
+    /* Ultra Compact */
+    padding: 10px 16px;
+}
+
+.product-card.text-only .product-name {
+    font-size: 1.15rem;
+    color: var(--category-primary);
+    margin-bottom: 4px;
+    /* Tighter spacing */
+    text-align: left;
+}
+
+.product-card.text-only .product-price {
+    text-align: left;
+    padding-left: 0;
+}
 
 /* ===== Card Bottom Container ===== */
 .card-bottom {
@@ -1134,3 +1234,76 @@ body.theme-all .product-info::after {
 }
 
 /* End of Styles */
+
+/* ===== Skeleton Loading ===== */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton {
+    background: #f0f0f0;
+    background-image: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+}
+
+.skeleton-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    height: 100%;
+    border: 1px solid var(--gray-border);
+    display: flex;
+    flex-direction: column;
+}
+
+.skeleton-image {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--radius-sm);
+    margin-bottom: 12px;
+}
+
+.skeleton-text {
+    height: 1rem;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.skeleton-text.title {
+    height: 1.2rem;
+    margin-bottom: 12px;
+}
+
+.skeleton-text.short {
+    width: 40%;
+    margin: 8px auto 0;
+}
+
+.skeleton-text.medium {
+    width: 70%;
+    margin: 0 auto;
+}
+
+/* ===== Billboard Skeleton (High Priority) - Darker for Visibility ===== */
+.hero-banner.skeleton-loading {
+    background-image: none !important;
+    background-color: #e0e0e0 !important;
+    background: linear-gradient(90deg, #e0e0e0 25%, #c0c0c0 50%, #e0e0e0 75%) !important;
+    background-size: 200% 100% !important;
+    animation: shimmer 1.5s infinite;
+    position: relative;
+    z-index: 10;
+}
+
+.hero-banner.skeleton-loading>* {
+    opacity: 0 !important;
+    transition: opacity 0.3s;
+}
