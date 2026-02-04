@@ -182,8 +182,6 @@ html[dir="rtl"] .language-dropdown {
     display: flex;
     gap: 12px;
     padding: 16px 24px;
-    padding-left: 140px;
-    /* Clear the absolute logo on larger screens */
     overflow-x: auto;
     background: var(--cream-light);
     scrollbar-width: none;
@@ -191,6 +189,13 @@ html[dir="rtl"] .language-dropdown {
 
 .category-nav::-webkit-scrollbar {
     display: none;
+}
+
+/* Large screens only: Push nav past the logo */
+@media (min-width: 768px) {
+    .category-nav {
+        padding-left: 140px;
+    }
 }
 
 .category-btn {
@@ -490,11 +495,7 @@ html[dir="rtl"] .language-dropdown {
     /* Push nav down to avoid logo collision & add breathing room below */
     .category-nav {
         margin-top: 24px;
-        /* Increased to clear larger logo */
         margin-bottom: 24px;
-        /* Symmetric spacing */
-        padding-left: 90px;
-        /* Clear smaller mobile logo */
     }
 
     .hero-banner {
