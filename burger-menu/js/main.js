@@ -88,9 +88,16 @@ const modalBackdrop = document.querySelector('.modal-backdrop');
 let currentCategory = 'burgers';
 
 // Show product modal
+// Show product modal
 function showModal(product) {
-    modalImage.src = getOptimizedImageUrl(product.image, 800);
-    modalImage.alt = product.name[currentLang];
+    if (product.image && product.image.trim() !== "") {
+        modalImage.src = getOptimizedImageUrl(product.image, 800);
+        modalImage.style.display = 'block';
+        modalImage.alt = product.name[currentLang];
+    } else {
+        modalImage.style.display = 'none';
+    }
+
     modalName.textContent = product.name[currentLang];
 
     const modalOptions = document.getElementById('modalOptions');
@@ -260,24 +267,52 @@ function initializeAllGrids() {
 
                 card.setAttribute('data-description', desc);
 
-                const optimizedThumb = getOptimizedImageUrl(product.image, 500);
-                card.innerHTML = `
-                    <img src="${optimizedThumb}" alt="${name}" class="product-image" loading="lazy">
-                    <h3 class="product-name">${name}</h3>
-                    <div class="card-bottom">
+                const hasImage = product.image && product.image.trim() !== "";
+                card.className = hasImage ? 'product-card' : 'product-card text-only';
+
+                // Add data attributes for category styling
+                card.dataset.category = cat;
+
+                const nameHTML = `<h3 class="product-name" ${!hasImage ? 'style="font-size: 1.1rem; margin-bottom: 4px; margin-top:auto;"' : ''}>${name}</h3>`;
+
+                const priceHTML = `
                         <div class="product-price">
                             ${product.priceDouble
                         ? `<span style="font-size:0.9em">${translations[currentLang].singlePatty}: ${product.price}</span><br><span style="font-size:0.9em">${translations[currentLang].doublePatty}: ${product.priceDouble}</span>`
                         : `${product.price}<sup>TZS</sup>`
                     }
-                        </div>
+                        </div>`;
+
+                const btnHTML = `
                         <button class="more-info-btn" aria-label="View Details">
                             <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                                 <path d="M12 4.5C7.86 4.5 4.5 7.86 4.5 12S7.86 19.5 12 19.5 19.5 16.14 19.5 12 16.14 4.5 12 4.5zm0 16.5c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9zm1-4h-2v-6h2v6zm0-8h-2V7h2v1.5z"/>
                             </svg>
-                        </button>
+                        </button>`;
+
+                if (hasImage) {
+                    const optimizedThumb = getOptimizedImageUrl(product.image, 500);
+                    card.innerHTML = `
+                    <img src="${optimizedThumb}" alt="${name}" class="product-image" loading="lazy">
+                    ${nameHTML}
+                    <div class="card-bottom">
+                        ${priceHTML}
+                        ${btnHTML}
                     </div>
                 `;
+                } else {
+                    // Text Only Layout (Left Aligned, Compact)
+                    card.innerHTML = `
+                    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+                        ${nameHTML}
+                        <p style="font-size:0.85rem; color:#666; text-align:left; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 4px;">${desc}</p>
+                    </div>
+                    <div class="card-bottom" style="padding-top: 4px;">
+                        ${priceHTML}
+                        ${btnHTML}
+                    </div>
+                `;
+                }
 
                 // Add click handler for modal
                 card.addEventListener('click', () => showModal(product));
