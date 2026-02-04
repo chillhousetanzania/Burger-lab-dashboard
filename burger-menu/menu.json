@@ -19,7 +19,7 @@
         },
         "veg_burger": {
             "color": "#2E7D32",
-            "image": "images/banner_all_nano.webp"
+            "image": "images/banner_veg_nano.webp"
         },
         "kids": {
             "color": "#FF69B4",
@@ -31,7 +31,7 @@
         },
         "sides": {
             "color": "#27AE60",
-            "image": "images/banner_extras_nano.webp"
+            "image": "images/banner_sides_nano_real.webp"
         }
     },
     "burgers": [
@@ -105,8 +105,8 @@
                 "ar": "",
                 "tr": ""
             },
-            "price": "18,000",
-            "priceDouble": "23,000",
+            "price": "16,000",
+            "priceDouble": "21,000",
             "calories": 580,
             "image": "images/jalapeno_burger_v2.webp",
             "description": {
@@ -175,6 +175,22 @@
             "image": "images/lord_of_the_rings_burger_1768773206918.webp",
             "description": {
                 "en": "Ranch sauce, BBQ sauce, Slice of Tomato, Lettuce, Cheeder cheese, 3 pieces of onion rings, 50 G beef bacon",
+                "ar": "",
+                "tr": ""
+            }
+        },
+        {
+            "name": {
+                "en": "Gunners Beef",
+                "ar": "",
+                "tr": ""
+            },
+            "price": "18,000",
+            "priceDouble": "23,000",
+            "calories": 750,
+            "image": "images/gunners_beef_red_real.png",
+            "description": {
+                "en": "Brioche bread, onion rings, ketchup, mayonnaise, american cheese, mozzarella sticks",
                 "ar": "",
                 "tr": ""
             }
@@ -286,8 +302,8 @@
             "price": "18,000",
             "priceDouble": "23,000",
             "calories": 680,
-            "image": "images/gunners_chicken_v2.webp", 
-            description: {
+            "image": "images/gunners_chicken_v2.webp",
+            "description": {
                 "en": "5 inch brioche chicken, onion rings, mozarella sticks",
                 "ar": "",
                 "tr": ""
@@ -351,7 +367,9 @@
                 "tr": ""
             },
             "price": "15,000",
-            "calories": 500","image": "images/kids_cheese_meal.webp","description": {
+            "calories": 500,
+            "image": "images/kids_cheese_meal.webp",
+            "description": {
                 "en": "Burger 4 inch, Juice, French fries, Toys.",
                 "ar": "",
                 "tr": ""
@@ -489,7 +507,6 @@
             },
             "price": "4,000",
             "calories": 350,
-            "image": "",
             "description": {
                 "en": "",
                 "ar": "",
@@ -504,7 +521,6 @@
             },
             "price": "2,000",
             "calories": 150,
-            "image": "",
             "description": {
                 "en": "",
                 "ar": "",
@@ -519,7 +535,6 @@
             },
             "price": "3,000",
             "calories": 300,
-            "image": "",
             "description": {
                 "en": "",
                 "ar": "",
@@ -534,7 +549,6 @@
             },
             "price": "2,000",
             "calories": 80,
-            "image": "",
             "description": {
                 "en": "",
                 "ar": "",
@@ -549,7 +563,6 @@
             },
             "price": "4,000",
             "calories": 400,
-            "image": "",
             "description": {
                 "en": "",
                 "ar": "",
@@ -564,7 +577,6 @@
             },
             "price": "12,000",
             "calories": 400,
-            "image": "",
             "description": {
                 "en": "",
                 "ar": "",
@@ -579,9 +591,40 @@
             },
             "price": "8,000",
             "calories": 500,
-            "image": "",
             "description": {
                 "en": "",
+                "ar": "",
+                "tr": ""
+            }
+        }
+    ],
+    "drinks": [
+        {
+            "name": {
+                "en": "Water",
+                "ar": "",
+                "tr": ""
+            },
+            "price": "1,000",
+            "calories": 0,
+            "image": "images/water_bottle_red.webp",
+            "description": {
+                "en": "500ml Bottled Water",
+                "ar": "",
+                "tr": ""
+            }
+        },
+        {
+            "name": {
+                "en": "Soda",
+                "ar": "",
+                "tr": ""
+            },
+            "price": "2,000",
+            "calories": 140,
+            "image": "images/soda_collection_red.webp",
+            "description": {
+                "en": "Coke, Fanta, Sprite",
                 "ar": "",
                 "tr": ""
             }

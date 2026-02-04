@@ -279,13 +279,12 @@ html[dir="rtl"] .language-dropdown {
     }
 }
 
-/* Skeleton State for Banner */
-/* Skeleton State removed */
+
 
 /* Banner theme classes - Images visible, gradient as fallback */
 .hero-banner.theme-all {
     background-color: var(--burgers-primary);
-    background-image: url('../images/banner_all.webp');
+    background-image: url('../images/banner_all_nano.webp') !important;
     background-size: cover;
     background-position: center;
 }
@@ -297,23 +296,44 @@ html[dir="rtl"] .language-dropdown {
     background-position: center;
 }
 
+.hero-banner.theme-burgers {
+    background-color: var(--burgers-dark);
+    background-image: url('../images/banner_burgers_nano.webp');
+    background-size: cover;
+    background-position: center;
+}
+
 .hero-banner.theme-chicken {
     background-color: var(--chicken-dark);
-    background-image: url('../images/banner_chicken.webp');
+    background-image: url('../images/banner_chicken_nano.webp');
     background-size: cover;
     background-position: center;
 }
 
 .hero-banner.theme-extras {
     background-color: var(--extras-dark);
-    background-image: url('../images/banner_extras.webp');
+    background-image: url('../images/banner_extras_nano.webp');
     background-size: cover;
     background-position: center;
 }
 
 .hero-banner.theme-drinks {
     background-color: var(--drinks-dark);
-    background-image: url('../images/banner_drinks.webp');
+    background-image: url('../images/banner_drinks_nano_blue.webp') !important;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-banner.theme-veg_burger {
+    background-color: #2E7D32;
+    background-image: url('../images/banner_veg_nano.webp') !important;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-banner.theme-sides {
+    background-color: #2E7D32;
+    background-image: url('../images/banner_sides_nano_real.webp') !important;
     background-size: cover;
     background-position: center;
 }
@@ -384,48 +404,7 @@ html[dir="rtl"] .language-dropdown {
     /* Tight line height for multiline */
 }
 
-/* Checkered Pattern Decoration - Hidden */
-.checkered-pattern {
-    display: none;
-}
 
-/* ===== 3D Burger Container (Three.js) - Dual Layer ===== */
-.burger-3d-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.burger-3d-container canvas {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-/* Back layer - burgers behind the text */
-.burger-back {
-    z-index: 0;
-}
-
-/* Front layer - burgers in front of text */
-.burger-front {
-    z-index: 3;
-}
-
-/* Ensure banner content stays between layers */
-.time-to-prepare,
-.category-title {
-    position: relative;
-    z-index: 2;
-}
-
-.checkered-pattern {
-    position: relative;
-    z-index: 1;
-}
 
 /* ===== Product Grid ===== */
 .product-grid {
@@ -589,8 +568,7 @@ html[dir="rtl"] .language-dropdown {
     margin-left: 2px;
 }
 
-/* ===== Product Footer Removed - Back to Original ===== */
-/* .product-footer removed */
+
 
 /* Text Only Card Variant */
 .product-card.text-only {
@@ -1014,7 +992,7 @@ body.theme-drinks .option-btn.active {
 .modal-price {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary-red);
+    color: var(--category-primary);
     margin-bottom: 16px;
 }
 
@@ -1303,7 +1281,129 @@ body.theme-all .product-info::after {
     z-index: 10;
 }
 
-.hero-banner.skeleton-loading>* {
-    opacity: 0 !important;
-    transition: opacity 0.3s;
+/* ===== Auto Text-Only Mode (No Image) ===== */
+.product-card.no-image-mode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 120px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+    /* Optional: Dynamic Border/Shadow based on category */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--gray-border);
+}
+
+.product-card.no-image-mode .product-img,
+.product-card.no-image-mode img {
+    display: none !important;
+}
+
+/* Accent Bar for No-Image Mode */
+.product-card.no-image-mode::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--category-primary);
+    /* Dynamic per theme */
+}
+
+/* Specific Sides color override if needed, but var(--category-primary) handles it automatically if set correctly in JS */
+body.theme-sides .product-card.no-image-mode::before {
+    background: #2E7D32;
+}
+
+body.theme-sides .product-card.no-image-mode {
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.1);
+    border-color: #E8F5E9;
+}
+
+body.theme-sides .product-card.no-image-mode .product-price {
+    color: #2E7D32;
+}
+
+.product-card.no-image-mode .product-details {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.product-card.no-image-mode .product-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--brown-dark);
+    margin: 0;
+}
+
+.product-card.no-image-mode .product-price {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.product-card.no-image-mode .product-options {
+    display: none;
+}
+
+.product-card.no-image-mode .more-info-btn {
+    display: flex;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: var(--category-primary);
+    color: var(--white);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.theme-sides .product-card.no-image-mode .more-info-btn {
+    background: #2E7D32;
+    /* Match Sides Green */
+}
+
+/* ===== No-Image Modal Styling ===== */
+.modal.no-image-modal .modal-content {
+    grid-template-columns: 1fr;
+    /* Single column */
+    max-width: 500px;
+    /* Smaller width since no image */
+}
+
+/* Hide image container in no-image mode */
+.modal.no-image-modal .modal-image-container {
+    display: none !important;
+}
+
+/* Adjust layout for text-only modal */
+.modal.no-image-modal .modal-details {
+    padding: 32px;
+    text-align: center;
+    align-items: center;
+}
+
+.modal.no-image-modal .modal-title {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    color: var(--category-primary);
+}
+
+.modal.no-image-modal .modal-description {
+    font-size: 1.1rem;
+    color: var(--brown-dark);
 }

@@ -90,12 +90,18 @@ let currentCategory = 'burgers';
 // Show product modal
 // Show product modal
 function showModal(product) {
-    if (product.image && product.image.trim() !== "") {
-        modalImage.src = getOptimizedImageUrl(product.image, 800);
+    // Check if image exists
+    const hasImage = product.image && product.image.trim() !== '';
+
+    if (hasImage) {
+        modal.classList.remove('no-image-modal');
         modalImage.style.display = 'block';
+        modalImage.src = getOptimizedImageUrl(product.image, 800);
         modalImage.alt = product.name[currentLang];
     } else {
+        modal.classList.add('no-image-modal');
         modalImage.style.display = 'none';
+        modalImage.src = '';
     }
 
     modalName.textContent = product.name[currentLang];
@@ -211,7 +217,7 @@ function updateCategoryTitle(category) {
 // Render products with click handlers
 // Persistent Grids Cache
 // Persistent Grids Cache
-// const categoryGrids = {}; // Removed duplicate
+
 
 // Initialize all category grids once (Persistent DOM)
 function initializeAllGrids() {
@@ -261,58 +267,42 @@ function initializeAllGrids() {
         if (products) {
             products.forEach((product, index) => {
                 const card = document.createElement('div');
+                card.className = 'product-card'; // Ensure base class is added
+
                 // Fallback to English if translation is missing/empty
                 const desc = product.description[currentLang] || product.description['en'] || '';
                 const name = product.name[currentLang] || product.name['en'] || 'Unnamed Product';
 
                 card.setAttribute('data-description', desc);
 
-                const hasImage = product.image && product.image.trim() !== "";
-                card.className = hasImage ? 'product-card' : 'product-card text-only';
+                // Check if image exists
+                const hasImage = product.image && product.image.trim() !== '';
+                let imgHtml = '';
 
-                // Add data attributes for category styling
-                card.dataset.category = cat;
+                if (hasImage) {
+                    const optimizedThumb = getOptimizedImageUrl(product.image, 500);
+                    imgHtml = `<img src="${optimizedThumb}" alt="${name}" class="product-image" loading="lazy">`;
+                } else {
+                    card.classList.add('no-image-mode');
+                }
 
-                const nameHTML = `<h3 class="product-name" ${!hasImage ? 'style="font-size: 1.1rem; margin-bottom: 4px; margin-top:auto;"' : ''}>${name}</h3>`;
-
-                const priceHTML = `
+                card.innerHTML = `
+                    ${imgHtml}
+                    <div class="product-details">
+                        <h3 class="product-title">${name}</h3>
                         <div class="product-price">
                             ${product.priceDouble
                         ? `<span style="font-size:0.9em">${translations[currentLang].singlePatty}: ${product.price}</span><br><span style="font-size:0.9em">${translations[currentLang].doublePatty}: ${product.priceDouble}</span>`
                         : `${product.price}<sup>TZS</sup>`
                     }
-                        </div>`;
-
-                const btnHTML = `
-                        <button class="more-info-btn" aria-label="View Details">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                                <path d="M12 4.5C7.86 4.5 4.5 7.86 4.5 12S7.86 19.5 12 19.5 19.5 16.14 19.5 12 16.14 4.5 12 4.5zm0 16.5c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9zm1-4h-2v-6h2v6zm0-8h-2V7h2v1.5z"/>
-                            </svg>
-                        </button>`;
-
-                if (hasImage) {
-                    const optimizedThumb = getOptimizedImageUrl(product.image, 500);
-                    card.innerHTML = `
-                    <img src="${optimizedThumb}" alt="${name}" class="product-image" loading="lazy">
-                    ${nameHTML}
-                    <div class="card-bottom">
-                        ${priceHTML}
-                        ${btnHTML}
+                        </div>
                     </div>
+                    <button class="more-info-btn" aria-label="View Details">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <path d="M12 4.5C7.86 4.5 4.5 7.86 4.5 12S7.86 19.5 12 19.5 19.5 16.14 19.5 12 16.14 4.5 12 4.5zm0 16.5c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9zm1-4h-2v-6h2v6zm0-8h-2V7h2v1.5z"/>
+                        </svg>
+                    </button>
                 `;
-                } else {
-                    // Text Only Layout (Left Aligned, Compact)
-                    card.innerHTML = `
-                    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
-                        ${nameHTML}
-                        <p style="font-size:0.85rem; color:#666; text-align:left; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 4px;">${desc}</p>
-                    </div>
-                    <div class="card-bottom" style="padding-top: 4px;">
-                        ${priceHTML}
-                        ${btnHTML}
-                    </div>
-                `;
-                }
 
                 // Add click handler for modal
                 card.addEventListener('click', () => showModal(product));
@@ -338,11 +328,7 @@ function showCategoryGrid(category) {
     }
 }
 
-// Deprecated: renderProducts (kept for compatibility in case of leftovers)
-function renderProducts(category) {
-    // Forward to new system
-    showCategoryGrid(category);
-}
+
 
 // Update category title
 // Update category title - Uses dynamic label helper
@@ -411,19 +397,7 @@ function updateBannerTheme(category) {
         banner.style.display = 'flex';
 
 
-        // Hide 3D Model Canvas if present
-        const canvas = document.querySelector('canvas');
-        if (canvas) canvas.style.display = 'none';
 
-        // Hide Text Overlays
-        const title = document.getElementById('categoryTitle');
-        if (title) title.style.display = 'none';
-
-        const timeInfo = document.querySelector('.time-to-prepare');
-        if (timeInfo) timeInfo.style.display = 'none';
-
-        const pattern = document.querySelector('.checkered-pattern');
-        if (pattern) pattern.style.display = 'none';
 
         // Override CSS variables for consistency (using Golden Amber)
         const root = document.documentElement;
@@ -437,8 +411,7 @@ function updateBannerTheme(category) {
     banner.classList.remove('billboard-active');
     banner.style.backgroundImage = ''; // Clear inline style to let CSS take over
     banner.style.height = '';
-    const canvas = document.querySelector('canvas');
-    if (canvas) canvas.style.display = 'block';
+
 
     banner.classList.remove('theme-burgers', 'theme-chicken', 'theme-extras', 'theme-drinks', 'theme-all');
 
@@ -534,10 +507,7 @@ function handleCategoryClick(e) {
         productGrid.style.opacity = '1';
         productGrid.style.transform = 'translateY(0)';
 
-        // Switch 3D model in banner (burgers → fries for extras)
-        if (typeof switchFoodModel === 'function') {
-            switchFoodModel(category);
-        }
+
     }, 200);
 }
 
@@ -682,7 +652,8 @@ async function init() {
         console.log('Fetching live menu from API...');
         // Correctly point to the dashboard server API
         // Correctly point to the dashboard server API (Relative path works for both)
-        const API_URL = '/api/menu';
+        // const API_URL = '/api/menu'; // BYPASS DB -> Use Static File
+        const API_URL = 'menu.json';
 
         const response = await fetch(API_URL);
         if (!response.ok) {
