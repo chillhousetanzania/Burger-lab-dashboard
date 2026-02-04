@@ -38,7 +38,7 @@
         },
         "kids": {
             "color": "#FF69B4",
-            "image": "images/banner_all_nano.webp",
+            "image": "images/banner_kids_nano_v2.webp",
             "titles": {
                 "en": "kids",
                 "ar": "أطفال",
@@ -61,6 +61,15 @@
                 "en": "sides",
                 "ar": "الجانبين",
                 "tr": "taraflar"
+            }
+        },
+        "drinks": {
+            "color": "#0891b2",
+            "image": "images/banner_drinks_nano_blue.webp",
+            "titles": {
+                "en": "drinks",
+                "ar": "مشروبات",
+                "tr": "içecekler"
             }
         }
     },
