@@ -396,6 +396,13 @@ function updateBannerTheme(category) {
         banner.style.width = '100%';
         banner.style.display = 'flex';
 
+        // HIDE OVERLAYS (Pure Billboard)
+        const timeOverlay = document.querySelector('.time-to-prepare');
+        if (timeOverlay) timeOverlay.style.display = 'none';
+
+        const titleOverlay = document.querySelector('.category-title');
+        if (titleOverlay) titleOverlay.style.display = 'none';
+
 
 
 
@@ -411,6 +418,15 @@ function updateBannerTheme(category) {
     banner.classList.remove('billboard-active');
     banner.style.backgroundImage = ''; // Clear inline style to let CSS take over
     banner.style.height = '';
+    banner.style.minHeight = ''; // Reset
+    banner.style.aspectRatio = ''; // Reset
+
+    // RESTORE OVERLAYS
+    const timeOverlay = document.querySelector('.time-to-prepare');
+    if (timeOverlay) timeOverlay.style.display = 'flex'; // Restore flex
+
+    const titleOverlay = document.querySelector('.category-title');
+    if (titleOverlay) titleOverlay.style.display = 'block';
 
 
     banner.classList.remove('theme-burgers', 'theme-chicken', 'theme-extras', 'theme-drinks', 'theme-all');

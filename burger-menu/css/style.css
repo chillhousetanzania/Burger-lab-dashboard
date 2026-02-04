@@ -585,11 +585,13 @@ html[dir="rtl"] .language-dropdown {
     color: var(--category-primary);
     margin-bottom: 4px;
     /* Tighter spacing */
-    text-align: left;
+    text-align: center;
+    /* Changed from left to center */
 }
 
 .product-card.text-only .product-price {
-    text-align: left;
+    text-align: center;
+    /* Changed from left to center */
     padding-left: 0;
 }
 
