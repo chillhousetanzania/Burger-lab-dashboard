@@ -1015,3 +1015,52 @@ if (fabScrollTop) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
+
+// ==========================================
+// Mouse Drag Scroll for PC
+// ==========================================
+function enableDragScroll(selector) {
+    const slider = document.querySelector(selector);
+    if (!slider) return;
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active'); // active class for styling if needed
+        slider.style.cursor = 'grabbing';
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('active');
+        slider.style.cursor = 'grab';
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('active');
+        slider.style.cursor = 'grab';
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault(); // prevent selection
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll-fast
+        slider.scrollLeft = scrollLeft - walk;
+    });
+}
+
+// Enable for Category Nav
+document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('.category-nav');
+    if (nav) {
+        nav.style.cursor = 'grab';
+        enableDragScroll('.category-nav');
+    }
+});
