@@ -303,9 +303,9 @@ function initializeAllGrids() {
                 } else {
                     // Text Only Layout
                     card.innerHTML = `
-                    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+                    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
                         ${nameHTML}
-                        <p style="font-size:0.9rem; color:#666; text-align:center; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px;">${desc}</p>
+                        <p style="font-size:0.9rem; color:#666; text-align:left; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px;">${desc}</p>
                     </div>
                     <div class="card-bottom">
                         ${priceHTML}
