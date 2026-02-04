@@ -120,8 +120,8 @@ app.use('/images', express.static(path.join(__dirname, 'burger-menu/images')));
 app.use(express.static(path.join(__dirname, 'dist'))); // Serve root files (favicon, etc)
 app.use('/assets', express.static(path.join(__dirname, 'dist/assets'))); // Explicit assets
 
-// Path to menu.json
-const MENU_PATH = path.resolve(__dirname, 'burger-menu/menu.json');
+// Path to menu.json (Source of Truth - Local Dev Folder)
+const MENU_PATH = path.resolve(__dirname, '../burger-menu/menu.json');
 
 app.get('/api/menu', async (req, res) => {
     try {
