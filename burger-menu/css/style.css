@@ -552,7 +552,12 @@ html[dir="rtl"] .language-dropdown {
     font-size: 1rem;
     font-weight: 600;
     color: var(--brown-dark);
-    text-align: center;
+    text-align: center !important;
+    /* Force centering */
+    width: 100%;
+    /* Ensure full width */
+    display: block;
+    /* Ensure block level behavior */
     margin-bottom: 8px;
     line-height: 1.3;
 }
