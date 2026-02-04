@@ -116,8 +116,14 @@ app.post('/api/update-password', authenticateToken, async (req, res) => {
 app.use('/menu', express.static(path.join(__dirname, 'burger-menu')));
 app.use('/images', express.static(path.join(__dirname, 'burger-menu/images')));
 
-// 4. Admin Dashboard Static Files
-app.use(express.static(path.join(__dirname, 'dist'))); // Serve root files (favicon, etc)
+// 4. Admin Dashboard Static Files (Disable Cache for Index)
+app.use((req, res, next) => {
+    if (req.url === '/' || req.url === '/index.html') {
+        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    }
+    next();
+});
+app.use(express.static(path.join(__dirname, 'dist'))); // Serve root files
 app.use('/assets', express.static(path.join(__dirname, 'dist/assets'))); // Explicit assets
 
 // Path to menu.json (Source of Truth - Local Dev Folder)
@@ -255,26 +261,31 @@ app.post('/api/upload', authenticateToken, upload.single('image'), async (req, r
     try {
         if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
 
-        const processedBuffer = await sharp(req.file.path)
-            .resize(1200, null, { withoutEnlargement: true })
+        // Ensure images directory exists
+        const imagesDir = path.resolve(__dirname, '../burger-menu/images');
+        await fs.mkdir(imagesDir, { recursive: true });
+
+        // Generate unique filename
+        const filename = `${path.parse(req.file.originalname).name}_${Date.now()}.webp`.replace(/\s+/g, '_');
+        const outputPath = path.join(imagesDir, filename);
+
+        // Process image (Resize and Convert to WebP)
+        await sharp(req.file.path)
+            .resize(1200, null, { withoutEnlargement: true }) // Max width 1200px
             .webp({ quality: 80 })
-            .toBuffer();
+            .toFile(outputPath);
 
-        // Stream to Cloudinary
-        const uploadStream = cloudinary.uploader.upload_stream(
-            { resource_type: 'image', folder: 'burger-lab' },
-            (error, result) => {
-                if (error) return res.status(500).json({ error: 'CDN Upload failed' });
+        // Cleanup temp file
+        await fs.unlink(req.file.path).catch(() => { });
 
-                // Cleanup temp file
-                fs.unlink(req.file.path).catch(() => { });
+        console.log(`✅ Image saved locally: ${outputPath}`);
 
-                res.json({ path: result.secure_url });
-            }
-        );
+        // Return path relative to menu.json (images/filename.webp)
+        // usage in frontend: API_BASE + path, OR if in menu.json, direct static path
+        res.json({ path: `images/${filename}` });
 
-        uploadStream.end(processedBuffer);
     } catch (error) {
+        console.error('Upload Error:', error);
         res.status(500).json({ error: 'Upload failed: ' + error.message });
     }
 });
