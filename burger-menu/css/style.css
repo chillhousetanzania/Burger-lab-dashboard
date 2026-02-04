@@ -182,6 +182,8 @@ html[dir="rtl"] .language-dropdown {
     display: flex;
     gap: 12px;
     padding: 16px 24px;
+    padding-left: 140px;
+    /* Clear the absolute logo on larger screens */
     overflow-x: auto;
     background: var(--cream-light);
     scrollbar-width: none;
@@ -491,7 +493,8 @@ html[dir="rtl"] .language-dropdown {
         /* Increased to clear larger logo */
         margin-bottom: 24px;
         /* Symmetric spacing */
-        /* Added spacing below as requested */
+        padding-left: 90px;
+        /* Clear smaller mobile logo */
     }
 
     .hero-banner {
