@@ -8,12 +8,13 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const MENU_PATH = path.resolve(__dirname, 'burger-menu/menu.json');
+const MENU_PATH_DASHBOARD = path.resolve(__dirname, 'burger-menu/menu.json');
+const MENU_PATH_WEBSITE = 'd:/websites/burger-menu/menu.json'; // Hardcoded for certainty
 
 async function fixTranslations() {
     try {
-        console.log('📖 Reading menu.json...');
-        const raw = await fs.readFile(MENU_PATH, 'utf-8');
+        console.log(`📖 Reading menu.json from: ${MENU_PATH_DASHBOARD}`);
+        const raw = await fs.readFile(MENU_PATH_DASHBOARD, 'utf-8');
         let menuData = JSON.parse(raw);
         let changed = false;
 
@@ -113,8 +114,13 @@ async function fixTranslations() {
 
         if (changed) {
             console.log('💾 Saving updated menu.json...');
-            await fs.writeFile(MENU_PATH, JSON.stringify(menuData, null, 4));
-            console.log('✅ Translation Fix Complete!');
+            console.log(`💾 Saving to DASHBOARD: ${MENU_PATH_DASHBOARD}`);
+            await fs.writeFile(MENU_PATH_DASHBOARD, JSON.stringify(menuData, null, 4));
+
+            console.log(`💾 Saving to WEBSITE: ${MENU_PATH_WEBSITE}`);
+            await fs.writeFile(MENU_PATH_WEBSITE, JSON.stringify(menuData, null, 4));
+
+            console.log('✅ Translation Fix Complete & Synced!');
         } else {
             console.log('✨ No missing translations found.');
         }

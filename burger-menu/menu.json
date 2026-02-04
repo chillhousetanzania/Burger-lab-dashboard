@@ -11,35 +11,65 @@
     "categorySettings": {
         "burgers": {
             "color": "#8B0000",
-            "image": "images/banner_burgers_nano.webp"
+            "image": "images/banner_burgers_nano.webp",
+            "titles": {
+                "en": "burgers",
+                "ar": "البرغر",
+                "tr": "hamburger"
+            }
         },
         "chicken": {
             "color": "#E1ad01",
-            "image": "images/banner_chicken_nano.webp"
+            "image": "images/banner_chicken_nano.webp",
+            "titles": {
+                "en": "chicken",
+                "ar": "فرخة",
+                "tr": "tavuk"
+            }
         },
         "veg_burger": {
             "color": "#2E7D32",
-            "image": "images/banner_veg_nano.webp"
+            "image": "images/banner_veg_nano.webp",
+            "titles": {
+                "en": "veg_burger",
+                "ar": "veg_burger",
+                "tr": "sebze_burger"
+            }
         },
         "kids": {
             "color": "#FF69B4",
-            "image": "images/banner_all_nano.webp"
+            "image": "images/banner_all_nano.webp",
+            "titles": {
+                "en": "kids",
+                "ar": "أطفال",
+                "tr": "çocuklar"
+            }
         },
         "sauces": {
             "color": "#C0392B",
-            "image": "images/banner_extras_nano.webp"
+            "image": "images/banner_extras_nano.webp",
+            "titles": {
+                "en": "sauces",
+                "ar": "صلصات",
+                "tr": "soslar"
+            }
         },
         "sides": {
             "color": "#27AE60",
-            "image": "images/banner_sides_nano_real.webp"
+            "image": "images/banner_sides_nano_real.webp",
+            "titles": {
+                "en": "sides",
+                "ar": "الجانبين",
+                "tr": "taraflar"
+            }
         }
     },
     "burgers": [
         {
             "name": {
                 "en": "Classic Burger",
-                "ar": "",
-                "tr": ""
+                "ar": "كلاسيك برجر",
+                "tr": "Klasik Burger"
             },
             "price": "13,000",
             "priceDouble": "18,000",
@@ -47,15 +77,15 @@
             "image": "images/classic_burger_v2.webp",
             "description": {
                 "en": "5 inch brioche, ketchup, mayonnaise, mustard, American cheese, lettuce, tomato, onion",
-                "ar": "",
-                "tr": ""
+                "ar": "بريوش 5 بوصة، كاتشب، مايونيز، خردل، جبنة أمريكية، خس، طماطم، بصل",
+                "tr": "5 inçlik börek, ketçap, mayonez, hardal, Amerikan peyniri, marul, domates, soğan"
             }
         },
         {
             "name": {
                 "en": "Cheese Burger",
-                "ar": "",
-                "tr": ""
+                "ar": "برجر بالجبنة",
+                "tr": "Peynirli Burger"
             },
             "price": "14,000",
             "priceDouble": "19,000",
@@ -63,15 +93,15 @@
             "image": "images/cheese_burger_v2.webp",
             "description": {
                 "en": "5 inch brioche, ketchup, mayonnaise, mustard, Pickles, American cheese",
-                "ar": "",
-                "tr": ""
+                "ar": "بريوش 5 بوصة، كاتشب، مايونيز، خردل، مخلل، جبنة أمريكية",
+                "tr": "5 inçlik börek, ketçap, mayonez, hardal, turşu, Amerikan peyniri"
             }
         },
         {
             "name": {
                 "en": "Tropical Burger",
-                "ar": "",
-                "tr": ""
+                "ar": "برجر استوائي",
+                "tr": "Tropikal Burger"
             },
             "price": "15,000",
             "priceDouble": "20,000",
@@ -79,15 +109,15 @@
             "image": "images/tropical_burger_v2.webp",
             "description": {
                 "en": "5 inch brioche, barbecue sauce, mayonnaise, grilled pineapple slice, american cheese",
-                "ar": "",
-                "tr": ""
+                "ar": "بريوش 5 بوصة، صوص باربيكيو، مايونيز، شريحة أناناس مشوية، جبنة أمريكية",
+                "tr": "5 inçlik börek, barbekü sosu, mayonez, ızgara ananas dilimi, amerikan peyniri"
             }
         },
         {
             "name": {
                 "en": "Mushroom Burger",
-                "ar": "",
-                "tr": ""
+                "ar": "برجر مشروم",
+                "tr": "Mantar Burger"
             },
             "price": "16,000",
             "priceDouble": "21,000",
@@ -95,15 +125,15 @@
             "image": "images/mushroom_burger_v2.webp",
             "description": {
                 "en": "5 inch brioche, mushroom sauce, american cheese",
-                "ar": "",
-                "tr": ""
+                "ar": "بريوش 5 بوصة، صوص مشروم، جبنة أمريكية",
+                "tr": "5 inçlik brioche, mantar sosu, amerikan peyniri"
             }
         },
         {
             "name": {
                 "en": "Jalapeno Burger",
-                "ar": "",
-                "tr": ""
+                "ar": "هالابينو برجر",
+                "tr": "Jalapeno Burger"
             },
             "price": "16,000",
             "priceDouble": "21,000",
@@ -111,15 +141,15 @@
             "image": "images/jalapeno_burger_v2.webp",
             "description": {
                 "en": "5 inch brioche, sriracha mayonnaise sauce, american cheese, lettuce, jalapeno",
-                "ar": "",
-                "tr": ""
+                "ar": "بريوش 5 بوصة، صوص سريراتشا مايونيز، جبنة أمريكية، خس، هالابينو",
+                "tr": "5 inçlik börek, sriracha mayonez sosu, amerikan peyniri, marul, jalapeno"
             }
         },
         {
             "name": {
                 "en": "Beef Bacon Burger",
-                "ar": "",
-                "tr": ""
+                "ar": "برجر لحم بقري مقدد",
+                "tr": "Dana Bacon Burger"
             },
             "price": "17,000",
             "priceDouble": "22,000",
@@ -127,15 +157,15 @@
             "image": "images/bacon_burger_v2.webp",
             "description": {
                 "en": "5 inch brioche, texas sauce, pickles, american cheese, slices of bacon, lettuce, tomato",
-                "ar": "",
-                "tr": ""
+                "ar": "بريوش 5 بوصة، صوص تكساس، مخلل، جبنة أمريكية، شرائح لحم مقدد، خس، طماطم",
+                "tr": "5 inçlik brioche, texas sos, turşu, amerikan peyniri, pastırma dilimleri, marul, domates"
             }
         },
         {
             "name": {
                 "en": "Mediterranean Burger",
-                "ar": "",
-                "tr": ""
+                "ar": "برجر البحر الأبيض المتوسط",
+                "tr": "Akdeniz Burger"
             },
             "price": "19,000",
             "priceDouble": "23,000",
@@ -143,15 +173,15 @@
             "image": "images/mediterranean_burger_1768772925172.webp",
             "description": {
                 "en": "Ketchup, Mayonnaise, Pickles, Cheddar cheese, Pastrami, Lettuce, Tomato",
-                "ar": "",
-                "tr": ""
+                "ar": "كاتشب، مايونيز، مخلل، جبنة شيدر، بسطرمة، خس، طماطم",
+                "tr": "Ketçap, Mayonez, Turşu, Kaşar peyniri, Pastırma, Marul, Domates"
             }
         },
         {
             "name": {
                 "en": "Smokey Mushroom",
-                "ar": "",
-                "tr": ""
+                "ar": "سموكي الفطر",
+                "tr": "Dumanlı Mantar"
             },
             "price": "18,000",
             "priceDouble": "22,000",
@@ -159,15 +189,15 @@
             "image": "images/smoky_mushrooms_burger_1768773223098.webp",
             "description": {
                 "en": "Smoky bbq sauce, Lettuce, Cheeder cheese, Caramelize onion, Slice of Tomato, Crispy Bacon",
-                "ar": "",
-                "tr": ""
+                "ar": "صوص باربيكيو مدخن، خس، جبنة شيدر، بصل مكرمل، شريحة طماطم، لحم مقدد مقرمش",
+                "tr": "Dumanlı barbekü sos, Marul, Cheeder peyniri, Karamelize soğan, Dilim Domates, Çıtır Pastırma"
             }
         },
         {
             "name": {
                 "en": "Lord of the Rings",
-                "ar": "",
-                "tr": ""
+                "ar": "سيد الخواتم",
+                "tr": "Yüzüklerin Efendisi"
             },
             "price": "18,000",
             "priceDouble": "22,000",
@@ -175,15 +205,15 @@
             "image": "images/lord_of_the_rings_burger_1768773206918.webp",
             "description": {
                 "en": "Ranch sauce, BBQ sauce, Slice of Tomato, Lettuce, Cheeder cheese, 3 pieces of onion rings, 50 G beef bacon",
-                "ar": "",
-                "tr": ""
+                "ar": "صوص رانش، صوص باربيكيو، شريحة طماطم، خس، جبنة شيدر، 3 قطع حلقات بصل، 50 جرام لحم بقري مقدد",
+                "tr": "Ranch sos, BBQ sos, Dilim Domates, Marul, Cheeder peyniri, 3 adet soğan halkası, 50 gr dana pastırma"
             }
         },
         {
             "name": {
                 "en": "Gunners Beef",
-                "ar": "",
-                "tr": ""
+                "ar": "لحم المدفعية",
+                "tr": "Nişancı Sığır Eti"
             },
             "price": "18,000",
             "priceDouble": "23,000",
@@ -191,8 +221,8 @@
             "image": "images/gunners_beef_red_real.png",
             "description": {
                 "en": "Brioche bread, onion rings, ketchup, mayonnaise, american cheese, mozzarella sticks",
-                "ar": "",
-                "tr": ""
+                "ar": "خبز بريوش، حلقات بصل، كاتشب، مايونيز، جبنة أمريكية، أصابع موزاريلا",
+                "tr": "Brioche ekmeği, soğan halkası, ketçap, mayonez, amerikan peyniri, mozarella çubukları"
             }
         }
     ],
@@ -200,8 +230,8 @@
         {
             "name": {
                 "en": "Chicken fillet",
-                "ar": "",
-                "tr": ""
+                "ar": "فيليه دجاج",
+                "tr": "Tavuk fileto"
             },
             "price": "13,000",
             "priceDouble": "18,000",
@@ -209,15 +239,15 @@
             "image": "images/chicken_fillet_v2.webp",
             "description": {
                 "en": "5 inch brioche, ketchup, mayonnaise, american cheese, crispy chicken, lettuce",
-                "ar": "",
-                "tr": ""
+                "ar": "بريوش 5 بوصة، كاتشب، مايونيز، جبنة أمريكية، دجاج مقرمش، خس",
+                "tr": "5 inçlik börek, ketçap, mayonez, amerikan peyniri, çıtır tavuk, marul"
             }
         },
         {
             "name": {
                 "en": "Spicy Chicken Fillet",
-                "ar": "",
-                "tr": ""
+                "ar": "فيليه الدجاج الحار",
+                "tr": "Baharatlı Tavuk Fileto"
             },
             "price": "13,000",
             "priceDouble": "18,000",
@@ -225,15 +255,15 @@
             "image": "images/spicy_chicken_v2.webp",
             "description": {
                 "en": "5 inch brioche, sriracha mayonnaise sauce, american cheese, spicy crispy chicken, lettuce",
-                "ar": "",
-                "tr": ""
+                "ar": "بريوش 5 بوصة، صوص سريراتشا مايونيز، جبنة أمريكية، دجاج مقرمش حار، خس",
+                "tr": "5 inçlik brioche, sriracha mayonez sos, amerikan peyniri, baharatlı çıtır tavuk, marul"
             }
         },
         {
             "name": {
                 "en": "Grilled Lemon (Chicken & Fillet)",
-                "ar": "",
-                "tr": ""
+                "ar": "ليمون مشوي (دجاج و فيليه)",
+                "tr": "Izgara Limon (Tavuk & Fileto)"
             },
             "price": "13,000",
             "priceDouble": "18,000",
@@ -241,15 +271,15 @@
             "image": "images/grilled_chicken.webp",
             "description": {
                 "en": "5 inch brioche, thousand island sauce, american cheese, grilled chicken, lettuce, pickles",
-                "ar": "",
-                "tr": ""
+                "ar": "بريوش 5 بوصة، صوص ثاوزند آيلاند، جبنة أمريكية، دجاج مشوي، خس، مخلل",
+                "tr": "5 inçlik börek, bin ada sosu, amerikan peyniri, ızgara tavuk, marul, turşu"
             }
         },
         {
             "name": {
                 "en": "Tandoori Chicken",
-                "ar": "",
-                "tr": ""
+                "ar": "دجاج تندوري",
+                "tr": "Tandır Tavuğu"
             },
             "price": "15,000",
             "priceDouble": "20,000",
@@ -257,15 +287,15 @@
             "image": "images/tandoori_chicken_burger_1768772940647.webp",
             "description": {
                 "en": "Buffalo sauce, Grilled onion, Tomato, Lettuce, Cucumber",
-                "ar": "",
-                "tr": ""
+                "ar": "صوص بافلو، بصل مشوي، طماطم، خس، خيار",
+                "tr": "Manda sosu, Izgara soğan, Domates, Marul, Salatalık"
             }
         },
         {
             "name": {
                 "en": "Butter Chicken",
-                "ar": "",
-                "tr": ""
+                "ar": "دجاج بالزبدة",
+                "tr": "Tereyağlı Tavuk"
             },
             "price": "15,000",
             "priceDouble": "20,000",
@@ -273,15 +303,15 @@
             "image": "images/butter_chicken_v2.webp",
             "description": {
                 "en": "Grilled chicken, Buffalo sauce, Lettuce, Tomato, Onion, Cheddar cheese, Coriander leaves",
-                "ar": "",
-                "tr": ""
+                "ar": "دجاج مشوي، صوص بافلو، خس، طماطم، بصل، جبنة شيدر، أوراق كزبرة",
+                "tr": "Izgara tavuk, Manda sosu, Marul, Domates, Soğan, Kaşar peyniri, Kişniş yaprağı"
             }
         },
         {
             "name": {
                 "en": "Flaky Chicken",
-                "ar": "",
-                "tr": ""
+                "ar": "دجاج فلاكي",
+                "tr": "lapa lapa tavuk"
             },
             "price": "18,000",
             "priceDouble": "23,000",
@@ -289,15 +319,15 @@
             "image": "images/flaky_chicken_v2.webp",
             "description": {
                 "en": "Fried chicken, Cheeder cheese, Fresh, mushrooms, Beef bacon",
-                "ar": "",
-                "tr": ""
+                "ar": "دجاج مقلي، جبنة شيدر، طازج، مشروم، لحم بقري مقدد",
+                "tr": "Kızarmış tavuk, Cheeder peyniri, Taze, mantar, Dana pastırması"
             }
         },
         {
             "name": {
                 "en": "Gunners Chicken",
-                "ar": "",
-                "tr": ""
+                "ar": "دجاج المدفعية",
+                "tr": "Topçu Tavuğu"
             },
             "price": "18,000",
             "priceDouble": "23,000",
@@ -305,15 +335,15 @@
             "image": "images/gunners_chicken_v2.webp",
             "description": {
                 "en": "5 inch brioche chicken, onion rings, mozarella sticks",
-                "ar": "",
-                "tr": ""
+                "ar": "5 بوصة دجاج بريوش، حلقات بصل، أصابع موزاريلا",
+                "tr": "5 inçlik brioche tavuğu, soğan halkaları, mozarella çubukları"
             }
         },
         {
             "name": {
                 "en": "Jalapeno Chicken",
-                "ar": "",
-                "tr": ""
+                "ar": "دجاج هالابينو",
+                "tr": "Jalapeno Tavuğu"
             },
             "price": "15,000",
             "priceDouble": "20,000",
@@ -321,8 +351,8 @@
             "image": "images/jalapeno_chicken.webp",
             "description": {
                 "en": "5 inch brioche, ketchup, mayonnaise, american cheese, crispy chicken, lettuce, jalapeno",
-                "ar": "",
-                "tr": ""
+                "ar": "بريوش 5 بوصة، كاتشب، مايونيز، جبنة أمريكية، دجاج مقرمش، خس، هالبينو",
+                "tr": "5 inçlik börek, ketçap, mayonez, amerikan peyniri, çıtır tavuk, marul, jalapeno"
             }
         }
     ],
@@ -330,8 +360,8 @@
         {
             "name": {
                 "en": "Veg Classic Burger",
-                "ar": "",
-                "tr": ""
+                "ar": "برجر نباتي كلاسيكي",
+                "tr": "Sebzeli Klasik Burger"
             },
             "price": "15,000",
             "priceDouble": "18,000",
@@ -339,8 +369,8 @@
             "image": "images/veg_burger.webp",
             "description": {
                 "en": "single patty 15,000 double patty 18,000",
-                "ar": "",
-                "tr": ""
+                "ar": "قطعة واحدة 15000 قطعة مزدوجة 18000",
+                "tr": "tek köfte 15.000 çift köfte 18.000"
             }
         }
     ],
@@ -348,46 +378,46 @@
         {
             "name": {
                 "en": "Kids chicken burger",
-                "ar": "",
-                "tr": ""
+                "ar": "برجر دجاج للأطفال",
+                "tr": "Çocuklar için tavuk burger"
             },
             "price": "15,000",
             "calories": 450,
             "image": "images/kids_chicken_meal.webp",
             "description": {
                 "en": "Burger 4 inch, Juice, French fries, Toys.",
-                "ar": "",
-                "tr": ""
+                "ar": "برجر 4 بوصة، عصير، بطاطا مقلية، ألعاب.",
+                "tr": "Burger 4 inç, Meyve Suyu, Patates kızartması, Oyuncaklar."
             }
         },
         {
             "name": {
                 "en": "Kids cheese burger",
-                "ar": "",
-                "tr": ""
+                "ar": "برجر بالجبنة للأطفال",
+                "tr": "Çocuk peynirli burger"
             },
             "price": "15,000",
             "calories": 500,
             "image": "images/kids_cheese_meal.webp",
             "description": {
                 "en": "Burger 4 inch, Juice, French fries, Toys.",
-                "ar": "",
-                "tr": ""
+                "ar": "برجر 4 بوصة، عصير، بطاطا مقلية، ألعاب.",
+                "tr": "Burger 4 inç, Meyve Suyu, Patates kızartması, Oyuncaklar."
             }
         },
         {
             "name": {
                 "en": "Nuggets meal",
-                "ar": "",
-                "tr": ""
+                "ar": "وجبة ناجتس",
+                "tr": "Nugget yemeği"
             },
             "price": "15,000",
             "calories": 400,
             "image": "images/kids_nuggets_meal.webp",
             "description": {
                 "en": "4 piece nuggets, Juice, French fries, Toys.",
-                "ar": "",
-                "tr": ""
+                "ar": "4 قطع ناجتس، عصير، بطاطا مقلية، ألعاب.",
+                "tr": "4 parçalı nugget, Meyve suyu, Patates kızartması, Oyuncaklar."
             }
         }
     ],
@@ -395,8 +425,8 @@
         {
             "name": {
                 "en": "Buffalo",
-                "ar": "",
-                "tr": ""
+                "ar": "الجاموس",
+                "tr": "Bufalo"
             },
             "price": "2,000",
             "calories": 50,
@@ -410,8 +440,8 @@
         {
             "name": {
                 "en": "Smoky BBQ",
-                "ar": "",
-                "tr": ""
+                "ar": "شواء مدخن",
+                "tr": "Dumanlı Barbekü"
             },
             "price": "2,000",
             "calories": 60,
@@ -425,8 +455,8 @@
         {
             "name": {
                 "en": "Ranch",
-                "ar": "",
-                "tr": ""
+                "ar": "مزرعة",
+                "tr": "Çiftlik"
             },
             "price": "2,000",
             "calories": 120,
@@ -440,8 +470,8 @@
         {
             "name": {
                 "en": "Cheddar Cheese",
-                "ar": "",
-                "tr": ""
+                "ar": "جبنة شيدر",
+                "tr": "Kaşar Peyniri"
             },
             "price": "2,000",
             "calories": 150,
@@ -455,8 +485,8 @@
         {
             "name": {
                 "en": "Thousand Island",
-                "ar": "",
-                "tr": ""
+                "ar": "جزيرة الألف",
+                "tr": "Bin Adası"
             },
             "price": "2,000",
             "calories": 100,
@@ -470,8 +500,8 @@
         {
             "name": {
                 "en": "Texas",
-                "ar": "",
-                "tr": ""
+                "ar": "تكساس",
+                "tr": "Teksas"
             },
             "price": "2,000",
             "calories": 90,
@@ -485,8 +515,8 @@
         {
             "name": {
                 "en": "Siracha",
-                "ar": "",
-                "tr": ""
+                "ar": "سيراتش",
+                "tr": "Siraç"
             },
             "price": "2,000",
             "calories": 30,
@@ -502,8 +532,8 @@
         {
             "name": {
                 "en": "Fries",
-                "ar": "",
-                "tr": ""
+                "ar": "بطاطا مقلية",
+                "tr": "Patates kızartması"
             },
             "price": "4,000",
             "calories": 350,
@@ -516,8 +546,8 @@
         {
             "name": {
                 "en": "Coleslaw",
-                "ar": "",
-                "tr": ""
+                "ar": "كولسلو",
+                "tr": "Lâhana salatası"
             },
             "price": "2,000",
             "calories": 150,
@@ -530,8 +560,8 @@
         {
             "name": {
                 "en": "Onion Rings (4 pcs)",
-                "ar": "",
-                "tr": ""
+                "ar": "حلقات البصل (4 قطع)",
+                "tr": "Soğan Halkası (4 adet)"
             },
             "price": "3,000",
             "calories": 300,
@@ -544,8 +574,8 @@
         {
             "name": {
                 "en": "Caramelized Onion",
-                "ar": "",
-                "tr": ""
+                "ar": "البصل المكرمل",
+                "tr": "Karamelize Soğan"
             },
             "price": "2,000",
             "calories": 80,
@@ -558,8 +588,8 @@
         {
             "name": {
                 "en": "Mozzarella (2 pcs)",
-                "ar": "",
-                "tr": ""
+                "ar": "موزاريلا (2 قطعة)",
+                "tr": "Mozarella (2 adet)"
             },
             "price": "4,000",
             "calories": 400,
@@ -572,8 +602,8 @@
         {
             "name": {
                 "en": "Buffalo Wings Fried",
-                "ar": "",
-                "tr": ""
+                "ar": "أجنحة بافلو مقلية",
+                "tr": "Kızartılmış Bufalo Kanatları"
             },
             "price": "12,000",
             "calories": 400,
@@ -586,8 +616,8 @@
         {
             "name": {
                 "en": "Cheese Fries",
-                "ar": "",
-                "tr": ""
+                "ar": "بطاطا بالجبنة",
+                "tr": "Peynirli Kızartma"
             },
             "price": "8,000",
             "calories": 500,
@@ -602,31 +632,31 @@
         {
             "name": {
                 "en": "Water",
-                "ar": "",
-                "tr": ""
+                "ar": "ماء",
+                "tr": "su"
             },
             "price": "1,000",
             "calories": 0,
             "image": "images/water_bottle_red.webp",
             "description": {
                 "en": "500ml Bottled Water",
-                "ar": "",
-                "tr": ""
+                "ar": "500 مل من المياه المعبأة",
+                "tr": "500ml Şişelenmiş Su"
             }
         },
         {
             "name": {
                 "en": "Soda",
-                "ar": "",
-                "tr": ""
+                "ar": "الصودا",
+                "tr": "Soda"
             },
             "price": "2,000",
             "calories": 140,
             "image": "images/soda_collection_red.webp",
             "description": {
                 "en": "Coke, Fanta, Sprite",
-                "ar": "",
-                "tr": ""
+                "ar": "كوكا، فانتا، سبرايت",
+                "tr": "Kola, Fanta, Sprite"
             }
         }
     ]
