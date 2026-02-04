@@ -88,16 +88,9 @@ const modalBackdrop = document.querySelector('.modal-backdrop');
 let currentCategory = 'burgers';
 
 // Show product modal
-// Show product modal
 function showModal(product) {
-    if (product.image && product.image.trim() !== "") {
-        modalImage.src = getOptimizedImageUrl(product.image, 800);
-        modalImage.style.display = 'block';
-        modalImage.alt = product.name[currentLang];
-    } else {
-        modalImage.style.display = 'none';
-    }
-
+    modalImage.src = getOptimizedImageUrl(product.image, 800);
+    modalImage.alt = product.name[currentLang];
     modalName.textContent = product.name[currentLang];
 
     const modalOptions = document.getElementById('modalOptions');
@@ -172,8 +165,8 @@ function getCategoryLabel(cat) {
     if (translations[currentLang] && translations[currentLang][cat]) {
         return translations[currentLang][cat];
     }
-    // 3. Fallback to Capitalized Key (handle underscores)
-    return cat.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    // 3. Fallback to Capitalized Key
+    return cat.charAt(0).toUpperCase() + cat.slice(1);
 }
 
 // Update UI language
@@ -267,52 +260,24 @@ function initializeAllGrids() {
 
                 card.setAttribute('data-description', desc);
 
-                const hasImage = product.image && product.image.trim() !== "";
-                card.className = hasImage ? 'product-card' : 'product-card text-only';
-
-                // Add data attributes for category styling
-                card.dataset.category = cat;
-
-                const nameHTML = `<h3 class="product-name" ${!hasImage ? 'style="font-size: 1.1rem; margin-bottom: 4px; margin-top:auto;"' : ''}>${name}</h3>`;
-
-                const priceHTML = `
+                const optimizedThumb = getOptimizedImageUrl(product.image, 500);
+                card.innerHTML = `
+                    <img src="${optimizedThumb}" alt="${name}" class="product-image" loading="lazy">
+                    <h3 class="product-name">${name}</h3>
+                    <div class="card-bottom">
                         <div class="product-price">
                             ${product.priceDouble
                         ? `<span style="font-size:0.9em">${translations[currentLang].singlePatty}: ${product.price}</span><br><span style="font-size:0.9em">${translations[currentLang].doublePatty}: ${product.priceDouble}</span>`
                         : `${product.price}<sup>TZS</sup>`
                     }
-                        </div>`;
-
-                const btnHTML = `
+                        </div>
                         <button class="more-info-btn" aria-label="View Details">
                             <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                                 <path d="M12 4.5C7.86 4.5 4.5 7.86 4.5 12S7.86 19.5 12 19.5 19.5 16.14 19.5 12 16.14 4.5 12 4.5zm0 16.5c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9zm1-4h-2v-6h2v6zm0-8h-2V7h2v1.5z"/>
                             </svg>
-                        </button>`;
-
-                if (hasImage) {
-                    const optimizedThumb = getOptimizedImageUrl(product.image, 500);
-                    card.innerHTML = `
-                    <img src="${optimizedThumb}" alt="${name}" class="product-image" loading="lazy">
-                    ${nameHTML}
-                    <div class="card-bottom">
-                        ${priceHTML}
-                        ${btnHTML}
+                        </button>
                     </div>
                 `;
-                } else {
-                    // Text Only Layout
-                    card.innerHTML = `
-                    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
-                        ${nameHTML}
-                        <p style="font-size:0.85rem; color:#666; text-align:left; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 4px;">${desc}</p>
-                    </div>
-                    <div class="card-bottom" style="padding-top: 4px;">
-                        ${priceHTML}
-                        ${btnHTML}
-                    </div>
-                `;
-                }
 
                 // Add click handler for modal
                 card.addEventListener('click', () => showModal(product));
@@ -448,21 +413,7 @@ function updateBannerTheme(category) {
     if (settings) {
         if (settings.image) {
             const optimizedHeader = getOptimizedImageUrl(settings.image, 1200);
-
-            // SKELETON: Start loading state
-            banner.classList.add('skeleton-loading');
-
-            // Preload image
-            const img = new Image();
-            img.src = optimizedHeader;
-            img.onload = () => {
-                banner.style.backgroundImage = `url('${optimizedHeader}')`;
-                banner.classList.remove('skeleton-loading');
-            };
-            img.onerror = () => {
-                banner.classList.remove('skeleton-loading'); // Remove on error to show fallback color
-            };
-
+            banner.style.backgroundImage = `url('${optimizedHeader}')`;
             banner.style.backgroundSize = 'cover';
             banner.style.backgroundPosition = 'center center';
             banner.style.backgroundRepeat = 'no-repeat';
@@ -475,7 +426,6 @@ function updateBannerTheme(category) {
         }
     } else {
         // Fallback
-        banner.classList.remove('skeleton-loading'); // Ensure no stuck skeleton
         banner.classList.add(`theme-${category}`);
     }
 
@@ -691,60 +641,20 @@ function preloadImages() {
     return Promise.all([...bannerPromises, ...productPromises]);
 }
 
-// Initial Skeleton Loader
-function renderSkeletonGrid() {
-    const grid = document.getElementById('productGrid');
-    const hero = document.querySelector('.hero-banner');
-
-    // Apply skeleton to hero if exists
-    if (hero) hero.classList.add('skeleton-loading');
-
-    if (!grid) return;
-
-    // Create a temporary container for skeletons
-    // Using 4 columns x 2 rows = 8 cards
-    let html = '<div class="category-grid-container" style="display:grid; opacity:1;">';
-
-    for (let i = 0; i < 8; i++) {
-        html += `
-        <div class="product-card skeleton-card">
-            <div class="skeleton skeleton-image"></div>
-            <div class="skeleton skeleton-text title" style="width: 60%; margin: 0 auto 12px;"></div>
-            <div class="skeleton skeleton-text medium"></div>
-            <div class="skeleton skeleton-text short"></div>
-        </div>
-        `;
-    }
-    html += '</div>';
-    grid.innerHTML = html;
-}
-
-// Show skeletons immediately
-renderSkeletonGrid();
-
 // Initialization Logic
 async function init() {
     try {
         console.log('Fetching live menu from API...');
-        // SMART API DETECTION
-        // If on localhost (dev), assume port 5174. If on Render (prod), use relative path.
-        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        const API_URL = isLocal && window.location.port === '5173' ? 'http://localhost:5174/api/menu' : '/api/menu';
+        // Correctly point to the dashboard server API
+        // Correctly point to the dashboard server API (Relative path works for both)
+        const API_URL = '/api/menu';
 
-        let response;
-        try {
-            response = await fetch(API_URL);
-            if (!response.ok) throw new Error('API unreachable');
-        } catch (err) {
-            console.warn('API failed, falling back to local menu.json', err);
-            response = await fetch('menu.json');
-        }
-
+        const response = await fetch(API_URL);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         menuData = await response.json();
-        console.log('Menu data loaded:', menuData);
+        console.log('Menu data loaded from cloud:', menuData);
 
         // Render Promotion Banner
         const heroBanner = document.querySelector('.hero-banner');
@@ -1050,52 +960,3 @@ if (fabScrollTop) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
-
-// ==========================================
-// Mouse Drag Scroll for PC
-// ==========================================
-function enableDragScroll(selector) {
-    const slider = document.querySelector(selector);
-    if (!slider) return;
-
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    slider.addEventListener('mousedown', (e) => {
-        isDown = true;
-        slider.classList.add('active'); // active class for styling if needed
-        slider.style.cursor = 'grabbing';
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-    });
-
-    slider.addEventListener('mouseleave', () => {
-        isDown = false;
-        slider.classList.remove('active');
-        slider.style.cursor = 'grab';
-    });
-
-    slider.addEventListener('mouseup', () => {
-        isDown = false;
-        slider.classList.remove('active');
-        slider.style.cursor = 'grab';
-    });
-
-    slider.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault(); // prevent selection
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2; // Scroll-fast
-        slider.scrollLeft = scrollLeft - walk;
-    });
-}
-
-// Enable for Category Nav
-document.addEventListener('DOMContentLoaded', () => {
-    const nav = document.querySelector('.category-nav');
-    if (nav) {
-        nav.style.cursor = 'grab';
-        enableDragScroll('.category-nav');
-    }
-});
