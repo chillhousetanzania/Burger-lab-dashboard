@@ -46,7 +46,7 @@ const newMenuData = {
             price: "18000",
             priceDouble: "23000",
             calories: "850",
-            image: "images/gunners_beef_red_real.webp",
+            image: "images/gunners_beef_red_real.png",
             description: { en: "Brioche bun, onion rings, ketchup, mayo, American cheese, lettuce, mozzarella sticks", ar: "", tr: "" }
         }
     ],
