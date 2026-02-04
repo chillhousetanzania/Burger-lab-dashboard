@@ -31,9 +31,9 @@
             "color": "#2E7D32",
             "image": "images/banner_veg_nano.webp",
             "titles": {
-                "en": "veg_burger",
-                "ar": "veg_burger",
-                "tr": "sebze_burger"
+                "en": "Veg Burger",
+                "ar": "Veg Burger",
+                "tr": "Sebze Burger"
             }
         },
         "kids": {
