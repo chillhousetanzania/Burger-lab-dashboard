@@ -254,6 +254,7 @@ function initializeAllGrids() {
         if (products) {
             products.forEach((product, index) => {
                 const card = document.createElement('div');
+                card.className = 'product-card'; // Restored class assignment
                 // Fallback to English if translation is missing/empty
                 const desc = product.description[currentLang] || product.description['en'] || '';
                 const name = product.name[currentLang] || product.name['en'] || 'Unnamed Product';
