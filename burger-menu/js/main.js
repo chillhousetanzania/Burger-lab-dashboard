@@ -292,7 +292,7 @@ function initializeAllGrids() {
                         <h3 class="product-title">${name}</h3>
                         <div class="product-price">
                             ${product.priceDouble
-                        ? `<span style="font-size:0.9em">${translations[currentLang].singlePatty}: ${product.price}</span><br><span style="font-size:0.9em">${translations[currentLang].doublePatty}: ${product.priceDouble}</span>`
+                        ? `<span style="font-size:0.9em">${translations[currentLang].singlePatty}: ${product.price}<sup>TZS</sup></span><br><span style="font-size:0.9em">${translations[currentLang].doublePatty}: ${product.priceDouble}<sup>TZS</sup></span>`
                         : `${product.price}<sup>TZS</sup>`
                     }
                         </div>
