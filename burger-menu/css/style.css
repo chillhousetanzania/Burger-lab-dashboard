@@ -182,6 +182,9 @@ html[dir="rtl"] .language-dropdown {
     display: flex;
     gap: 12px;
     padding: 16px 24px;
+    /* Always clear the logo: logo width (110px) + left pos (24px) + gap (10px) = 144px */
+    /* On mobile (< 600px), this will be overridden to a smaller value */
+    margin-left: 120px;
     overflow-x: auto;
     background: var(--cream-light);
     scrollbar-width: none;
@@ -189,13 +192,6 @@ html[dir="rtl"] .language-dropdown {
 
 .category-nav::-webkit-scrollbar {
     display: none;
-}
-
-/* Large screens only: Push nav past the logo */
-@media (min-width: 768px) {
-    .category-nav {
-        padding-left: 140px;
-    }
 }
 
 .category-btn {
@@ -496,6 +492,8 @@ html[dir="rtl"] .language-dropdown {
     .category-nav {
         margin-top: 24px;
         margin-bottom: 24px;
+        margin-left: 0;
+        /* Mobile logo is smaller, no extra margin needed */
     }
 
     .hero-banner {
