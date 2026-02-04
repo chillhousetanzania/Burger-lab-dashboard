@@ -88,9 +88,16 @@ const modalBackdrop = document.querySelector('.modal-backdrop');
 let currentCategory = 'burgers';
 
 // Show product modal
+// Show product modal
 function showModal(product) {
-    modalImage.src = getOptimizedImageUrl(product.image, 800);
-    modalImage.alt = product.name[currentLang];
+    if (product.image && product.image.trim() !== "") {
+        modalImage.src = getOptimizedImageUrl(product.image, 800);
+        modalImage.style.display = 'block';
+        modalImage.alt = product.name[currentLang];
+    } else {
+        modalImage.style.display = 'none';
+    }
+
     modalName.textContent = product.name[currentLang];
 
     const modalOptions = document.getElementById('modalOptions');
