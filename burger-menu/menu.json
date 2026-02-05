@@ -1,12 +1,14 @@
 {
     "promotions": {
-        "isActive": false,
+        "isActive": true,
         "text": {
             "en": "",
             "ar": "",
             "tr": ""
         },
-        "billboards": []
+        "billboards": [
+            "images/Screenshot_2026-02-04_161033_1770277515990.webp"
+        ]
     },
     "categorySettings": {
         "burgers": {
@@ -32,7 +34,7 @@
             "image": "images/banner_veg_nano.webp",
             "titles": {
                 "en": "Veg Burger",
-                "ar": "Veg Burger",
+                "ar": "برجر نباتي",
                 "tr": "Sebze Burger"
             }
         },
@@ -70,6 +72,15 @@
                 "en": "drinks",
                 "ar": "مشروبات",
                 "tr": "içecekler"
+            }
+        },
+        "categorySettings": {
+            "color": "#000000",
+            "image": "",
+            "titles": {
+                "en": "categorySettings",
+                "ar": "إعدادات الفئة",
+                "tr": "kategoriAyarlar"
             }
         }
     },
