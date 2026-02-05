@@ -261,31 +261,26 @@ app.post('/api/upload', authenticateToken, upload.single('image'), async (req, r
     try {
         if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
 
-        // Ensure images directory exists
-        const imagesDir = path.resolve(__dirname, '../burger-menu/images');
-        await fs.mkdir(imagesDir, { recursive: true });
-
-        // Generate unique filename
-        const filename = `${path.parse(req.file.originalname).name}_${Date.now()}.webp`.replace(/\s+/g, '_');
-        const outputPath = path.join(imagesDir, filename);
-
-        // Process image (Resize and Convert to WebP)
-        await sharp(req.file.path)
-            .resize(1200, null, { withoutEnlargement: true }) // Max width 1200px
+        const processedBuffer = await sharp(req.file.path)
+            .resize(1200, null, { withoutEnlargement: true })
             .webp({ quality: 80 })
-            .toFile(outputPath);
+            .toBuffer();
 
-        // Cleanup temp file
-        await fs.unlink(req.file.path).catch(() => { });
+        // Stream to Cloudinary
+        const uploadStream = cloudinary.uploader.upload_stream(
+            { resource_type: 'image', folder: 'burger-lab' },
+            (error, result) => {
+                if (error) return res.status(500).json({ error: 'CDN Upload failed' });
 
-        console.log(`✅ Image saved locally: ${outputPath}`);
+                // Cleanup temp file
+                fs.unlink(req.file.path).catch(() => { });
 
-        // Return path relative to menu.json (images/filename.webp)
-        // usage in frontend: API_BASE + path, OR if in menu.json, direct static path
-        res.json({ path: `images/${filename}` });
+                res.json({ path: result.secure_url });
+            }
+        );
 
+        uploadStream.end(processedBuffer);
     } catch (error) {
-        console.error('Upload Error:', error);
         res.status(500).json({ error: 'Upload failed: ' + error.message });
     }
 });

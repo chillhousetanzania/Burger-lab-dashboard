@@ -667,9 +667,9 @@ async function init() {
     try {
         console.log('Fetching live menu from API...');
         // Correctly point to the dashboard server API
-        // Correctly point to the dashboard server API (Relative path works for both)
-        // const API_URL = '/api/menu'; // BYPASS DB -> Use Static File
-        const API_URL = 'menu.json';
+        // Correctly point to the dashboard server API
+        const API_URL = '/api/menu'; // DYNAMIC MODE
+        // const API_URL = 'menu.json'; // STATIC MODE
 
         const response = await fetch(API_URL);
         if (!response.ok) {
