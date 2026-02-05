@@ -1,14 +1,12 @@
 {
     "promotions": {
-        "isActive": true,
+        "isActive": false,
         "text": {
             "en": "",
             "ar": "",
             "tr": ""
         },
-        "billboards": [
-            "images/Screenshot_2026-02-04_161033_1770277515990.webp"
-        ]
+        "billboards": []
     },
     "categorySettings": {
         "burgers": {
