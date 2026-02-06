@@ -1033,15 +1033,50 @@ body.theme-drinks .option-btn.active {
     }
 }
 
-/* Floating Translate Button (HIDDEN) */
+/* Floating Translate Button */
 .fab-translate {
-    display: none !important;
+    position: fixed;
+    bottom: 96px;
+    left: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: var(--category-primary);
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px var(--category-glow);
+    transition: var(--transition);
+    z-index: 1000;
+    animation: glow-pulse 2s infinite;
 }
 
 /* Floating Scroll Top Button */
-/* Floating Scroll Top Button (HIDDEN) */
 .fab-scroll-top {
-    display: none !important;
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: var(--category-primary);
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px var(--category-glow),
+        0 0 20px var(--category-glow);
+    transition: var(--transition);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    animation: glow-pulse 2s infinite;
 }
 
 .fab-scroll-top.visible {
